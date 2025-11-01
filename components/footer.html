@@ -1,36 +1,46 @@
 <footer class="site-footer">
     <div class="footer-grid">
         <div class="footer-column footer-brand">
-            <h3>InaraWell</h3>
-            <p>&copy; 2025 InaraWell. All rights reserved.</p>
+            <div class="footer-logo">InaraWell.com</div>
+            <p>Empowering you to live a more fulfilling life through self-help resources and guidance.</p>
+            
             <div class="social-links">
-                <a href="#" aria-label="LinkedIn">In</a> | 
-                <a href="#" aria-label="Twitter/X">X</a> | 
-                <a href="#" aria-label="Instagram">Ig</a>
+                <a href="https://youtube.com/@inarawell" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/inarawell?igsh=dGp3YXdlcmMxZWl0" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.threads.net/@inarawell" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column footer-legal">
+            <h4>Legal</h4>
+            <div class="footer-links-group">
+                <a href="https://www.inarawell.com/policies">Privacy Policy</a>
+                <a href="https://www.inarawell.com/policies">Terms and Refund Policy</a>
+            </div>
+        </div>
+
+        <div class="footer-column footer-links">
+            <h4>Quick Links</h4>
+            <div class="footer-links-group">
+                <a href="https://www.inarawell.com/our-creations-showcase">Our Creations Showcase</a>
+                <a href="https://www.inarawell.com/faq">FAQ</a>
             </div>
         </div>
         
-        <div class="footer-column footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="insights.html">Insights</a></li>
-            </ul>
-        </div>
-        
         <div class="footer-column footer-contact">
-            <h4>Get In Touch</h4>
-            <p>Email: <a href="mailto:info@inarawell.com">info@inarawell.com</a></p>
-            <p>Phone: (555) 123-4567</p>
-        </div>
-        
-        <div class="footer-column footer-legal">
-            <h4>Legal</h4>
-            <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-            </ul>
+            <h4>Contact Us</h4>
+            <div class="contact-btn-group">
+                <a href="https://www.inarawell.com/contact-us">Contact Us</a>
+                <a href="mailto:care@inarawell.com">Our Gmail</a>
+            </div>
         </div>
     </div>
+
+    <div class="footer-bottom">
+        <p>© <span id="currentYear"></span> InaraWell. All rights reserved.</p>
+    </div>
 </footer>
+
+<script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+                    </script>
