@@ -165,6 +165,58 @@ body {
     color: var(--color-accent);
 }
 
+/* --- New Styles for Updated Footer Structure --- */
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent); /* Highlight the site name */
+    margin-bottom: 15px;
+}
+
+.footer-links-group, .contact-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Spacing between links */
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    font-size: 1.5rem;
+}
+
+.social-links a {
+    color: var(--color-text-light); /* White icons */
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--color-accent); /* Highlight on hover */
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    font-size: 0.85rem;
+}
+
+/* Ensure font size in the grid is legible */
+.footer-grid h4 {
+    font-size: 1.1rem;
+}
+.footer-grid p, .footer-grid a {
+    font-size: 0.95rem;
+}
+
+/* Override existing link styling for the footer's nested groups */
+.footer-links-group a, .contact-btn-group a {
+    width: fit-content; /* Makes the hover effect cleaner */
+}
+
 /* Responsiveness for Footer */
 @media (max-width: 768px) {
     .footer-grid {
@@ -176,6 +228,9 @@ body {
     .footer-grid {
         grid-template-columns: 1fr; /* Single column on mobile */
         text-align: center;
+    }
+    .footer-links-group, .contact-btn-group {
+        align-items: center;
     }
     .footer-links ul, .footer-legal ul {
         padding-left: 0;
@@ -227,4 +282,47 @@ body {
 .cta-button:hover {
     background-color: var(--color-accent);
     color: var(--color-primary);
-  }
+}
+
+/* --- Styles for services.html (Services Page) --- */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.service-card {
+    background-color: var(--color-secondary); /* Light Blue/Off-White background */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(28, 46, 70, 0.2);
+}
+
+.card-title {
+    color: var(--color-primary); /* Dark Blue heading */
+    margin-bottom: 10px;
+}
+
+.card-description {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.card-cta {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--color-accent); /* Light Blue Accent button */
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    }
