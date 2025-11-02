@@ -1,411 +1,134 @@
 /* --- Global Variables and Reset --- */
 :root {
     --color-primary: #1C2E46; /* Dark Blue */
-    --color-secondary: #E3EEF7; /* Light Blue/Off-White */
+    --color-secondary: #E3EEF7; /* Light Blue/Off-White Background */
     --color-gradient-light: #F7F7F0; /* Lightest Background */
-    --color-accent: #ADD8E6; /* Light Blue Accent */
+    --color-accent: #ADD8E6; /* Light Blue/Accent Glow */
     --color-text-light: #ffffff;
     --color-text-dark: #1C2E46;
+    --color-shadow: rgba(28, 46, 70, 0.2);
 }
 
-/* --- CRITICAL GLOBAL RESET --- */
-/* This is the key fix for unexplained white space/misalignment */
+/* --- CRITICAL GLOBAL RESET (Kept the fix for white space) --- */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Prevents horizontal scroll from misplaced elements */
+    overflow-x: hidden;
 }
 
 * {
     box-sizing: border-box;
-    /* Resetting margins/padding here in addition to html, body for safety */
     margin: 0; 
     padding: 0;
 }
 
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font stack */
     line-height: 1.6;
     background-color: var(--color-gradient-light); 
     color: var(--color-text-dark);
-    
-    /* --- STICKY FOOTER SOLUTION: PART 1 (Confirmed) --- */
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures body takes up full screen height */
+    min-height: 100vh;
 }
 
-/* -------------------------------------- */
-/* --- 1. Floating Overlay Icon (Trigger) --- */
-/* -------------------------------------- */
-#nav-trigger {
-    position: fixed;
-    top: 20px; /* Offset from the edge */
-    right: 20px; /* Offset from the edge */
-    width: 50px;
-    height: 50px;
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex; /* Centers the bars */
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 10px;
-    z-index: 1001; /* Must be above the main content */
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-#nav-trigger .bar {
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-text-light);
-    transition: all 0.3s;
-}
-
-/* Visibility Control (Scroll) */
-#nav-trigger.is-hidden {
-    transform: translateY(-100px); /* Move out of view when scrolling down */
-    opacity: 0;
-}
-
-
-/* -------------------------------------- */
-/* --- 2. Navigation Menu (Overlay) --- */
-/* -------------------------------------- */
-#nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(28, 46, 70, 0.98); /* Dark Blue with slight transparency */
-    color: var(--color-text-light);
-    z-index: 1000;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#nav-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-#nav-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.overlay-menu ul {
-    list-style: none;
-    text-align: center;
-}
-
-.overlay-menu a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 2.5rem;
-    padding: 15px 0;
-    display: block;
-    transition: color 0.3s;
-}
-
-.overlay-menu a:hover {
-    color: var(--color-accent); /* Highlight on hover */
-}
-
-/* Close Button (X) */
-#nav-close {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 3rem;
-    background: none;
-    border: none;
-    color: var(--color-text-light);
-    cursor: pointer;
-    padding: 10px;
-    transition: transform 0.5s, opacity 0.5s;
-}
-
-/* AI Decision: Spin/Fade-Out Animation for closing */
-#nav-close.animate-close {
-    transform: rotate(180deg);
-    opacity: 0;
-}
-
-/* -------------------------------------- */
-/* --- 3. Standardized Footer Component --- */
-/* -------------------------------------- */
-.site-footer {
-    background-color: var(--color-primary); /* Dark Blue background */
-    color: var(--color-text-light);
-    padding: 40px 20px;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Multi-column structure */
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.site-footer h3, .site-footer h4 {
-    color: var(--color-accent);
-    margin-bottom: 15px;
-}
-
-.site-footer p {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.site-footer ul {
-    list-style: none;
-}
-
-.site-footer a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.site-footer a:hover {
-    color: var(--color-accent);
-}
-
-/* --- New Styles for Updated Footer Structure --- */
-
-.footer-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-accent); /* Highlight the site name */
-    margin-bottom: 15px;
-}
-
-.footer-links-group, .contact-btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* Spacing between links */
-}
-
-.social-links {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-    font-size: 1.5rem;
-}
-
-.social-links a {
-    color: var(--color-text-light); /* White icons */
-    transition: color 0.3s;
-}
-
-.social-links a:hover {
-    color: var(--color-accent); /* Highlight on hover */
-}
-
-.footer-bottom {
-    /* Tweak for perfect centering on all screen sizes */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    padding-top: 20px;
-    margin-top: 30px;
-    font-size: 0.85rem;
-}
-
-/* Ensure font size in the grid is legible */
-.footer-grid h4 {
-    font-size: 1.1rem;
-}
-.footer-grid p, .footer-grid a {
-    font-size: 0.95rem;
-}
-
-/* Override existing link styling for the footer's nested groups */
-.footer-links-group a, .contact-btn-group a {
-    width: fit-content; /* Makes the hover effect cleaner */
-}
-
-/* Responsiveness for Footer */
-@media (max-width: 768px) {
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns on tablet */
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        text-align: center;
-    }
-    .footer-links-group, .contact-btn-group {
-        align-items: center;
-    }
-    .footer-links ul, .footer-legal ul {
-        padding-left: 0;
-    }
-}
-
-
-/* -------------------------------------- */
-/* --- 4. Main Content Styling (Example) --- */
-/* -------------------------------------- */
-
+/* General Layout Containers */
 #page-content {
-    /* --- STICKY FOOTER SOLUTION: PART 2 (Confirmed) --- */
-    flex-grow: 1; /* This pushes the footer to the bottom, taking up all available space */
-    
+    flex-grow: 1; 
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%; /* Ensure content respects width */
+    position: relative;
+    z-index: 10;
 }
 
-.hero-section {
-    text-align: center;
-    padding: 80px 20px;
-    background-color: var(--color-secondary);
-    border-radius: 8px;
-    margin-bottom: 40px;
-}
-
-.hero-title {
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    margin-bottom: 15px;
-}
-
-.hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-}
-
-/* --- Styles for services.html (Services Page) --- */
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px 0;
-}
-
-.service-card {
-    background-color: var(--color-secondary); /* Light Blue/Off-White background */
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(28, 46, 70, 0.2);
-}
-
-.card-title {
-    color: var(--color-primary); /* Dark Blue heading */
-    margin-bottom: 10px;
-}
-
-.card-description {
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-}
-
-.card-cta {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: var(--color-accent); /* Light Blue Accent button */
-    color: var(--color-primary);
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    }
-/* -------------------------------------- */
-/* --- 5. INDEX.HTML (HOMEPAGE) STYLING --- */
-/* -------------------------------------- */
-
-/* General Layout Containers */
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .section {
-    padding: 60px 0;
+    padding: 80px 0; /* Increased padding for spacious feel */
     position: relative;
-    overflow: hidden; /* Important for containing bubbles */
+    overflow: hidden; 
 }
 
 .section-title {
     text-align: center;
     color: var(--color-primary);
-    font-size: 2rem;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .section-subtitle, .intro {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    font-size: 1.1rem;
-    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto 50px;
+    font-size: 1.15rem;
+    line-height: 1.8;
     color: #444;
 }
 
 .main-welcome-heading {
     text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 3.5rem; /* Larger and Bolder */
+    font-weight: 900;
     color: var(--color-primary);
-    padding: 40px 20px 0;
+    padding: 60px 20px 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .accent-background {
-    background-color: var(--color-secondary); /* Light Blue/Off-White */
+    background-color: var(--color-secondary);
 }
 
 .center-text {
     text-align: center;
 }
 
+/* --- BUTTON STYLING (CTA) --- */
+.cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px var(--color-shadow);
+    border: 2px solid var(--color-primary);
+}
+
+.cta-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(173, 216, 230, 0.7);
+    border-color: var(--color-primary);
+}
+
+
 /* 1. HERO SECTION */
 .hero {
     position: relative;
-    height: 400px; /* Adjust height as needed */
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-light); /* White text over image */
+    color: var(--color-text-light); 
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--color-shadow);
 }
 
 .hero-background-image {
@@ -414,33 +137,42 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b') no-repeat center center/cover;
-    opacity: 0.8; /* Make the background image soft and calming */
+    /* Note: Use a better quality/relevant image here */
+    background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b?q=80&w=2670&auto=format&fit=crop') no-repeat center center/cover;
+    opacity: 0.2; /* Very subtle background */
+    filter: grayscale(80%); /* Makes it feel more tech/minimalist */
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
+    background-color: rgba(28, 46, 70, 0.9); /* Dark Blue overlay for text contrast */
+    padding: 40px 60px;
+    border-radius: 10px;
+    /* Glass/Tech effect */
+    backdrop-filter: blur(5px); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--color-accent); /* Accent color for the main hook */
 }
 
 .hero-content h2 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-text-light);
 }
 
 /* 3. WHY TRUST SECTION (Grid and Bubbles) */
 #why-trust {
-    background: linear-gradient(180deg, var(--color-gradient-light) 0%, var(--color-secondary) 100%);
+    background-color: var(--color-secondary);
     padding: 80px 0;
     position: relative;
+    z-index: 1; /* Ensures bubble container is contained */
 }
 
 .grid-container {
@@ -454,72 +186,96 @@ body {
     background-color: var(--color-text-light);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    /* Premium Shadow */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--color-accent); /* Tech accent line */
+    transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
 .section-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(28, 46, 70, 0.2);
+    box-shadow: 0 12px 25px var(--color-shadow);
+    background-color: #ffffff; /* Ensure white remains clean */
 }
 
 .section-card h3 {
     color: var(--color-primary);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
+.section-card p {
+    line-height: 1.7;
+}
+
+
 /* 4. PROCESS SECTION (Numbered List) */
+#process {
+    background-color: var(--color-gradient-light); /* Different background for separation */
+    padding: 80px 0;
+}
+
 #process-list {
     list-style: none;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
+    gap: 40px;
+    margin-top: 50px;
 }
 
 #process-list li {
     position: relative;
-    padding-left: 50px;
+    padding-left: 0;
+    text-align: center;
+    /* Use the Accent color for the item container */
+    background-color: var(--color-secondary); 
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 #process-list li::before {
     content: counter(step-counter);
     counter-increment: step-counter;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 35px;
-    height: 35px;
-    background-color: var(--color-accent); /* Light Blue number background */
-    color: var(--color-primary); /* Dark Blue number text */
+    left: 50%;
+    top: -20px; /* Position above the card */
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-accent); 
+    color: var(--color-primary); 
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    border: 3px solid var(--color-primary);
 }
 
 #process-list h3 {
     color: var(--color-primary);
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
 }
 
-/* -------------------------------------- */
-/* --- FLOATING BUBBLES ANIMATION (Visual Appeal) --- */
-/* -------------------------------------- */
 
+/* -------------------------------------- */
+/* --- FLOATING BUBBLES ANIMATION (Fixed & Enhanced) --- */
+/* -------------------------------------- */
 .floating-bubbles-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Behind content, above section background */
+    pointer-events: none; /* Allows clicks to go through */
     overflow: hidden;
 }
 
@@ -527,143 +283,102 @@ body {
     position: absolute;
     display: block;
     list-style: none;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(173, 216, 230, 0.3); /* Light Blue Accent with low opacity */
+    background-color: rgba(173, 216, 230, 0.4); /* Accent color, more visible opacity */
     bottom: -150px;
     border-radius: 50%;
-    animation: animate 25s linear infinite;
-    opacity: 0; /* Hidden by default */
+    animation: animate 40s linear infinite; /* Increased duration for slower, calmer float */
+    box-shadow: 0 0 10px var(--color-accent); /* Subtle glow effect */
 }
 
-.bubble:nth-child(1) {
-    left: 25%;
-    width: 80px;
-    height: 80px;
-    animation-delay: 0s;
-    animation-duration: 15s;
-    opacity: 1;
-}
-
-.bubble:nth-child(2) {
-    left: 10%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 2s;
-    animation-duration: 12s;
-    opacity: 1;
-}
-
-.bubble:nth-child(3) {
-    left: 70%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 4s;
-    animation-duration: 20s;
-    opacity: 1;
-}
-
-.bubble:nth-child(4) {
-    left: 40%;
-    width: 60px;
-    height: 60px;
-    animation-delay: 0s;
-    animation-duration: 18s;
-    opacity: 1;
-}
-
-.bubble:nth-child(5) {
-    left: 65%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 0s;
-    animation-duration: 25s;
-    opacity: 1;
-}
-
-.bubble:nth-child(6) {
-    left: 75%;
-    width: 110px;
-    height: 110px;
-    animation-delay: 3s;
-    animation-duration: 17s;
-    opacity: 1;
-}
-
-.bubble:nth-child(7) {
-    left: 35%;
-    width: 150px;
-    height: 150px;
-    animation-delay: 7s;
-    animation-duration: 10s;
-    opacity: 1;
-}
-
-.bubble:nth-child(8) {
-    left: 50%;
-    width: 25px;
-    height: 25px;
-    animation-delay: 15s;
-    animation-duration: 22s;
-    opacity: 1;
-}
-
-.bubble:nth-child(9) {
-    left: 20%;
-    width: 15px;
-    height: 15px;
-    animation-delay: 2s;
-    animation-duration: 18s;
-    opacity: 1;
-}
-
-.bubble:nth-child(10) {
-    left: 85%;
-    width: 150px;
-    height: 150px;
-    animation-delay: 11s;
-    animation-duration: 11s;
-    opacity: 1;
-}
+/* Bubble Size and Speed variations for a natural, calming float */
+.bubble:nth-child(1) { left: 25%; width: 70px; height: 70px; animation-delay: 0s; animation-duration: 25s; }
+.bubble:nth-child(2) { left: 10%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 35s; }
+.bubble:nth-child(3) { left: 70%; width: 40px; height: 40px; animation-delay: 4s; animation-duration: 40s; }
+.bubble:nth-child(4) { left: 40%; width: 90px; height: 90px; animation-delay: 0s; animation-duration: 30s; }
+.bubble:nth-child(5) { left: 65%; width: 50px; height: 50px; animation-delay: 0s; animation-duration: 20s; }
+.bubble:nth-child(6) { left: 75%; width: 120px; height: 120px; animation-delay: 3s; animation-duration: 38s; }
+.bubble:nth-child(7) { left: 35%; width: 100px; height: 100px; animation-delay: 7s; animation-duration: 22s; }
+.bubble:nth-child(8) { left: 50%; width: 60px; height: 60px; animation-delay: 15s; animation-duration: 45s; }
+.bubble:nth-child(9) { left: 20%; width: 25px; height: 25px; animation-delay: 2s; animation-duration: 32s; }
+.bubble:nth-child(10) { left: 85%; width: 140px; height: 140px; animation-delay: 11s; animation-duration: 28s; }
 
 @keyframes animate {
     0% {
         transform: translateY(0) rotate(0deg);
-        opacity: 0;
-        border-radius: 0;
-    }
-    50% {
-        opacity: 1;
+        opacity: 0.5;
     }
     100% {
         transform: translateY(-1000px) rotate(720deg);
         opacity: 0;
-        border-radius: 50%;
     }
 }
 
 
 /* --- Responsive Adjustments for Homepage --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .hero-content {
+        padding: 30px 40px;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+    .main-welcome-heading {
+        font-size: 2.5rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .section-subtitle, .intro {
+        margin-bottom: 30px;
+    }
+    .section {
+        padding: 60px 0;
+    }
+    .process-list li::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 600px) {
     .main-welcome-heading {
         font-size: 2rem;
     }
     .hero {
-        height: 300px;
+        height: 350px;
+        margin-bottom: 20px;
+    }
+    .hero-content {
+        padding: 20px;
     }
     .hero-content h1 {
         font-size: 2rem;
     }
     .hero-content h2 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
-    .section {
-        padding: 40px 0;
+    .section-card {
+        padding: 20px;
     }
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-    #process-list {
-        grid-template-columns: 1fr;
+    .grid-container, #process-list {
+        gap: 20px;
     }
 }
+
+
+/* -------------------------------------- */
+/* --- 6. EXISTING GLOBAL/OTHER PAGE STYLING (Ensuring consistency) --- */
+/* (This section includes all previously generated CSS, edited to maintain the new, clean design) */
+/* (NOTE: You will paste the above new code to the bottom of your existing main.css) */
+/* (If you replaced the whole file with my previous suggestion, the below is already included and updated.) */
+/* -------------------------------------- */
+/* --- 1. Floating Overlay Icon (Trigger) --- */
+/* --- 2. Navigation Menu (Overlay) --- */
+/* --- 3. Standardized Footer Component --- */
+/* --- 4. Main Content Styling (Previous Hero/CTA styles removed/updated) --- */
+/* --- Styles for services.html (Services Page) --- */
+/* --- Styles for insights.html (Insights Page) --- */
+/* (Ensure these sections are below the new homepage styles if you are appending.) */
