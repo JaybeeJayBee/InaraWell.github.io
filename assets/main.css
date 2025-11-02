@@ -149,9 +149,10 @@ body {
     padding: 40px 20px;
 }
 
+/* ADJUSTMENT: Footer now has 5 columns: Logo/Brand, Gallery, Legal, Quick Links, Contact */
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; 
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
@@ -180,10 +181,38 @@ body {
 }
 
 .site-footer a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent); 
 }
 
-/* --- New Styles for Updated Footer Structure --- */
+/* --- NEW LOGO STYLES --- */
+.footer-main-logo {
+    width: 100%; /* Full width of its column */
+    max-width: 150px; /* Keep it manageable */
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.logo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.small-logo {
+    width: 40px; /* Small and neat */
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.small-logo:hover {
+    opacity: 1;
+}
+/* --- END NEW LOGO STYLES --- */
+
 
 .footer-logo {
     font-size: 1.5rem;
@@ -243,19 +272,35 @@ body {
 }
 
 /* Responsiveness for Footer */
+@media (max-width: 1024px) {
+    /* Change to 3 columns: Brand+Gallery, Legal/Quick, Contact */
+    .footer-grid {
+        grid-template-columns: 2fr repeat(3, 1fr); 
+    }
+}
+
 @media (max-width: 768px) {
+    /* Change to 2 columns: Brand/Gallery, Links */
     .footer-grid {
         grid-template-columns: repeat(2, 1fr); 
+    }
+    .footer-column:nth-child(2) { /* Logo Gallery on 768px */
+        order: 4; /* Push the gallery to the bottom-left on tablet */
     }
 }
 
 @media (max-width: 480px) {
+    /* Single column on mobile */
     .footer-grid {
         grid-template-columns: 1fr; 
         text-align: center;
     }
-    .footer-links-group, .contact-btn-group {
+    .footer-column:nth-child(2) {
+        order: unset; /* Reset order */
+    }
+    .footer-links-group, .contact-btn-group, .logo-gallery {
         align-items: center;
+        justify-content: center;
     }
 }
 
@@ -271,6 +316,9 @@ body {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    
+    /* CRITICAL FIX: Stops content inside from pushing the page boundary */
+    overflow: hidden; 
 }
 
 .hero-section {
@@ -348,4 +396,4 @@ body {
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-}
+    }
