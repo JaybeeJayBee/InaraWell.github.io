@@ -347,3 +347,323 @@ body {
     border-radius: 5px;
     font-weight: bold;
     }
+/* -------------------------------------- */
+/* --- 5. INDEX.HTML (HOMEPAGE) STYLING --- */
+/* -------------------------------------- */
+
+/* General Layout Containers */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden; /* Important for containing bubbles */
+}
+
+.section-title {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.section-subtitle, .intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+.main-welcome-heading {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    padding: 40px 20px 0;
+}
+
+.accent-background {
+    background-color: var(--color-secondary); /* Light Blue/Off-White */
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* 1. HERO SECTION */
+.hero {
+    position: relative;
+    height: 400px; /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light); /* White text over image */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b') no-repeat center center/cover;
+    opacity: 0.8; /* Make the background image soft and calming */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. WHY TRUST SECTION (Grid and Bubbles) */
+#why-trust {
+    background: linear-gradient(180deg, var(--color-gradient-light) 0%, var(--color-secondary) 100%);
+    padding: 80px 0;
+    position: relative;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.section-card {
+    background-color: var(--color-text-light);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(28, 46, 70, 0.2);
+}
+
+.section-card h3 {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+/* 4. PROCESS SECTION (Numbered List) */
+#process-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#process-list li {
+    position: relative;
+    padding-left: 50px;
+}
+
+#process-list li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 35px;
+    height: 35px;
+    background-color: var(--color-accent); /* Light Blue number background */
+    color: var(--color-primary); /* Dark Blue number text */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#process-list h3 {
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+/* -------------------------------------- */
+/* --- FLOATING BUBBLES ANIMATION (Visual Appeal) --- */
+/* -------------------------------------- */
+
+.floating-bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(173, 216, 230, 0.3); /* Light Blue Accent with low opacity */
+    bottom: -150px;
+    border-radius: 50%;
+    animation: animate 25s linear infinite;
+    opacity: 0; /* Hidden by default */
+}
+
+.bubble:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+    opacity: 1;
+}
+
+.bubble:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+    opacity: 1;
+}
+
+.bubble:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+    animation-duration: 20s;
+    opacity: 1;
+}
+
+.bubble:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+    opacity: 1;
+}
+
+.bubble:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+    animation-duration: 25s;
+    opacity: 1;
+}
+
+.bubble:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+    animation-duration: 17s;
+    opacity: 1;
+}
+
+.bubble:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+    animation-duration: 10s;
+    opacity: 1;
+}
+
+.bubble:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 22s;
+    opacity: 1;
+}
+
+.bubble:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 18s;
+    opacity: 1;
+}
+
+.bubble:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 11s;
+    animation-duration: 11s;
+    opacity: 1;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+        border-radius: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+
+/* --- Responsive Adjustments for Homepage --- */
+@media (max-width: 768px) {
+    .main-welcome-heading {
+        font-size: 2rem;
+    }
+    .hero {
+        height: 300px;
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+    .section {
+        padding: 40px 0;
+    }
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    #process-list {
+        grid-template-columns: 1fr;
+    }
+}
