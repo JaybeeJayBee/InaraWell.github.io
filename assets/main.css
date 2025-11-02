@@ -6,24 +6,23 @@
     --color-accent: #ADD8E6; /* Light Blue Accent */
     --color-text-light: #ffffff;
     --color-text-dark: #1C2E46;
-    
-    /* NEW: Define the fixed height for the footer */
-    --footer-height: 250px; 
 }
 
 /* --- CRITICAL GLOBAL RESET AND BOUNDARY FIX --- */
-/* This is the most aggressive margin reset */
+/* This prevents horizontal overflow and ensures clean starting point */
 html, body {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
     width: 100%;
-    height: 100%; /* Important for Sticky Footer */
-    overflow-x: hidden; /* Prevents horizontal scroll */
-    position: relative; /* Ensures alignment */
+    height: 100%; 
+    overflow-x: hidden;
 }
 
 * {
     box-sizing: border-box;
+    /* Ensure no residual margins/padding */
+    margin: 0; 
+    padding: 0;
 }
 
 
@@ -33,38 +32,11 @@ body {
     background-color: var(--color-gradient-light); 
     color: var(--color-text-dark);
     
-    /* --- CLASSIC STICKY FOOTER SOLUTION --- */
-    min-height: 100%; 
-    position: relative; 
-    
-    /* This ensures content-wrap is the main column */
-    display: block; 
+    /* --- STICKY FOOTER SOLUTION: PART 1 (The Reliable Flexbox Method) --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures body takes up full screen height */
 }
-
-/* --- KEY STICKY FOOTER FIX: WRAPPER LOGIC --- */
-/* The wrapper contains all content EXCEPT the footer */
-#content-wrap {
-    min-height: 100vh; /* Must be full viewport height */
-    
-    /* The core of the fix: Pull the footer up into the content area */
-    margin-bottom: calc(var(--footer-height) * -1); 
-    
-    /* Resetting the Flex properties that are no longer needed */
-    display: block; 
-}
-
-/* The element that creates space for the footer at the bottom of the page */
-#footer-push {
-    height: var(--footer-height); 
-}
-
-/* The footer container must be full width and fixed height */
-#footer-container {
-    height: var(--footer-height); 
-    width: 100%;
-    /* No position: fixed; is needed as the margin takes care of placement */
-}
-
 
 /* -------------------------------------- */
 /* --- 1. Floating Overlay Icon (Trigger) --- */
@@ -172,11 +144,9 @@ body {
 /* --- 3. Standardized Footer Component --- */
 /* -------------------------------------- */
 .site-footer {
-    /* The footer content fills the fixed-height footer-container */
     background-color: var(--color-primary); 
     color: var(--color-text-light);
     padding: 40px 20px;
-    height: 100%; 
 }
 
 .footer-grid {
@@ -192,9 +162,11 @@ body {
     margin-bottom: 15px;
 }
 
+/* TARGETED FIX: Ensure paragraph margins don't push outside the footer's padding */
 .site-footer p {
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin-bottom: 0; /* Removing bottom margin on paragraphs inside footer */
+    padding-bottom: 10px; /* Using padding for spacing inside the container */
 }
 
 .site-footer ul {
@@ -248,9 +220,12 @@ body {
     align-items: center;
     
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
+    
+    /* TARGETED FIX: Zero out margins on the bottom bar */
+    margin: 0; 
     padding-top: 20px;
-    margin-top: 30px;
+    
+    text-align: center;
     font-size: 0.85rem;
 }
 
@@ -290,8 +265,8 @@ body {
 /* -------------------------------------- */
 
 #page-content {
-    /* Resets Flexbox property */
-    flex-grow: unset; 
+    /* --- STICKY FOOTER SOLUTION: PART 2 --- */
+    flex-grow: 1; /* This ensures the main content takes up ALL remaining space */
     
     padding: 20px;
     max-width: 1200px;
@@ -373,4 +348,4 @@ body {
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    }
+}
