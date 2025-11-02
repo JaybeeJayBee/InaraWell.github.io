@@ -8,17 +8,33 @@
     --color-text-dark: #1C2E46;
 }
 
-* {
-    box-sizing: border-box;
+/* --- CRITICAL GLOBAL RESET --- */
+/* This is the key fix for unexplained white space/misalignment */
+html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scroll from misplaced elements */
 }
+
+* {
+    box-sizing: border-box;
+    /* Resetting margins/padding here in addition to html, body for safety */
+    margin: 0; 
+    padding: 0;
+}
+
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: var(--color-gradient-light); /* Light background aesthetic */
+    background-color: var(--color-gradient-light); 
     color: var(--color-text-dark);
+    
+    /* --- STICKY FOOTER SOLUTION: PART 1 (Confirmed) --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures body takes up full screen height */
 }
 
 /* -------------------------------------- */
@@ -130,7 +146,6 @@ body {
     background-color: var(--color-primary); /* Dark Blue background */
     color: var(--color-text-light);
     padding: 40px 20px;
-    margin-top: 50px; /* Separates it from main content */
 }
 
 .footer-grid {
@@ -197,6 +212,11 @@ body {
 }
 
 .footer-bottom {
+    /* Tweak for perfect centering on all screen sizes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     padding-top: 20px;
@@ -241,10 +261,11 @@ body {
 /* -------------------------------------- */
 /* --- 4. Main Content Styling (Example) --- */
 /* -------------------------------------- */
-/* Use this section to add specific styles for classes like .hero-title, .cta-button, etc. */
 
 #page-content {
-    min-height: 50vh; /* Ensures content pushes the footer down */
+    /* --- STICKY FOOTER SOLUTION: PART 2 (Confirmed) --- */
+    flex-grow: 1; /* This pushes the footer to the bottom, taking up all available space */
+    
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
