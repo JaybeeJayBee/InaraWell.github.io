@@ -1,200 +1,16 @@
-/* --- Global Variables and Reset --- */
-:root {
-    --color-primary: #1C2E46; /* Dark Blue */
-    --color-secondary: #E3EEF7; /* Light Blue/Off-White */
-    --color-gradient-light: #F7F7F0; /* Lightest Background */
-    --color-accent: #ADD8E6; /* Light Blue Accent */
-    --color-text-light: #ffffff;
-    --color-text-dark: #1C2E46;
-}
-
-/* --- CRITICAL GLOBAL RESET AND BOUNDARY FIX --- */
-/* This prevents horizontal overflow and ensures clean starting point */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%; 
-    overflow-x: hidden;
-}
-
-* {
-    box-sizing: border-box;
-    /* Ensure no residual margins/padding */
-    margin: 0; 
-    padding: 0;
-}
-
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: var(--color-gradient-light); 
-    color: var(--color-text-dark);
-    
-    /* --- STICKY FOOTER SOLUTION: PART 1 (The Reliable Flexbox Method) --- */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures body takes up full screen height */
-}
-
-/* -------------------------------------- */
-/* --- 1. Floating Overlay Icon (Trigger) --- */
-/* -------------------------------------- */
-#nav-trigger {
-    position: fixed;
-    top: 20px; 
-    right: 20px; 
-    width: 50px;
-    height: 50px;
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex; 
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 10px;
-    z-index: 1001; 
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-#nav-trigger .bar {
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-text-light);
-    transition: all 0.3s;
-}
-
-/* Visibility Control (Scroll) */
-#nav-trigger.is-hidden {
-    transform: translateY(-100px); 
-    opacity: 0;
-}
-
-
-/* -------------------------------------- */
-/* --- 2. Navigation Menu (Overlay) --- */
-/* -------------------------------------- */
-#nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(28, 46, 70, 0.98); 
-    color: var(--color-text-light);
-    z-index: 1000;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#nav-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-#nav-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.overlay-menu ul {
-    list-style: none;
-    text-align: center;
-}
-
-.overlay-menu a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 2.5rem;
-    padding: 15px 0;
-    display: block;
-    transition: color 0.3s;
-}
-
-.overlay-menu a:hover {
-    color: var(--color-accent); 
-}
-
-/* Close Button (X) */
-#nav-close {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 3rem;
-    background: none;
-    border: none;
-    color: var(--color-text-light);
-    cursor: pointer;
-    padding: 10px;
-    transition: transform 0.5s, opacity 0.5s;
-}
-
-/* AI Decision: Spin/Fade-Out Animation for closing */
-#nav-close.animate-close {
-    transform: rotate(180deg);
-    opacity: 0;
-}
-
-/* -------------------------------------- */
-/* --- 3. Standardized Footer Component --- */
-/* -------------------------------------- */
-.site-footer {
-    background-color: var(--color-primary); 
-    color: var(--color-text-light);
-    padding: 40px 20px;
-}
-
-/* Footer now has 4 columns again */
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr; 
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.site-footer h3, .site-footer h4 {
-    color: var(--color-accent);
-    margin-bottom: 15px;
-}
-
-/* TARGETED FIX: Ensure paragraph margins don't push outside the footer's padding */
-.site-footer p {
-    font-size: 0.9rem;
-    margin-bottom: 0; 
-    padding-bottom: 10px; 
-}
-
-.site-footer ul {
-    list-style: none;
-}
-
-.site-footer a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.site-footer a:hover {
-    color: var(--color-accent); 
-}
+/* --- New Styles for Updated Footer Structure --- */
 
 .footer-logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--color-accent); 
+    color: var(--color-accent); /* Highlight the site name */
     margin-bottom: 15px;
 }
 
 .footer-links-group, .contact-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; 
+    gap: 8px; /* Spacing between links */
 }
 
 .social-links {
@@ -205,25 +21,19 @@ body {
 }
 
 .social-links a {
-    color: var(--color-text-light); 
+    color: var(--color-text-light); /* White icons */
     transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: var(--color-accent); 
+    color: var(--color-accent); /* Highlight on hover */
 }
 
 .footer-bottom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    
-    margin: 0; 
-    padding-top: 20px;
-    
     text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
     font-size: 0.85rem;
 }
 
@@ -237,116 +47,5 @@ body {
 
 /* Override existing link styling for the footer's nested groups */
 .footer-links-group a, .contact-btn-group a {
-    width: fit-content; 
+    width: fit-content; /* Makes the hover effect cleaner */
 }
-
-/* Responsiveness for Footer */
-@media (max-width: 768px) {
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr); 
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-grid {
-        grid-template-columns: 1fr; 
-        text-align: center;
-    }
-    .footer-links-group, .contact-btn-group {
-        align-items: center;
-    }
-}
-
-
-/* -------------------------------------- */
-/* --- 4. Main Content Styling (Example) --- */
-/* -------------------------------------- */
-
-#page-content {
-    /* --- STICKY FOOTER SOLUTION: PART 2 --- */
-    flex-grow: 1; /* This ensures the main content takes up ALL remaining space */
-    
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    
-    /* CRITICAL FIX: Stops content inside from pushing the page boundary */
-    overflow: hidden; 
-}
-
-.hero-section {
-    text-align: center;
-    padding: 80px 20px;
-    background-color: var(--color-secondary);
-    border-radius: 8px;
-    margin-bottom: 40px;
-}
-
-.hero-title {
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    margin-bottom: 15px;
-}
-
-.hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-}
-
-/* --- Styles for services.html (Services Page) --- */
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px 0;
-}
-
-.service-card {
-    background-color: var(--color-secondary); 
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(28, 46, 70, 0.2);
-}
-
-.card-title {
-    color: var(--color-primary); 
-    margin-bottom: 10px;
-}
-
-.card-description {
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-}
-
-.card-cta {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: var(--color-accent); 
-    color: var(--color-primary);
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    }
