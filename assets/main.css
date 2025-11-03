@@ -690,3 +690,7 @@ body {
     .section-card { border-left: none; border-bottom: 5px solid var(--color-accent); }
     #process-list { flex-direction: column; align-items: center; }
 }
+/* --- FIX: Forcing alignment of the final button --- */
+.center-text-fix {
+    text-align: center; /* This centers the inline/inline-block children like the button */
+}
