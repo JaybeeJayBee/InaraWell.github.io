@@ -6,27 +6,29 @@
     --color-accent: #ADD8E6; /* Light Blue Accent */
     --color-text-light: #ffffff;
     --color-text-dark: #1C2E46;
+
+    /* --- NEW FONT VARIABLES FOR CONTACT/THANK YOU PAGES --- */
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Playfair Display', serif;
 }
 
 /* --- CRITICAL GLOBAL RESET --- */
-/* This is the key fix for unexplained white space/misalignment */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Prevents horizontal scroll from misplaced elements */
+    overflow-x: hidden; 
 }
 
 * {
     box-sizing: border-box;
-    /* Resetting margins/padding here in addition to html, body for safety */
     margin: 0; 
     padding: 0;
 }
 
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-primary); /* Using the defined font variable */
     line-height: 1.6;
     background-color: var(--color-gradient-light); 
     color: var(--color-text-dark);
@@ -34,7 +36,7 @@ body {
     /* --- STICKY FOOTER SOLUTION: PART 1 (Confirmed) --- */
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures body takes up full screen height */
+    min-height: 100vh; 
 }
 
 /* -------------------------------------- */
@@ -42,19 +44,19 @@ body {
 /* -------------------------------------- */
 #nav-trigger {
     position: fixed;
-    top: 20px; /* Offset from the edge */
-    right: 20px; /* Offset from the edge */
+    top: 20px; 
+    right: 20px; 
     width: 50px;
     height: 50px;
     background-color: var(--color-primary);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: flex; /* Centers the bars */
+    display: flex; 
     flex-direction: column;
     justify-content: space-around;
     padding: 10px;
-    z-index: 1001; /* Must be above the main content */
+    z-index: 1001; 
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
@@ -67,7 +69,7 @@ body {
 
 /* Visibility Control (Scroll) */
 #nav-trigger.is-hidden {
-    transform: translateY(-100px); /* Move out of view when scrolling down */
+    transform: translateY(-100px); 
     opacity: 0;
 }
 
@@ -81,7 +83,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(28, 46, 70, 0.98); /* Dark Blue with slight transparency */
+    background-color: rgba(28, 46, 70, 0.98); 
     color: var(--color-text-light);
     z-index: 1000;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
@@ -109,16 +111,16 @@ body {
 .overlay-menu a {
     color: var(--color-text-light);
     text-decoration: none;
-    font-size: 1.5rem; /* Reduced size for professional look */
-    font-weight: 600; /* Bolder text for clarity */
-    padding: 8px 0; /* Reduced padding/spacing */
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    padding: 8px 0; 
     display: block;
     transition: color 0.3s;
 }
 
 .overlay-menu a:hover {
-    color: var(--color-accent); /* Highlight on hover */
-    text-decoration: underline; /* Added professional underline */
+    color: var(--color-accent); 
+    text-decoration: underline; 
     text-underline-offset: 4px;
 }
 
@@ -148,6 +150,24 @@ body {
     transform: rotate(180deg);
     opacity: 0;
 }
+
+/* --- Professional Navigation Info Styling --- */
+.overlay-info {
+    position: absolute; /* Position it cleanly at the bottom */
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.overlay-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent); /* Use accent color to highlight site name */
+    margin-top: 20px;
+}
+
 
 /* -------------------------------------- */
 /* --- 3. Standardized Footer Component --- */
@@ -269,7 +289,7 @@ body {
 
 
 /* -------------------------------------- */
-/* --- 4. Main Content Styling (Example) --- */
+/* --- 4. Main Content Styling (Global) --- */
 /* -------------------------------------- */
 
 #page-content {
@@ -369,7 +389,7 @@ body {
 }
 
 .section {
-    padding: 80px 0; /* Increased vertical padding for more space and air */
+    padding: 80px 0; 
     position: relative;
     overflow: hidden; 
 }
@@ -377,7 +397,7 @@ body {
 .section-title {
     text-align: center;
     color: var(--color-primary);
-    font-size: 2.5rem; /* Larger, bolder titles */
+    font-size: 2.5rem; 
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -387,8 +407,8 @@ body {
     max-width: 900px;
     margin: 0 auto 50px;
     font-size: 1.2rem;
-    line-height: 1.8; /* Better readability */
-    color: var(--color-primary); /* Dark text for clarity */
+    line-height: 1.8; 
+    color: var(--color-primary); 
 }
 
 /* -------------------------------------- */
@@ -396,11 +416,10 @@ body {
 /* -------------------------------------- */
 
 .combined-hero-section {
-    background-color: var(--color-gradient-light); /* Light background for the whole section */
+    background-color: var(--color-gradient-light); 
     padding-bottom: 0;
     position: relative;
     overflow: hidden;
-    /* Clean separator from body background if necessary, but keep it light */
     border-bottom: 5px solid var(--color-secondary); 
 }
 
@@ -409,7 +428,7 @@ body {
     font-size: 3.5rem;
     font-weight: 900;
     color: var(--color-primary);
-    padding: 60px 20px 20px; /* Separating from the hero block */
+    padding: 60px 20px 20px; 
     letter-spacing: -0.5px;
 }
 
@@ -420,18 +439,18 @@ body {
 
 @keyframes scaleZoom {
     0% { transform: scale(1.0); }
-    50% { transform: scale(1.03); } /* Zoom in slightly */
-    100% { transform: scale(1.0); } /* Zoom back out */
+    50% { transform: scale(1.03); } 
+    100% { transform: scale(1.0); } 
 }
 
 /* 1. HERO SECTION (Contained within the combined header) */
 .hero {
     position: relative;
-    height: 400px; /* Slightly reduced height since the Welcome text is outside */
+    height: 400px; 
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary); /* Dark text over the light background */
+    color: var(--color-primary); 
     text-align: center;
     margin-bottom: 0;
 }
@@ -442,10 +461,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Swapping to a light, calming background for the light-themed hero */
     background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b') no-repeat center center/cover;
-    background-color: var(--color-secondary); /* Light blue base */
-    mix-blend-mode: soft-light; /* Softens the image into the light background */
+    background-color: var(--color-secondary); 
+    mix-blend-mode: soft-light; 
     opacity: 0.8; 
     z-index: 1;
 }
@@ -454,25 +472,25 @@ body {
     position: relative;
     z-index: 2;
     padding: 20px;
-    background-color: transparent; /* REMOVED DARK BLOCK */
+    background-color: transparent; 
     border-radius: 0;
 }
 
 .hero-main-title {
-    font-size: 3.2rem; /* Adjusted font size */
+    font-size: 3.2rem; 
     margin-bottom: 10px;
     text-shadow: none;
     font-weight: 900;
     letter-spacing: -1px;
-    color: var(--color-primary); /* Dark Blue text */
+    color: var(--color-primary); 
 }
 
 .hero-sub-title {
-    font-size: 1.5rem; /* Adjusted font size */
+    font-size: 1.5rem; 
     font-weight: 400;
     text-shadow: none;
-    margin-bottom: 0; /* CTA is removed */
-    color: var(--color-primary); /* Dark Blue text */
+    margin-bottom: 0; 
+    color: var(--color-primary); 
 }
 
 /* Hero CTA is now deprecated/removed */
@@ -483,13 +501,10 @@ body {
 
 /* 3. WHY TRUST SECTION (Modern Card Grid) */
 #why-trust {
-    /* More focus on the background gradient */
     background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-gradient-light) 100%);
     padding: 100px 0;
     position: relative;
 }
-
-/* ... (REST OF THE CSS CODE FOR SECTIONS 3, 4, 5 REMAINS UNCHANGED) ... */
 
 .grid-container {
     display: grid;
@@ -501,10 +516,10 @@ body {
 .section-card {
     background-color: var(--color-text-light);
     padding: 30px;
-    border-radius: 12px; /* Smoother corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for a floating effect */
+    border-radius: 12px; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
     transition: all 0.4s ease-in-out;
-    border-left: 5px solid var(--color-accent); /* Accent line for techish feel */
+    border-left: 5px solid var(--color-accent); 
     position: relative;
     z-index: 2;
 }
@@ -528,7 +543,7 @@ body {
 }
 
 .full-span {
-    grid-column: 1 / -1; /* Make the last card span the full width */
+    grid-column: 1 / -1; 
     text-align: center;
 }
 
@@ -554,7 +569,7 @@ body {
     background-color: var(--color-text-light);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
-    flex-basis: 250px; /* Fixed width for list items */
+    flex-basis: 250px; 
     max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -564,12 +579,12 @@ body {
     counter-increment: step-counter;
     position: absolute;
     left: 50%;
-    top: -20px; /* Move number outside the card */
+    top: -20px; 
     transform: translateX(-50%);
     width: 45px;
     height: 45px;
-    background-color: var(--color-primary); /* Dark Blue background */
-    color: var(--color-text-light); /* White number text */
+    background-color: var(--color-primary); 
+    color: var(--color-text-light); 
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -590,7 +605,6 @@ body {
 .cta-final-section {
     background-color: var(--color-secondary);
     padding: 100px 0;
-    /* Removed previous Flexbox properties to rely on the simpler text-align fix */
 }
 
 .final-cta-button {
@@ -620,15 +634,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Below the text (z-index: 2) */
+    z-index: 1; 
     overflow: hidden;
     pointer-events: none;
 }
 
 /* Original Bubbles Container for Why Trust Section */
 .floating-bubbles-container {
-    /* Kept original styles: position absolute, z-index 1, etc. */
-    /* Only ensure it does not conflict with the new header container */
     position: absolute;
     top: 0;
     left: 0;
@@ -640,7 +652,6 @@ body {
 }
 
 .bubble {
-    /* Styles remain the same for both containers */
     position: absolute;
     display: block;
     width: 30px; 
@@ -686,14 +697,14 @@ body {
 /* --- Responsive Adjustments for Homepage --- */
 @media (max-width: 900px) {
     .section-title { font-size: 2rem; }
-    .hero-main-title { font-size: 2.8rem; } /* Adjusted */
-    .hero-sub-title { font-size: 1.4rem; } /* Adjusted */
+    .hero-main-title { font-size: 2.8rem; } 
+    .hero-sub-title { font-size: 1.4rem; } 
     .grid-container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .full-span { grid-column: auto; }
 }
 @media (max-width: 600px) {
-    .main-welcome-heading { font-size: 2.5rem; padding-top: 40px; padding-bottom: 10px; } /* Adjusted */
-    .hero { height: 300px; } /* Adjusted */
+    .main-welcome-heading { font-size: 2.5rem; padding-top: 40px; padding-bottom: 10px; } 
+    .hero { height: 300px; } 
     .hero-main-title { font-size: 2.2rem; }
     .hero-sub-title { font-size: 1.1rem; }
     .section { padding: 50px 0; }
@@ -702,8 +713,9 @@ body {
 }
 /* --- FIX: Forcing alignment of the final button --- */
 .center-text-fix {
-    text-align: center; /* This centers the inline/inline-block children like the button */
+    text-align: center; 
 }
+
 /* --- Styles for affiliate.html (Affiliate Program Page) --- */
 
 /* Font Import for Poppins */
@@ -894,22 +906,6 @@ body {
 @media (max-width: 768px) {
     .section-title { font-size: 2rem; }
     .benefits-grid { grid-template-columns: 1fr; }
-}
-/* --- Professional Navigation Info Styling --- */
-.overlay-info {
-    position: absolute; /* Position it cleanly at the bottom */
-    bottom: 50px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.overlay-info h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-accent); /* Use accent color to highlight site name */
-    margin-top: 20px;
 }
 /* --- Styles for faq.html (FAQ Page) --- */
 
