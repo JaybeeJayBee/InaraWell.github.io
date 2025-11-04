@@ -30,6 +30,7 @@
     
  <main id="page-content">
     
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,16 +57,12 @@
             background-color: #f9f9f9;
             color: var(--primary);
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         
         .container {
             max-width: 1200px;
-            margin: 0 auto; /* ⭐ FIX: Centers the container horizontally */
+            margin: 0 auto;
             padding: 0 20px;
-            flex-grow: 1; 
         }
         
         /* Header Styles */
@@ -190,7 +187,6 @@
             }
             
             .products-grid {
-                /* On small screens, ensure the grid still flows well */
                 grid-template-columns: 1fr;
             }
         }
@@ -275,6 +271,8 @@
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
             });
+            
+            // Removed code to set the current year in the footer
         });
     </script>
 </body>
@@ -287,7 +285,8 @@
 
 </body>
                   </html>
-</main>
+     
+ </main>
 
     <div id="footer-container"></div>
 
