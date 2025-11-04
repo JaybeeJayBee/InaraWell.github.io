@@ -1307,3 +1307,267 @@ body {
         padding-left: 0;
     }
     }
+/* --- NEW FONT DEFINITIONS (MUST BE AT THE TOP) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* --- UPDATE GLOBAL BODY FONT (REQUIRED FOR CONTACT/THANK YOU STYLING) --- */
+body {
+    /* Overrides the 'font-family: Arial, sans-serif;' default in your existing CSS */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* --- NEW STYLES for contact.html (Contact Us Page) --- */
+
+.contact-hero {
+    position: relative;
+    background: linear-gradient(45deg, var(--color-gradient-light) 0%, var(--color-accent) 100%);
+    color: var(--color-primary);
+    padding: 6rem 2rem;
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 40px; 
+}
+
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+    transform: rotate(3deg);
+    animation: wave 15s infinite ease-in-out;
+    z-index: 0;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(3deg) scale(1.0); }
+    50% { transform: rotate(-3deg) scale(1.05); }
+}
+
+.contact-hero .content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.contact-hero p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-section {
+    padding: 2rem 0; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.contact-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(28, 46, 70, 0.1);
+    padding: 3rem;
+    flex: 1;
+    min-width: 300px;
+    max-width: 550px; 
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(28, 46, 70, 0.15);
+}
+
+.contact-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--color-secondary);
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(173, 216, 230, 0.5);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Reusing cta-button from global styles but adjusting context */
+.contact-card .cta-button {
+    width: auto;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    border: none;
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.2);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.contact-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--color-accent);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    color: var(--color-primary);
+    font-size: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+    color: var(--color-accent);
+}
+
+/* --- NEW STYLES for thank-you.html (Thank You Page) --- */
+
+.thank-you-main {
+    align-items: center;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    justify-content: space-evenly; 
+    flex-grow: 1;
+    /* Ensure main tag is a column container for the cards */
+    display: flex; 
+    flex-direction: column;
+}
+
+.thank-you-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(28, 46, 70, 0.1);
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Animation delays for the cards */
+.thank-you-card:nth-of-type(1) { animation-delay: 0.2s; }
+.thank-you-card:nth-of-type(2) { animation-delay: 1.2s; }
+.thank-you-card:nth-of-type(3) { animation-delay: 2.2s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.thank-you-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.thank-you-card p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.thank-you-card .cta-button {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+.thank-you-card .cta-button:hover {
+    background-color: #364d6e;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-hero h1 {
+        font-size: 2.5rem;
+    }
+    .contact-hero p {
+        font-size: 1rem;
+    }
+    .contact-card {
+        padding: 2rem;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .thank-you-main {
+        padding: 2rem 1rem;
+        justify-content: flex-start;
+    }
+    .thank-you-card {
+        padding: 2rem;
+        margin-bottom: 20px;
+    }
+    .thank-you-card h1 {
+        font-size: 2.5rem;
+    }
+    .thank-you-card p {
+        font-size: 1rem;
+    }
+}
