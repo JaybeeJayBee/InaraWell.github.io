@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadComponent('nav-overlay-container', 'components/nav.html').then(() => {
         // Run Navigation setup after the nav.html content has been injected
         setupNavigation();
+        setupSubmenuLogic(); // NEW: Run submenu logic after nav is loaded
     });
     loadComponent('footer-container', 'components/footer.html').then(() => {
         // Run Footer script after injection
@@ -47,6 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeBtn.classList.remove('animate-close');
                 trigger.style.display = 'flex'; // Show trigger when menu closes
             }, 500); // Matches CSS transition time
+            
+            // Close any open submenus when the main menu closes
+            document.querySelectorAll('.has-submenu .submenu').forEach(sub => {
+                sub.classList.add('hidden');
+                sub.previousElementSibling.querySelector('.submenu-arrow').classList.remove('rotate');
+            });
         });
 
         // Floating Icon Visibility Control (Scroll Logic)
@@ -68,6 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }, false);
     }
     
+    // --- NEW: Submenu Dropdown Logic ---
+    function setupSubmenuLogic() {
+        // Listen for clicks on the main link that has the submenu
+        const submenuToggle = document.querySelector('.submenu-toggle');
+        
+        if (!submenuToggle) return;
+        
+        // We use the parent list item (li) to listen for the click
+        submenuToggle.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevents navigating to our-creations-showcase.html immediately
+
+            const parentLi = submenuToggle.parentElement;
+            const submenu = parentLi.querySelector('.submenu');
+            const arrow = parentLi.querySelector('.submenu-arrow');
+
+            // Toggle visibility of the submenu
+            submenu.classList.toggle('hidden');
+            
+            // Toggle arrow rotation
+            arrow.classList.toggle('rotate');
+            
+            // OPTIONAL: If the link is the main destination, you can navigate on a second click
+            // if (submenu.classList.contains('hidden')) {
+            //     window.location.href = submenuToggle.getAttribute('href');
+            // }
+        });
+    }
+
     // --- Footer Year Script ---
     function setupFooterYear() {
         const yearElement = document.getElementById("currentYear");
