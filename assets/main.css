@@ -1571,34 +1571,54 @@ body {
         font-size: 1rem;
     }
 }
-/* --- New Styles for Submenu Dropdown --- */
+/* --- New Styles for Submenu Dropdown (CORRECTED) --- */
 
 .has-submenu {
-    position: relative; /* Allows us to position sub-elements if needed */
+    position: relative;
 }
 
+/* Ensure the main submenu toggle link is visually consistent with other primary links */
+.overlay-menu .submenu-toggle {
+    /* Main links use font-size: 1.5rem; and font-weight: 600; */
+    font-size: 1.5rem; 
+    font-weight: 600;
+}
+
+/* Submenu Links: Make these noticeably smaller than the primary links (1.2rem vs 1.5rem) */
 .overlay-menu .submenu {
     list-style: none;
     padding: 0;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduced vertical space */
     transition: all 0.3s ease-in-out;
-    max-height: 500px; /* Large max-height for smooth transition */
+    max-height: 500px;
+    
+    /* Center the sub-links better below the parent */
+    text-align: center; 
 }
 
 .overlay-menu .submenu.hidden {
     max-height: 0;
     overflow: hidden;
+    margin-bottom: 0;
+}
+
+.overlay-menu .submenu li {
+    padding: 0;
 }
 
 .overlay-menu .submenu a {
-    font-size: 1.8rem; /* Smaller size for sub-links */
-    padding: 8px 0;
-    opacity: 0.8;
+    /* FIX: Set a smaller font size for sub-links */
+    font-size: 1.2rem; 
+    font-weight: 400; /* Lighter weight helps distinguish it from primary links */
+    padding: 6px 0; /* Less padding than the primary links */
+    opacity: 0.9;
+    text-decoration: none; /* Sub-links shouldn't be underlined by default */
 }
 
 .overlay-menu .submenu a:hover {
     opacity: 1;
+    text-decoration: underline;
 }
 
 .submenu-toggle {
@@ -1608,11 +1628,19 @@ body {
 }
 
 .submenu-arrow {
-    margin-left: 15px;
-    font-size: 1.5rem;
+    margin-left: 10px; /* Reduced margin */
+    font-size: 1.1rem; /* Smaller arrow size */
     transition: transform 0.3s ease-in-out;
+    color: var(--color-text-light); /* Ensure arrow color consistency */
 }
 
 .submenu-arrow.rotate {
-    transform: rotate(180deg); /* The up arrow effect */
+    transform: rotate(180deg);
+}
+
+/* Mobile Adjustment: Ensure sub-links look good on tiny screens */
+@media (max-width: 480px) {
+    .overlay-menu .submenu a {
+        font-size: 1.1rem;
+    }
 }
