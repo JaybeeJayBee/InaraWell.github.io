@@ -210,15 +210,22 @@ body {
     display: flex;
     gap: 15px;
     font-size: 1.5rem;
+    /* Added display: block to ensure they render independently */
+    align-items: center; 
 }
 
 .social-links a {
-    color: var(--color-text-light); /* White icons */
+    /* Explicitly setting color and opacity for immediate visibility */
+    color: var(--color-text-light) !important; /* Force white color */
+    opacity: 1; 
+    text-decoration: none;
     transition: color 0.3s;
+    /* Adding display: block to ensure the click area is correctly mapped */
+    display: block;
 }
 
 .social-links a:hover {
-    color: var(--color-accent); /* Highlight on hover */
+    color: var(--color-accent) !important; /* Ensure hover uses accent */
 }
 
 .footer-bottom {
