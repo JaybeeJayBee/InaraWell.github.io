@@ -13,405 +13,131 @@
     <div id="nav-overlay-container"></div>
     
  <main id="page-content">
-    
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InaraWell Policies | Self-Help Resources</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+    <header class="policy-header">
+        <h1 class="policies-title">InaraWell Policies</h1>
+        <p class="policies-subtitle">For Self-Help Tools & Resources</p>
+    </header>
 
-        :root {
-            --primary: #1C2E46;
-            --secondary: #E3EEF7;
-            --gradient1: #F7F7F0;
-            --gradient2: #ADD8E6;
-            --accent: #D4AF37;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary);
-            background: linear-gradient(135deg, var(--gradient1), var(--gradient2));
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Header Section */
-        .policy-header {
-            text-align: center;
-            padding: 5rem 0 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .policy-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-            animation: fadeInDown 1s ease;
-        }
-
-        .policy-header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .policy-header p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--primary);
-            opacity: 0.9;
-            animation: fadeIn 1.5s ease;
-        }
-
-        /* Policy Sections */
-        .policy-section {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(28, 46, 70, 0.1);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .policy-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(28, 46, 70, 0.15);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(28, 46, 70, 0.1);
-        }
-
-        .section-icon {
-            font-size: 2.5rem;
-            margin-right: 1.5rem;
-            color: var(--accent);
-            animation: pulse 2s infinite;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--primary);
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        .policy-content {
-            padding-left: 4.5rem;
-        }
-
-        .policy-point {
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-left: 2rem;
-            animation: fadeInRight 0.8s ease;
-        }
-
-        .policy-point::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.7rem;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .policy-point h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .policy-list {
-            list-style-type: none;
-            margin: 1.5rem 0;
-        }
-
-        .policy-list li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .policy-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            background: rgba(227, 238, 247, 0.6);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            z-index: -1;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .policy-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .policy-section {
-                padding: 2rem;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .section-icon {
-                margin-bottom: 1rem;
-                margin-right: 0;
-            }
-            
-            .policy-content {
-                padding-left: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="floating-element" style="width: 150px; height: 150px; top: 10%; left: 5%; animation-delay: 0s;"></div>
-    <div class="floating-element" style="width: 100px; height: 100px; top: 70%; left: 80%; animation-delay: 3s;"></div>
-    <div class="floating-element" style="width: 80px; height: 80px; top: 40%; left: 15%; animation-delay: 6s;"></div>
-
-    <div class="container">
-        <header class="policy-header">
-            <h1>InaraWell Policies</h1>
-            <p>For Self-Help Tools & Resources</p>
-        </header>
-
-        <section class="policy-section" style="animation-delay: 0.2s;">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <div>
-                    <h2 class="section-title">Privacy Policy</h2>
-                    <p class="section-subtitle">Your Information is Safe with Us</p>
-                </div>
+    <section class="policy-section" id="privacy-policy">
+        <div class="section-header">
+            <div class="section-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div>
+                <h2 class="section-title">Privacy Policy</h2>
+                <p class="section-subtitle">Your Information is Safe with Us</p>
+            </div>
+        </div>
+        
+        <div class="policy-content">
+            <div class="policy-point">
+                <h3>What We Collect</h3>
+                <p>We only collect your name, email, and your Gumroad purchase history to deliver the self-help tools and resources you've purchased.</p>
             </div>
             
-            <div class="policy-content">
-                <div class="policy-point">
-                    <h3>What We Collect</h3>
-                    <p>We only collect your name, email, and your Gumroad purchase history to deliver the self-help tools and resources you've purchased.</p>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>What We Don't See</h3>
-                    <p>We never have access to your payment information. All payment processing is handled securely and completely by Gumroad.</p>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>How We Use Your Data</h3>
-                    <ul class="policy-list">
-                        <li>To deliver your purchased digital self-help products.</li>
-                        <li>To send you updates about new tools, resources, and self-improvement tips. You can easily opt out of these emails at any time.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>Your Control</h3>
-                    <ul class="policy-list">
-                        <li><strong>Delete your data:</strong> You can request to have your personal data deleted at any time by emailing us at care@inarawell.com.</li>
-                        <li><strong>Unsubscribe:</strong> All of our emails include a one-click unsubscribe link.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="policy-section" style="animation-delay: 0.4s;">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-file-contract"></i>
-                </div>
-                <div>
-                    <h2 class="section-title">Terms of Service</h2>
-                    <p class="section-subtitle">By Purchasing from InaraWell, You Agree To:</p>
-                </div>
+            <div class="policy-point">
+                <h3>What We Don't See</h3>
+                <p>We never have access to your payment information. All payment processing is handled securely and completely by Gumroad.</p>
             </div>
             
-            <div class="policy-content">
-                <div class="policy-point">
-                    <h3>Personal Use Only</h3>
-                    <p>All of our self-help tools and resources are for your personal use. You may not resell, redistribute, or share them with others.</p>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>No Professional Advice</h3>
-                    <p>The content provided by InaraWell is for informational and educational purposes only. It is not a substitute for professional medical, psychological, or legal advice. Always seek the advice of a qualified professional for any questions you may have regarding a specific issue or condition.</p>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>Fair Use</h3>
-                    <p>Engaging in chargebacks without first attempting to resolve an issue with us will result in the permanent removal of your access to our products.</p>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>Gumroad Handles</h3>
-                    <ul class="policy-list">
-                        <li>All payments and transactions.</li>
-                        <li>Digital delivery of your purchases.</li>
-                        <li>Please note that your use of Gumroad is also subject to their own terms and conditions.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="policy-section" style="animation-delay: 0.6s;">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-hand-holding-usd"></i>
-                </div>
-                <div>
-                    <h2 class="section-title">Refund Policy</h2>
-                    <p class="section-subtitle">14-Day Satisfaction Guarantee</p>
-                </div>
+            <div class="policy-point">
+                <h3>How We Use Your Data</h3>
+                <ul class="policy-list">
+                    <li>To deliver your purchased digital self-help products.</li>
+                    <li>To send you updates about new tools, resources, and self-improvement tips. You can easily opt out of these emails at any time.</li>
+                </ul>
             </div>
             
-            <div class="policy-content">
-                <div class="policy-point">
-                    <h3>Refunds are considered for:</h3>
-                    <ul class="policy-list">
-                        <li>Technical issues with a product that we are unable to resolve within 72 hours.</li>
-                        <li>Accidental duplicate or incorrect charges.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>No refunds are given for:</h3>
-                    <ul class="policy-list">
-                        <li>Changing your mind after you have downloaded or accessed the digital product.</li>
-                        <li>Deciding that the tools or resources aren't what you expected after using them.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-point">
-                    <h3>How to Request a Refund</h3>
-                    <ul class="policy-list">
-                        <li>Email us at care@inarawell.com with the following information:
-                            <ul style="list-style-type: circle; margin-left: 1.5rem;">
-                                <li>Your Gumroad receipt number.</li>
-                                <li>A detailed explanation of the issue you are experiencing.</li>
-                            </ul>
-                        </li>
-                        <li>Refunds, if approved, are processed within 4 business days.</li>
-                    </ul>
-                </div>
+            <div class="policy-point">
+                <h3>Your Control</h3>
+                <ul class="policy-list">
+                    <li><strong>Delete your data:</strong> You can request to have your personal data deleted at any time by emailing us at care@inarawell.com.</li>
+                    <li><strong>Unsubscribe:</strong> All of our emails include a one-click unsubscribe link.</li>
+                </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <script>
-        // Create additional floating elements dynamically
-        document.addEventListener('DOMContentLoaded', function() {
-            const body = document.body;
-            for (let i = 0; i < 5; i++) {
-                const element = document.createElement('div');
-                element.classList.add('floating-element');
-                
-                const size = Math.random() * 100 + 50;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
-                
-                element.style.width = `${size}px`;
-                element.style.height = `${size}px`;
-                element.style.left = `${posX}%`;
-                element.style.top = `${posY}%`;
-                element.style.animationDuration = `${duration}s`;
-                element.style.animationDelay = `${delay}s`;
-                element.style.opacity = Math.random() * 0.4 + 0.1;
-                
-                body.appendChild(element);
-            }
-        });
-    </script>
-</body>
-</html>
+    <section class="policy-section" id="terms-of-service">
+        <div class="section-header">
+            <div class="section-icon">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <div>
+                <h2 class="section-title">Terms of Service</h2>
+                <p class="section-subtitle">By Purchasing from InaraWell, You Agree To:</p>
+            </div>
+        </div>
+        
+        <div class="policy-content">
+            <div class="policy-point">
+                <h3>Personal Use Only</h3>
+                <p>All of our self-help tools and resources are for your personal use. You may not resell, redistribute, or share them with others.</p>
+            </div>
+            
+            <div class="policy-point">
+                <h3>No Professional Advice</h3>
+                <p>The content provided by InaraWell is for informational and educational purposes only. It is not a substitute for professional medical, psychological, or legal advice. Always seek the advice of a qualified professional for any questions you may have regarding a specific issue or condition.</p>
+            </div>
+            
+            <div class="policy-point">
+                <h3>Fair Use</h3>
+                <p>Engaging in chargebacks without first attempting to resolve an issue with us will result in the permanent removal of your access to our products.</p>
+            </div>
+            
+            <div class="policy-point">
+                <h3>Gumroad Handles</h3>
+                <ul class="policy-list">
+                    <li>All payments and transactions.</li>
+                    <li>Digital delivery of your purchases.</li>
+                    <li>Please note that your use of Gumroad is also subject to their own terms and conditions.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
+    <section class="policy-section" id="refund-policy">
+        <div class="section-header">
+            <div class="section-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <div>
+                <h2 class="section-title">Refund Policy</h2>
+                <p class="section-subtitle">14-Day Satisfaction Guarantee</p>
+            </div>
+        </div>
+        
+        <div class="policy-content">
+            <div class="policy-point">
+                <h3>Refunds are considered for:</h3>
+                <ul class="policy-list">
+                    <li>Technical issues with a product that we are unable to resolve within 72 hours.</li>
+                    <li>Accidental duplicate or incorrect charges.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-point">
+                <h3>No refunds are given for:</h3>
+                <ul class="policy-list">
+                    <li>Changing your mind after you have downloaded or accessed the digital product.</li>
+                    <li>Deciding that the tools or resources aren't what you expected after using them.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-point">
+                <h3>How to Request a Refund</h3>
+                <ul class="policy-list">
+                    <li>Email us at care@inarawell.com with the following information:
+                        <ul style="list-style-type: circle; margin-left: 1.5rem; color: var(--color-primary);">
+                            <li>Your Gumroad receipt number.</li>
+                            <li>A detailed explanation of the issue you are experiencing.</li>
+                        </ul>
+                    </li>
+                    <li>Refunds, if approved, are processed within 4 business days.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </main>
 
     <div id="footer-container"></div>
