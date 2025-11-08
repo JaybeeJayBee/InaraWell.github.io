@@ -98,11 +98,13 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
-            /* New lines to center the grid when it doesn't fill the full width */
-            **justify-content: center;**
-            **max-width: fit-content;**
-            **margin-left: auto;**
-            **margin-right: auto;**
+            /* FIX 1: Centers the content inside the grid track if it doesn't take up full width (but we need to center the grid block itself) */
+            justify-content: center;
+            /* FIX 2: Restrict the grid container's width to only what the columns need (which is the key difference) */
+            max-width: max-content; 
+            /* FIX 3: Center the now-shrunken grid container within its parent (`.container`) */
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .product-card {
@@ -176,9 +178,10 @@
             }
             
             .products-grid {
-                /* On small screens, we want it to be 1 column and fill the width, so we can remove the centering properties */
+                /* Reset centering for single-column view to allow it to fill 100% width */
                 grid-template-columns: 1fr;
                 max-width: 100%;
+                margin: 0 auto 60px auto; /* Re-center, but it won't matter much at 100% width */
             }
         }
 
