@@ -43,15 +43,13 @@
             line-height: 1.6;
         }
         
-        /* FIX: Added Flexbox to the container to center its child grid */
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            /* Reverting container to standard centering */
+            margin: 0 auto; 
             padding: 0 20px;
-            
-            /* CENTERING FIX */
-            display: flex;
-            justify-content: center;
+            /* Removing Flexbox from here */
+            display: block; 
         }
         
         /* Header Styles */
@@ -97,16 +95,21 @@
             border-radius: 4px;
         }
         
-        /* Products Grid */
+        /* Products Grid - FINAL ATTEMPT FIX */
         .products-grid {
-            /* No centering hacks needed here anymore, as the parent handles it */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
-            /* Ensure the grid respects the container's width */
-            width: 100%; 
-            max-width: 1200px;
+
+            /* **KEY FIX**: Use 'max-content' to force the container to shrink to the size of its columns, then center the block. */
+            max-width: max-content; 
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Fallback/cleanup properties */
+            justify-content: center;
+            justify-items: center; 
         }
         
         .product-card {
@@ -180,7 +183,11 @@
             }
             
             .products-grid {
+                /* On small screens, allow full width and clear margin hacks */
                 grid-template-columns: 1fr;
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
 
