@@ -1,26 +1,12 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InaraWell - Home</title>
-    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/bMgw0WCF/Smart-Select-20251001-110956-Gallery.jpg">
-    <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-
-    <div id="nav-overlay-container"></div>
-    
-<main id="page-content">
-    
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complimentary Creations | InaraWell</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/bMgw0WCF/Smart-Select-20251001-110956-Gallery.jpg">
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --primary: #1C2E46; /* Dark Blue */
@@ -41,7 +27,6 @@
             background-color: #f9f9f9;
             color: var(--primary);
             line-height: 1.6;
-            /* Ensure the body takes full height and allows content to stretch */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -51,15 +36,14 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            /* Allow main content to grow */
             flex-grow: 1; 
         }
 
-        /* The original styles are kept EXACTLY the same, using the 'premium' classes for styling consistency */
+        /* --- Standardized Banner Styles --- */
         .premium-banner {
             background: linear-gradient(135deg, var(--gradient-light) 0%, var(--gradient-blue) 100%);
-            text-align: center;
-            padding: 80px 20px;
+            /* IMPORTANT: This centers all inline/inline-block content within the banner */
+            **text-align: center;** padding: 80px 20px;
             margin-bottom: 50px;
             position: relative;
             overflow: hidden;
@@ -74,11 +58,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* The background image is kept EXACTLY the same as requested */
             background: url('https://i.ibb.co/Cp0J1rZH/Picsart-25-08-03-15-25-02-586.jpg') center/cover;
             opacity: 0.03;
             z-index: 0;
         }
+
+        /* Ensure the container contents inherit the centering */
+        .premium-banner .container {
+            **text-align: center;** }
 
         .premium-banner h1 {
             font-size: 3.5rem;
@@ -89,6 +76,7 @@
             margin-bottom: 15px;
         }
 
+        /* This ensures the underline is centered */
         .premium-banner h1::after {
             content: '';
             position: absolute;
@@ -105,12 +93,12 @@
             font-size: 1.2rem;
             color: var(--primary);
             opacity: 0.9;
+            /* This centers the paragraph block itself, ensuring it doesn't hug the left */
             max-width: 700px;
-            margin: 30px auto 0;
-            position: relative;
+            **margin: 30px auto 0;** position: relative;
         }
 
-        /* Premium Products Grid */
+        /* Premium Products Grid (Rest of styles remain the same for consistency) */
         .premium-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -140,7 +128,6 @@
         }
 
         .premium-image::after {
-            /* Text changed to 'FREE' for complimentary section */
             content: 'FREE'; 
             position: absolute;
             top: 15px;
@@ -216,71 +203,73 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Removed Footer Styles */
     </style>
 </head>
 <body>
-    <header class="premium-banner">
-        <div class="container">
-            <h1>Complimentary Creations</h1> 
-            <p>Explore our foundational resources—designed to offer immediate value and kickstart your journey toward personal growth and well-being.</p>
-        </div>
-    </header>
+    
+    <main id="page-content">
 
-    <main class="container">
-        <div class="premium-grid">
-            <div class="premium-card">
-                <div class="premium-image">
-                    <img src="https://i.ibb.co/60tdbZxM/1754230377299.jpg" alt="Daily Affirmation Deck (Digital Cards)">
+        <header class="premium-banner">
+            <div class="container">
+                <h1>Complimentary Creations</h1> 
+                <p>Explore our foundational resources—designed to offer immediate value and kickstart your journey toward personal growth and well-being.</p>
+            </div>
+        </header>
+
+        <section class="container">
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <div class="premium-image">
+                        <img src="https://i.ibb.co/60tdbZxM/1754230377299.jpg" alt="Daily Affirmation Deck (Digital Cards)">
+                    </div>
+                    <div class="premium-content">
+                        <h3>Daily Affirmation Deck (Digital Cards)</h3>
+                        <p>Start each day with a boost of positivity. This beautifully designed digital deck will offer a fresh affirmation daily to inspire confidence, gratitude, and resilience, accessible right from your device.</p>
+                        <button class="premium-coming-soon">Coming Soon</button>
+                    </div>
                 </div>
-                <div class="premium-content">
-                    <h3>Daily Affirmation Deck (Digital Cards)</h3>
-                    <p>Start each day with a boost of positivity. This beautifully designed digital deck will offer a fresh affirmation daily to inspire confidence, gratitude, and resilience, accessible right from your device.</p>
-                    <button class="premium-coming-soon">Coming Soon</button>
+
+                <div class="premium-card">
+                    <div class="premium-image">
+                        <img src="https://i.ibb.co/M58dkV6F/Picsart-25-08-03-15-18-35-182.jpg" alt="Guided Breathwork for Stress Release (Short Series)">
+                    </div>
+                    <div class="premium-content">
+                        <h3>Guided Breathwork for Stress Release (Short Series)</h3>
+                        <p>Find calm in minutes with these powerful breathwork exercises. This concise audio series provides simple yet effective techniques to quickly reduce stress and promote relaxation whenever you need it most.</p>
+                        <button class="premium-coming-soon">Coming Soon</button>
+                    </div>
+                </div>
+
+                <div class="premium-card">
+                    <div class="premium-image">
+                        <img src="https://i.ibb.co/q3dVGYvL/Picsart-25-08-03-19-25-05-465.jpg" alt="The Digital Detox Playbook Preview">
+                    </div>
+                    <div class="premium-content">
+                        <h3>The Digital Detox Playbook Preview</h3>
+                        <p>Get a taste of reclaiming your focus and reconnecting with what truly matters. This introductory preview will offer a sneak peek into practical strategies for a healthier relationship with technology.</p>
+                        <button class="premium-coming-soon">Coming Soon</button>
+                    </div>
+                </div>
+
+                <div class="premium-card">
+                    <div class="premium-image">
+                        <img src="https://i.ibb.co/qFsTyPGT/Picsart-25-08-03-19-33-17-750.jpg" alt="Self-Care Quick-Start Guide">
+                    </div>
+                    <div class="premium-content">
+                        <h3>Self-Care Quick-Start Guide</h3>
+                        <p>Kickstart your well-being journey with essential tips and simple practices. This guide provides actionable steps to integrate crucial self-care routines into your busy schedule, promoting balance and peace.</p>
+                        <button class="premium-coming-soon">Coming Soon</button>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="premium-card">
-                <div class="premium-image">
-                    <img src="https://i.ibb.co/M58dkV6F/Picsart-25-08-03-15-18-35-182.jpg" alt="Guided Breathwork for Stress Release (Short Series)">
-                </div>
-                <div class="premium-content">
-                    <h3>Guided Breathwork for Stress Release (Short Series)</h3>
-                    <p>Find calm in minutes with these powerful breathwork exercises. This concise audio series provides simple yet effective techniques to quickly reduce stress and promote relaxation whenever you need it most.</p>
-                    <button class="premium-coming-soon">Coming Soon</button>
-                </div>
-            </div>
-
-            <div class="premium-card">
-                <div class="premium-image">
-                    <img src="https://i.ibb.co/q3dVGYvL/Picsart-25-08-03-19-25-05-465.jpg" alt="The Digital Detox Playbook Preview">
-                </div>
-                <div class="premium-content">
-                    <h3>The Digital Detox Playbook Preview</h3>
-                    <p>Get a taste of reclaiming your focus and reconnecting with what truly matters. This introductory preview will offer a sneak peek into practical strategies for a healthier relationship with technology.</p>
-                    <button class="premium-coming-soon">Coming Soon</button>
-                </div>
-            </div>
-
-            <div class="premium-card">
-                <div class="premium-image">
-                    <img src="https://i.ibb.co/qFsTyPGT/Picsart-25-08-03-19-33-17-750.jpg" alt="Self-Care Quick-Start Guide">
-                </div>
-                <div class="premium-content">
-                    <h3>Self-Care Quick-Start Guide</h3>
-                    <p>Kickstart your well-being journey with essential tips and simple practices. This guide provides actionable steps to integrate crucial self-care routines into your busy schedule, promoting balance and peace.</p>
-                    <button class="premium-coming-soon">Coming Soon</button>
-                </div>
-            </div>
-        </div>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Staggered animation for complimentary cards (using original class names)
+            // Staggered animation for complimentary cards
             const cards = document.querySelectorAll('.premium-card');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
@@ -298,18 +287,7 @@
                 card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(card);
             });
-
-            // Removed code to set current year in footer
         });
     </script>
 </body>
-</html>
-
-</main>
-
-    <div id="footer-container"></div>
-
-    <script src="assets/component-loader.js"></script>
-
-</body>
-                                                                                                                                                                                                                                                                 </html>
+ </html>
