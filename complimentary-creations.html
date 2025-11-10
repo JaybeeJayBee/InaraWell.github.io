@@ -18,177 +18,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Creations | InaraWell</title>
-    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/bMgw0WCF/Smart-Select-20251001-110956-Gallery.jpg">
-    <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Complimentary Creations | InaraWell</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #1C2E46; /* Dark Blue */
-            --secondary: #E3EEF7; /* Light Blue/Off-White */
-            --gradient-light: #F7F7F0;
-            --gradient-blue: #ADD8E6;
+            --primary: #1C2E46;
+            --secondary: #E3EEF7;
+            --light-bg: #F7F7F0;
+            --accent-blue: #ADD8E6;
             --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f9f9f9;
             color: var(--primary);
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            flex-grow: 1; 
         }
-
-        /* --- Banner Styles (Centered Text) --- */
-        .premium-banner {
-            background: linear-gradient(135deg, var(--gradient-light) 0%, var(--gradient-blue) 100%);
-            **text-align: center;** padding: 80px 20px;
+        
+        /* Header Styles */
+        .section-banner {
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--secondary) 100%);
+            text-align: center;
+            padding: 60px 20px;
             margin-bottom: 50px;
             position: relative;
             overflow: hidden;
             border-radius: 0 0 25px 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-
-        .premium-banner::before {
+        
+        .section-banner::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.ibb.co/Cp0J1rZH/Picsart-25-08-03-15-25-02-586.jpg') center/cover;
+            background: url('https://i.ibb.co/60tdbZxM/1754230377299.jpg') center/cover;
             opacity: 0.03;
             z-index: 0;
         }
         
-        /* FIX: Explicitly ensure the container's contents are centered to prevent overrides */
-        .premium-banner .container {
-             **text-align: center;** }
-
-        .premium-banner h1 {
-            font-size: 3.5rem;
+        .section-banner h1 {
+            font-size: 3.2rem;
             position: relative;
             color: var(--primary);
             font-weight: 700;
             letter-spacing: 1px;
-            margin-bottom: 15px;
         }
-
-        .premium-banner h1::after {
+        
+        .section-banner h1::after {
             content: '';
             position: absolute;
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 4px;
         }
-
-        .premium-banner p {
-            font-size: 1.2rem;
-            color: var(--primary);
-            opacity: 0.9;
-            max-width: 700px;
-            **margin: 30px auto 0;** position: relative;
-        }
-
-        /* Premium Products Grid and Card Styles */
-        .premium-grid {
+        
+        /* Products Grid */
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
         }
-
-        .premium-card {
+        
+        .product-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: var(--transition);
-            border-top: 4px solid var(--primary);
-            position: relative;
         }
-
-        .premium-card:hover {
+        
+        .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
-
-        .premium-image {
+        
+        .product-image {
             height: 220px;
             overflow: hidden;
-            position: relative;
         }
-
-        .premium-image::after {
-            content: 'PREMIUM';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .premium-image img {
+        
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
-
-        .premium-card:hover .premium-image img {
+        
+        .product-card:hover .product-image img {
             transform: scale(1.05);
         }
-
-        .premium-content {
+        
+        .product-content {
             padding: 25px;
         }
-
-        .premium-content h3 {
-            font-size: 1.4rem;
+        
+        .product-content h3 {
+            font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--primary);
-            font-weight: 600;
         }
-
-        .premium-content p {
+        
+        .product-content p {
             margin-bottom: 20px;
             color: var(--primary);
             opacity: 0.9;
             font-size: 0.95rem;
         }
-
-        .premium-coming-soon {
+        
+        /* Button Styles */
+        .coming-soon-btn {
             display: inline-block;
-            background: var(--primary);
-            color: var(--secondary);
+            background: var(--secondary);
+            color: var(--primary);
             padding: 12px 25px;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: 600;
             text-decoration: none;
             cursor: default;
             pointer-events: none;
@@ -197,84 +161,103 @@
             text-align: center;
             transition: var(--transition);
             font-size: 0.95rem;
-            letter-spacing: 0.5px;
         }
-
+        
         /* Responsive Styles */
         @media (max-width: 768px) {
-            .premium-banner h1 {
+            .section-banner h1 {
                 font-size: 2.5rem;
             }
-            .premium-banner p {
-                font-size: 1rem;
-            }
-            .premium-grid {
+            
+            .products-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <header class="section-banner">
+        <div class="container">
+            <h1>Complimentary Creations</h1>
+        </div>
+    </header>
     
-    <div id="nav-overlay-container"></div>
-    
-    <main id="page-content">
-
-        <header class="premium-banner">
-            <div class="container">
-                <h1>Premium Creations</h1>
-                <p>Experience transformative growth with our highest-level offerings, designed for those committed to profound personal evolution</p>
-            </div>
-        </header>
-
-        <section class="container">
-            <div class="premium-grid">
-                <div class="premium-card">
-                    <div class="premium-image">
-                        <img src="https://i.ibb.co/Cp0J1rZH/Picsart-25-08-03-15-25-02-586.jpg" alt="The Visionary's Blueprint Masterclass">
-                    </div>
-                    <div class="premium-content">
-                        <h3>The Visionary's Blueprint Masterclass</h3>
-                        <p>Ready to manifest your biggest dreams? This immersive masterclass will walk you through a step-by-step process for defining, refining, and actively building the life you envision, complete with advanced tools and exclusive insights.</p>
-                        <button class="premium-coming-soon">Coming Soon</button>
-                    </div>
+    <main class="container">
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.ibb.co/60tdbZxM/1754230377299.jpg" alt="Daily Affirmation Deck">
                 </div>
-
-                <div class="premium-card">
-                    <div class="premium-image">
-                        <img src="https://i.ibb.co/Lz8F1wkF/Picsart-25-08-03-15-32-48-201.jpg" alt="Personalized Breakthrough Coaching Session">
-                    </div>
-                    <div class="premium-content">
-                        <h3>Personalized Breakthrough Coaching Session</h3>
-                        <p>Unlock your full potential with a one-on-one session tailored specifically to your unique challenges and aspirations. This premium offering provides personalized guidance and actionable strategies to help you achieve significant breakthroughs.</p>
-                        <button class="premium-coming-soon">Coming Soon</button>
-                    </div>
-                </div>
-
-                <div class="premium-card">
-                    <div class="premium-image">
-                        <img src="https://i.ibb.co/WvZWG3C5/Picsart-25-08-03-21-48-45-556.jpg" alt="The Emotion Blueprint Deep Dive Program">
-                    </div>
-                    <div class="premium-content">
-                        <h3>The Emotion Blueprint Deep Dive Program</h3>
-                        <p>Go beyond understanding to truly mastering your emotional landscape. This comprehensive program offers advanced techniques, personalized exercises, and live Q&A sessions to cultivate profound emotional intelligence and resilience.</p>
-                        <button class="premium-coming-soon">Coming Soon</button>
-                    </div>
-                </div>
-
-                <div class="premium-card">
-                    <div class="premium-image">
-                        <img src="https://i.ibb.co/wh6r8V5N/1754254458295.jpg" alt="Limitless Living Annual Package">
-                    </div>
-                    <div class="premium-content">
-                        <h3>Limitless Living: Annual Coaching & Retreat Package</h3>
-                        <p>Invest in a year of unparalleled growth and transformation. This exclusive package includes ongoing personalized coaching, access to all premium digital products, and an invitation to an annual immersive retreat.</p>
-                        <button class="premium-coming-soon">Coming Soon</button>
-                    </div>
+                <div class="product-content">
+                    <h3>Daily Affirmation Deck (Digital Cards)</h3>
+                    <p>Start each day with a boost of positivity. This beautifully designed digital deck will offer a fresh affirmation daily to inspire confidence, gratitude, and resilience, accessible right from your device.</p>
+                    <button class="coming-soon-btn">Coming Soon</button>
                 </div>
             </div>
-        </section>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.ibb.co/M58dkV6F/Picsart-25-08-03-15-18-35-182.jpg" alt="Guided Breathwork for Stress Release">
+                </div>
+                <div class="product-content">
+                    <h3>Guided Breathwork for Stress Release (Short Series)</h3>
+                    <p>Find calm in minutes with these powerful breathwork exercises. This concise audio series provides simple yet effective techniques to quickly reduce stress and promote relaxation whenever you need it most.</p>
+                    <button class="coming-soon-btn">Coming Soon</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.ibb.co/q3dVGYvL/Picsart-25-08-03-19-25-05-465.jpg" alt="Digital Detox Playbook Preview">
+                </div>
+                <div class="product-content">
+                    <h3>The Digital Detox Playbook Preview</h3>
+                    <p>Get a taste of reclaiming your focus and reconnecting with what truly matters. This introductory preview will offer a sneak peek into practical strategies for a healthier relationship with technology.</p>
+                    <button class="coming-soon-btn">Coming Soon</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.ibb.co/qFsTyPGT/Picsart-25-08-03-19-33-17-750.jpg" alt="Self-Care Quick-Start Guide">
+                </div>
+                <div class="product-content">
+                    <h3>Self-Care Quick-Start Guide</h3>
+                    <p>Kickstart your well-being journey with essential tips and simple practices. This guide provides actionable steps to integrate crucial self-care routines into your busy schedule, promoting balance and peace.</p>
+                    <button class="coming-soon-btn">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple animation for cards
+            const cards = document.querySelectorAll('.product-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 100 * index);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // The current year setter for the footer was removed as the footer is gone.
+        });
+    </script>
+</body>
+</html>
     </main>
 
     <div id="footer-container"></div>
