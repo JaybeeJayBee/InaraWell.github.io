@@ -89,6 +89,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* Hide bubble overflow */
 }
 
 #nav-overlay.hidden {
@@ -106,28 +107,53 @@ body {
     text-align: center;
 }
 
-.overlay-menu a {
+/* --- UPDATED: Reduced Text Size + Glitch Effect + Sci-Fi Hover --- */
+.overlay-menu a, .overlay-menu .submenu-toggle {
     color: var(--color-text-light);
     text-decoration: none;
-    font-size: 1.5rem; /* Reduced size for professional look */
-    font-weight: 600; /* Bolder text for clarity */
-    padding: 8px 0; /* Reduced padding/spacing */
+    font-size: 1.25rem; /* GREATLY REDUCED TEXT SIZE */
+    font-weight: 600; 
+    padding: 12px 0; /* Adjusted padding to maintain vertical alignment */
     display: block;
-    transition: color 0.3s;
+    transition: color 0.3s, text-shadow 0.3s, background-color 0.3s;
+    position: relative;
+    /* Glitch Effect Setup */
+    animation: glitch-text 3s infinite alternate steps(1); 
 }
 
-.overlay-menu a:hover {
+/* Glitch Effect on Text */
+@keyframes glitch-text {
+    0% { clip-path: inset(10% 0 80% 0); }
+    25% { clip-path: inset(50% 0 10% 0); }
+    50% { clip-path: inset(80% 0 10% 0); }
+    75% { clip-path: inset(10% 0 60% 0); }
+    100% { clip-path: inset(90% 0 0 0); }
+}
+
+/* Sci-Fi Hover Effect (Light Blue Glow) */
+.overlay-menu a:hover, .overlay-menu .submenu-toggle:hover {
     color: var(--color-accent); /* Highlight on hover */
-    text-decoration: underline; /* Added professional underline */
-    text-underline-offset: 4px;
+    text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent); /* SCI-FI GLOW */
+    background-color: rgba(173, 216, 230, 0.1); /* Subtle background highlight on hover */
+    text-decoration: none; /* Override underline */
+    animation: none; /* Pause glitch on hover for focus */
 }
 
-/* Ensure the text is smaller on very small screens for mobile fit */
-@media (max-width: 480px) {
-    .overlay-menu a {
-        font-size: 1.25rem;
-    }
+/* Submenu Links: Keep smaller than the primary links but apply hover */
+.overlay-menu .submenu a {
+    font-size: 1.1rem; /* Slightly smaller for sub-links */
+    font-weight: 400; 
+    padding: 8px 0;
+    opacity: 0.9;
+    animation: none; /* No glitch on sub-links */
 }
+
+.overlay-menu .submenu a:hover {
+    color: var(--color-text-light);
+    text-shadow: 0 0 5px var(--color-accent); /* Smaller glow for sub-links */
+    background-color: rgba(173, 216, 230, 0.05);
+}
+/* END UPDATED NAVIGATION STYLING */
 
 /* Close Button (X) */
 #nav-close {
@@ -141,6 +167,7 @@ body {
     cursor: pointer;
     padding: 10px;
     transition: transform 0.5s, opacity 0.5s;
+    z-index: 100; /* Must be above bubbles and menu */
 }
 
 /* AI Decision: Spin/Fade-Out Animation for closing */
@@ -149,8 +176,175 @@ body {
     opacity: 0;
 }
 
+
+/* --- FLOATING BUBBLES ANIMATION (NAVIGATION OVERLAY SPECIFIC) --- */
+
+.menu-bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Below the menu links (default z-index is higher) */
+    pointer-events: none; /* Allows clicks to go through to the menu */
+}
+
+.menu-bubbles-container .bubble {
+    position: absolute;
+    display: block;
+    width: 30px; 
+    height: 30px;
+    background-color: rgba(173, 216, 230, 0.2); /* Light Blue Accent, very subtle */
+    bottom: -100px;
+    border-radius: 50%;
+    animation: bubble-float 40s linear infinite; 
+    opacity: 0; 
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.4); 
+}
+
+/* Individual bubble settings and @keyframes remain unchanged */
+.menu-bubbles-container .bubble:nth-child(1) { left: 15%; width: 100px; height: 100px; animation-delay: 0s; animation-duration: 25s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(2) { left: 5%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 35s; opacity: 0.8; }
+.menu-bubbles-container .bubble:nth-child(3) { left: 80%; width: 50px; height: 50px; animation-delay: 4s; animation-duration: 20s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(4) { left: 45%; width: 70px; height: 70px; animation-delay: 0s; animation-duration: 40s; opacity: 0.9; }
+.menu-bubbles-container .bubble:nth-child(5) { left: 65%; width: 30px; height: 30px; animation-delay: 0s; animation-duration: 30s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(6) { left: 75%; width: 120px; height: 120px; animation-delay: 3s; animation-duration: 22s; opacity: 0.7; }
+.menu-bubbles-container .bubble:nth-child(7) { left: 30%; width: 40px; height: 40px; animation-delay: 7s; animation-duration: 38s; opacity: 0.9; }
+.menu-bubbles-container .bubble:nth-child(8) { left: 55%; width: 90px; height: 90px; animation-delay: 15s; animation-duration: 27s; opacity: 0.8; }
+.menu-bubbles-container .bubble:nth-child(9) { left: 20%; width: 60px; height: 60px; animation-delay: 2s; animation-duration: 29s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(10) { left: 90%; width: 80px; height: 80px; animation-delay: 11s; animation-duration: 32s; opacity: 0.8; }
+
+@keyframes bubble-float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; 
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+    }
+}
+/* END BUBBLE STYLING */
+
+/* --- Professional Navigation Info Styling --- */
+.overlay-info {
+    position: absolute; /* Position it cleanly at the bottom */
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    z-index: 100; /* Ensure it's above the bubbles */
+}
+
+.overlay-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent); /* Use accent color to highlight site name */
+    margin-top: 20px;
+}
+
+/* --- New Styles for Submenu Dropdown (FINAL ALIGNMENT & WRAPPING CORRECTION) --- */
+
+.has-submenu {
+    position: relative;
+}
+
+/* Target the submenu toggle (A or SPAN) and force it to look like a centered primary link */
+.overlay-menu .submenu-toggle {
+    /* Inherit main link properties for text and spacing */
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 1.25rem; /* GREATLY REDUCED TEXT SIZE */
+    font-weight: 600;
+    padding: 12px 0; /* Adjusted padding/spacing */
+    
+    /* FIX: Ensure it displays as a block for natural text wrapping and is centered */
+    display: block; 
+    text-align: center; /* Center the text block itself */
+    
+    cursor: pointer; 
+    transition: color 0.3s;
+    /* Glitch Effect Setup */
+    animation: glitch-text 3s infinite alternate steps(1); 
+}
+
+/* Ensure the non-clickable SPAN doesn't get text decoration on hover, only color change */
+.overlay-menu .submenu-toggle:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent); /* SCI-FI GLOW */
+    background-color: rgba(173, 216, 230, 0.1); /* Subtle background highlight on hover */
+    text-decoration: none; /* Prevents underline on the SPAN */
+    animation: none; /* Pause glitch on hover */
+}
+
+
+/* Submenu Links: Keep these smaller than the primary links */
+.overlay-menu .submenu {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    max-height: 500px;
+    text-align: center; 
+}
+
+.overlay-menu .submenu.hidden {
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.overlay-menu .submenu li {
+    padding: 0;
+}
+
+.overlay-menu .submenu a {
+    font-size: 1.1rem; /* Submenu text size */
+    font-weight: 400; 
+    padding: 8px 0;
+    opacity: 0.9;
+    text-decoration: none;
+    display: block; 
+}
+
+.overlay-menu .submenu a:hover {
+    opacity: 1;
+    text-decoration: none; /* Prevent underline */
+}
+
+/* Arrow Styling (Only visible for Creations Showcase) */
+.submenu-arrow {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease-in-out;
+    color: var(--color-text-light);
+}
+
+.submenu-arrow.rotate {
+    transform: rotate(180deg);
+}
+
+/* Mobile Adjustment: Ensure sub-links look good on tiny screens */
+@media (max-width: 480px) {
+    .overlay-menu a, .overlay-menu .submenu-toggle {
+        font-size: 1rem; /* Smaller text on tiny screens */
+        padding: 10px 0;
+    }
+    .overlay-menu .submenu a {
+        font-size: 0.9rem;
+    }
+}
 /* -------------------------------------- */
-/* --- 3. Standardized Footer Component --- */
+/* --- 3. Standardized Footer Component (SAME AS BEFORE) --- */
 /* -------------------------------------- */
 .site-footer {
     background-color: var(--color-primary); /* Dark Blue background */
@@ -276,8 +470,16 @@ body {
 
 
 /* -------------------------------------- */
-/* --- 4. Main Content Styling (Example) --- */
+/* --- 4. Main Content Styling (Example) (SAME AS BEFORE) --- */
 /* -------------------------------------- */
+/* --- NEW FONT DEFINITIONS (MUST BE AT THE TOP) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* --- UPDATE GLOBAL BODY FONT (REQUIRED FOR CONTACT/THANK YOU STYLING) --- */
+body {
+    /* Overrides the 'font-family: Arial, sans-serif;' default in your existing CSS */
+    font-family: 'Roboto', sans-serif;
+}
 
 #page-content {
     /* --- STICKY FOOTER SOLUTION: PART 2 (Confirmed) --- */
@@ -363,9 +565,9 @@ body {
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    }
+}
 /* -------------------------------------- */
-/* --- 5. INDEX.HTML (HOMEPAGE) STYLING --- */
+/* --- 5. INDEX.HTML (HOMEPAGE) STYLING (SAME AS BEFORE) --- */
 /* -------------------------------------- */
 
 /* General Layout Containers */
@@ -902,22 +1104,7 @@ body {
     .section-title { font-size: 2rem; }
     .benefits-grid { grid-template-columns: 1fr; }
 }
-/* --- Professional Navigation Info Styling --- */
-.overlay-info {
-    position: absolute; /* Position it cleanly at the bottom */
-    bottom: 50px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-}
 
-.overlay-info h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-accent); /* Use accent color to highlight site name */
-    margin-top: 20px;
-}
 /* --- Styles for faq.html (FAQ Page) --- */
 
 /* FAQ Hero Section Styling (to match your custom look) */
@@ -1096,15 +1283,6 @@ a.text-link:hover {
     background-color: var(--color-accent);
     color: var(--color-primary);
 }
-/* --- NEW FONT DEFINITIONS (MUST BE AT THE TOP) --- */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
-
-/* --- UPDATE GLOBAL BODY FONT (REQUIRED FOR CONTACT/THANK YOU STYLING) --- */
-body {
-    /* Overrides the 'font-family: Arial, sans-serif;' default in your existing CSS */
-    font-family: 'Roboto', sans-serif;
-}
-
 /* --- NEW STYLES for contact.html (Contact Us Page) --- */
 
 .contact-hero {
@@ -1358,90 +1536,6 @@ body {
     }
     .thank-you-card p {
         font-size: 1rem;
-    }
-}
-/* --- New Styles for Submenu Dropdown (FINAL ALIGNMENT & WRAPPING CORRECTION) --- */
-
-.has-submenu {
-    position: relative;
-}
-
-/* Target the submenu toggle (A or SPAN) and force it to look like a centered primary link */
-.overlay-menu .submenu-toggle {
-    /* Inherit main link properties for text and spacing */
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 1.5rem; 
-    font-weight: 600;
-    padding: 8px 0;
-    
-    /* FIX: Ensure it displays as a block for natural text wrapping and is centered */
-    display: block; 
-    text-align: center; /* Center the text block itself */
-    
-    cursor: pointer; 
-    transition: color 0.3s;
-}
-
-/* Ensure the non-clickable SPAN doesn't get text decoration on hover, only color change */
-.overlay-menu .submenu-toggle:hover {
-    color: var(--color-accent);
-    text-decoration: none; /* Prevents underline on the SPAN */
-}
-
-
-/* Submenu Links: Keep these smaller than the primary links */
-.overlay-menu .submenu {
-    list-style: none;
-    padding: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease-in-out;
-    max-height: 500px;
-    text-align: center; 
-}
-
-.overlay-menu .submenu.hidden {
-    max-height: 0;
-    overflow: hidden;
-    margin-bottom: 0;
-}
-
-.overlay-menu .submenu li {
-    padding: 0;
-}
-
-.overlay-menu .submenu a {
-    font-size: 1.2rem; 
-    font-weight: 400; 
-    padding: 6px 0;
-    opacity: 0.9;
-    text-decoration: none;
-    display: block; 
-}
-
-.overlay-menu .submenu a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-/* Arrow Styling (Only visible for Creations Showcase) */
-.submenu-arrow {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease-in-out;
-    color: var(--color-text-light);
-}
-
-.submenu-arrow.rotate {
-    transform: rotate(180deg);
-}
-
-/* Mobile Adjustment: Ensure sub-links look good on tiny screens */
-@media (max-width: 480px) {
-    .overlay-menu .submenu a {
-        font-size: 1.1rem;
     }
 }
 /* --- New Global Font Imports for Policies Page --- */
