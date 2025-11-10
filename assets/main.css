@@ -9,17 +9,15 @@
 }
 
 /* --- CRITICAL GLOBAL RESET --- */
-/* This is the key fix for unexplained white space/misalignment */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Prevents horizontal scroll from misplaced elements */
+    overflow-x: hidden;
 }
 
 * {
     box-sizing: border-box;
-    /* Resetting margins/padding here in addition to html, body for safety */
     margin: 0; 
     padding: 0;
 }
@@ -34,7 +32,7 @@ body {
     /* --- STICKY FOOTER SOLUTION: PART 1 (Confirmed) --- */
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures body takes up full screen height */
+    min-height: 100vh;
 }
 
 /* -------------------------------------- */
@@ -42,19 +40,19 @@ body {
 /* -------------------------------------- */
 #nav-trigger {
     position: fixed;
-    top: 20px; /* Offset from the edge */
-    right: 20px; /* Offset from the edge */
+    top: 20px;
+    right: 20px;
     width: 50px;
     height: 50px;
     background-color: var(--color-primary);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: flex; /* Centers the bars */
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 10px;
-    z-index: 1001; /* Must be above the main content */
+    z-index: 1001;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
@@ -67,7 +65,7 @@ body {
 
 /* Visibility Control (Scroll) */
 #nav-trigger.is-hidden {
-    transform: translateY(-100px); /* Move out of view when scrolling down */
+    transform: translateY(-100px);
     opacity: 0;
 }
 
@@ -107,45 +105,47 @@ body {
     text-align: center;
 }
 
-/* --- UPDATED: Reduced Text Size + Glitch Effect + Sci-Fi Hover --- */
+/* --- UPDATED: Reduced Text Size + Subtle Glitch (Shaking) + Sci-Fi Hover --- */
 .overlay-menu a, .overlay-menu .submenu-toggle {
-    color: var(--color-text-light);
+    color: var(--color-text-light); /* Ensure text is visible (white) */
     text-decoration: none;
-    font-size: 1.25rem; /* GREATLY REDUCED TEXT SIZE */
+    font-size: 1.8rem; /* INCREASED SIZE for visibility, still reduced from original */
     font-weight: 600; 
-    padding: 12px 0; /* Adjusted padding to maintain vertical alignment */
+    padding: 12px 0;
     display: block;
     transition: color 0.3s, text-shadow 0.3s, background-color 0.3s;
     position: relative;
-    /* Glitch Effect Setup */
-    animation: glitch-text 3s infinite alternate steps(1); 
+    /* Glitch Effect Setup (Subtle Shake) */
+    text-shadow: 1px 0 var(--color-accent); /* Initial light blue shadow for definition */
+    animation: subtle-shake 1.5s infinite alternate; 
 }
 
-/* Glitch Effect on Text */
-@keyframes glitch-text {
-    0% { clip-path: inset(10% 0 80% 0); }
-    25% { clip-path: inset(50% 0 10% 0); }
-    50% { clip-path: inset(80% 0 10% 0); }
-    75% { clip-path: inset(10% 0 60% 0); }
-    100% { clip-path: inset(90% 0 0 0); }
+/* Subtle Shaking/Glitch Animation */
+@keyframes subtle-shake {
+    0% { transform: translate(1px, 1px); text-shadow: 1px 0 var(--color-accent); }
+    25% { transform: translate(-1px, 0px); text-shadow: 0 1px var(--color-accent); }
+    50% { transform: translate(1px, -1px); text-shadow: -1px 0 var(--color-accent); }
+    75% { transform: translate(-1px, 1px); text-shadow: 0 -1px var(--color-accent); }
+    100% { transform: translate(1px, 1px); text-shadow: 1px 0 var(--color-accent); }
 }
 
 /* Sci-Fi Hover Effect (Light Blue Glow) */
 .overlay-menu a:hover, .overlay-menu .submenu-toggle:hover {
     color: var(--color-accent); /* Highlight on hover */
-    text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent); /* SCI-FI GLOW */
-    background-color: rgba(173, 216, 230, 0.1); /* Subtle background highlight on hover */
+    text-shadow: 0 0 15px var(--color-accent), 0 0 25px var(--color-text-light); /* STRONGER SCI-FI GLOW */
+    background-color: rgba(173, 216, 230, 0.15); /* Subtle background highlight on hover */
     text-decoration: none; /* Override underline */
-    animation: none; /* Pause glitch on hover for focus */
+    animation: none; /* Pause shaking on hover for focus */
 }
 
-/* Submenu Links: Keep smaller than the primary links but apply hover */
+/* Submenu Links: Keep smaller and remove glitch */
 .overlay-menu .submenu a {
-    font-size: 1.1rem; /* Slightly smaller for sub-links */
+    font-size: 1.4rem; /* Smaller size for sub-links */
     font-weight: 400; 
     padding: 8px 0;
     opacity: 0.9;
     animation: none; /* No glitch on sub-links */
+    text-shadow: none; /* No glitch shadow on sub-links */
 }
 
 .overlay-menu .submenu a:hover {
@@ -167,7 +167,7 @@ body {
     cursor: pointer;
     padding: 10px;
     transition: transform 0.5s, opacity 0.5s;
-    z-index: 100; /* Must be above bubbles and menu */
+    z-index: 100;
 }
 
 /* AI Decision: Spin/Fade-Out Animation for closing */
@@ -185,8 +185,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Below the menu links (default z-index is higher) */
-    pointer-events: none; /* Allows clicks to go through to the menu */
+    z-index: 1;
+    pointer-events: none;
 }
 
 .menu-bubbles-container .bubble {
@@ -194,7 +194,7 @@ body {
     display: block;
     width: 30px; 
     height: 30px;
-    background-color: rgba(173, 216, 230, 0.2); /* Light Blue Accent, very subtle */
+    background-color: rgba(173, 216, 230, 0.2);
     bottom: -100px;
     border-radius: 50%;
     animation: bubble-float 40s linear infinite; 
@@ -234,54 +234,48 @@ body {
 
 /* --- Professional Navigation Info Styling --- */
 .overlay-info {
-    position: absolute; /* Position it cleanly at the bottom */
+    position: absolute;
     bottom: 50px;
     left: 0;
     width: 100%;
     text-align: center;
     padding: 0 20px;
-    z-index: 100; /* Ensure it's above the bubbles */
+    z-index: 100;
 }
 
 .overlay-info h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-accent); /* Use accent color to highlight site name */
+    color: var(--color-accent);
     margin-top: 20px;
 }
 
-/* --- New Styles for Submenu Dropdown (FINAL ALIGNMENT & WRAPPING CORRECTION) --- */
+/* --- New Styles for Submenu Dropdown --- */
 
 .has-submenu {
     position: relative;
 }
 
-/* Target the submenu toggle (A or SPAN) and force it to look like a centered primary link */
 .overlay-menu .submenu-toggle {
-    /* Inherit main link properties for text and spacing */
     color: var(--color-text-light);
     text-decoration: none;
-    font-size: 1.25rem; /* GREATLY REDUCED TEXT SIZE */
+    font-size: 1.8rem; /* Corrected size */
     font-weight: 600;
-    padding: 12px 0; /* Adjusted padding/spacing */
-    
-    /* FIX: Ensure it displays as a block for natural text wrapping and is centered */
+    padding: 12px 0;
     display: block; 
-    text-align: center; /* Center the text block itself */
-    
+    text-align: center;
     cursor: pointer; 
     transition: color 0.3s;
-    /* Glitch Effect Setup */
-    animation: glitch-text 3s infinite alternate steps(1); 
+    /* Glitch Animation is applied above */
 }
 
 /* Ensure the non-clickable SPAN doesn't get text decoration on hover, only color change */
 .overlay-menu .submenu-toggle:hover {
     color: var(--color-accent);
-    text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent); /* SCI-FI GLOW */
-    background-color: rgba(173, 216, 230, 0.1); /* Subtle background highlight on hover */
-    text-decoration: none; /* Prevents underline on the SPAN */
-    animation: none; /* Pause glitch on hover */
+    text-shadow: 0 0 15px var(--color-accent), 0 0 25px var(--color-text-light);
+    background-color: rgba(173, 216, 230, 0.15);
+    text-decoration: none;
+    animation: none; 
 }
 
 
@@ -307,17 +301,20 @@ body {
 }
 
 .overlay-menu .submenu a {
-    font-size: 1.1rem; /* Submenu text size */
+    font-size: 1.4rem; /* Submenu text size */
     font-weight: 400; 
     padding: 8px 0;
     opacity: 0.9;
     text-decoration: none;
     display: block; 
+    animation: none; /* No glitch on sub-links */
 }
 
 .overlay-menu .submenu a:hover {
     opacity: 1;
-    text-decoration: none; /* Prevent underline */
+    text-shadow: 0 0 5px var(--color-accent);
+    background-color: rgba(173, 216, 230, 0.05);
+    text-decoration: none;
 }
 
 /* Arrow Styling (Only visible for Creations Showcase) */
@@ -336,25 +333,25 @@ body {
 /* Mobile Adjustment: Ensure sub-links look good on tiny screens */
 @media (max-width: 480px) {
     .overlay-menu a, .overlay-menu .submenu-toggle {
-        font-size: 1rem; /* Smaller text on tiny screens */
+        font-size: 1.5rem; /* Better text on tiny screens */
         padding: 10px 0;
     }
     .overlay-menu .submenu a {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 }
 /* -------------------------------------- */
-/* --- 3. Standardized Footer Component (SAME AS BEFORE) --- */
+/* --- 3. Standardized Footer Component --- */
 /* -------------------------------------- */
 .site-footer {
-    background-color: var(--color-primary); /* Dark Blue background */
+    background-color: var(--color-primary);
     color: var(--color-text-light);
     padding: 40px 20px;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Multi-column structure */
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
@@ -389,14 +386,14 @@ body {
 .footer-logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--color-accent); /* Highlight the site name */
+    color: var(--color-accent);
     margin-bottom: 15px;
 }
 
 .footer-links-group, .contact-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Spacing between links */
+    gap: 8px;
 }
 
 .social-links {
@@ -404,26 +401,22 @@ body {
     display: flex;
     gap: 15px;
     font-size: 1.5rem;
-    /* Added display: block to ensure they render independently */
     align-items: center; 
 }
 
 .social-links a {
-    /* Explicitly setting color and opacity for immediate visibility */
-    color: var(--color-text-light) !important; /* Force white color */
+    color: var(--color-text-light) !important;
     opacity: 1; 
     text-decoration: none;
     transition: color 0.3s;
-    /* Adding display: block to ensure the click area is correctly mapped */
     display: block;
 }
 
 .social-links a:hover {
-    color: var(--color-accent) !important; /* Ensure hover uses accent */
+    color: var(--color-accent) !important;
 }
 
 .footer-bottom {
-    /* Tweak for perfect centering on all screen sizes */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -435,7 +428,6 @@ body {
     font-size: 0.85rem;
 }
 
-/* Ensure font size in the grid is legible */
 .footer-grid h4 {
     font-size: 1.1rem;
 }
@@ -443,21 +435,20 @@ body {
     font-size: 0.95rem;
 }
 
-/* Override existing link styling for the footer's nested groups */
 .footer-links-group a, .contact-btn-group a {
-    width: fit-content; /* Makes the hover effect cleaner */
+    width: fit-content;
 }
 
 /* Responsiveness for Footer */
 @media (max-width: 768px) {
     .footer-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns on tablet */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 480px) {
     .footer-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
         text-align: center;
     }
     .footer-links-group, .contact-btn-group {
@@ -470,20 +461,20 @@ body {
 
 
 /* -------------------------------------- */
-/* --- 4. Main Content Styling (Example) (SAME AS BEFORE) --- */
+/* --- 4. Main Content Styling (Example) --- */
 /* -------------------------------------- */
+
 /* --- NEW FONT DEFINITIONS (MUST BE AT THE TOP) --- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
 /* --- UPDATE GLOBAL BODY FONT (REQUIRED FOR CONTACT/THANK YOU STYLING) --- */
 body {
-    /* Overrides the 'font-family: Arial, sans-serif;' default in your existing CSS */
     font-family: 'Roboto', sans-serif;
 }
 
 #page-content {
     /* --- STICKY FOOTER SOLUTION: PART 2 (Confirmed) --- */
-    flex-grow: 1; /* This pushes the footer to the bottom, taking up all available space */
+    flex-grow: 1;
     
     padding: 20px;
     max-width: 1200px;
@@ -534,7 +525,7 @@ body {
 }
 
 .service-card {
-    background-color: var(--color-secondary); /* Light Blue/Off-White background */
+    background-color: var(--color-secondary);
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -548,7 +539,7 @@ body {
 }
 
 .card-title {
-    color: var(--color-primary); /* Dark Blue heading */
+    color: var(--color-primary);
     margin-bottom: 10px;
 }
 
@@ -560,14 +551,14 @@ body {
 .card-cta {
     display: inline-block;
     padding: 8px 15px;
-    background-color: var(--color-accent); /* Light Blue Accent button */
+    background-color: var(--color-accent);
     color: var(--color-primary);
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
 }
 /* -------------------------------------- */
-/* --- 5. INDEX.HTML (HOMEPAGE) STYLING (SAME AS BEFORE) --- */
+/* --- 5. INDEX.HTML (HOMEPAGE) STYLING --- */
 /* -------------------------------------- */
 
 /* General Layout Containers */
@@ -578,7 +569,7 @@ body {
 }
 
 .section {
-    padding: 80px 0; /* Increased vertical padding for more space and air */
+    padding: 80px 0;
     position: relative;
     overflow: hidden; 
 }
@@ -586,7 +577,7 @@ body {
 .section-title {
     text-align: center;
     color: var(--color-primary);
-    font-size: 2.5rem; /* Larger, bolder titles */
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -596,8 +587,8 @@ body {
     max-width: 900px;
     margin: 0 auto 50px;
     font-size: 1.2rem;
-    line-height: 1.8; /* Better readability */
-    color: var(--color-primary); /* Dark text for clarity */
+    line-height: 1.8;
+    color: var(--color-primary);
 }
 
 /* -------------------------------------- */
@@ -605,11 +596,10 @@ body {
 /* -------------------------------------- */
 
 .combined-hero-section {
-    background-color: var(--color-gradient-light); /* Light background for the whole section */
+    background-color: var(--color-gradient-light);
     padding-bottom: 0;
     position: relative;
     overflow: hidden;
-    /* Clean separator from body background if necessary, but keep it light */
     border-bottom: 5px solid var(--color-secondary); 
 }
 
@@ -618,7 +608,7 @@ body {
     font-size: 3.5rem;
     font-weight: 900;
     color: var(--color-primary);
-    padding: 60px 20px 20px; /* Separating from the hero block */
+    padding: 60px 20px 20px;
     letter-spacing: -0.5px;
 }
 
@@ -629,18 +619,18 @@ body {
 
 @keyframes scaleZoom {
     0% { transform: scale(1.0); }
-    50% { transform: scale(1.03); } /* Zoom in slightly */
-    100% { transform: scale(1.0); } /* Zoom back out */
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1.0); }
 }
 
 /* 1. HERO SECTION (Contained within the combined header) */
 .hero {
     position: relative;
-    height: 400px; /* Slightly reduced height since the Welcome text is outside */
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary); /* Dark text over the light background */
+    color: var(--color-primary);
     text-align: center;
     margin-bottom: 0;
 }
@@ -651,10 +641,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Swapping to a light, calming background for the light-themed hero */
     background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b') no-repeat center center/cover;
-    background-color: var(--color-secondary); /* Light blue base */
-    mix-blend-mode: soft-light; /* Softens the image into the light background */
+    background-color: var(--color-secondary);
+    mix-blend-mode: soft-light;
     opacity: 0.8; 
     z-index: 1;
 }
@@ -663,28 +652,27 @@ body {
     position: relative;
     z-index: 2;
     padding: 20px;
-    background-color: transparent; /* REMOVED DARK BLOCK */
+    background-color: transparent;
     border-radius: 0;
 }
 
 .hero-main-title {
-    font-size: 3.2rem; /* Adjusted font size */
+    font-size: 3.2rem;
     margin-bottom: 10px;
     text-shadow: none;
     font-weight: 900;
     letter-spacing: -1px;
-    color: var(--color-primary); /* Dark Blue text */
+    color: var(--color-primary);
 }
 
 .hero-sub-title {
-    font-size: 1.5rem; /* Adjusted font size */
+    font-size: 1.5rem;
     font-weight: 400;
     text-shadow: none;
-    margin-bottom: 0; /* CTA is removed */
-    color: var(--color-primary); /* Dark Blue text */
+    margin-bottom: 0;
+    color: var(--color-primary);
 }
 
-/* Hero CTA is now deprecated/removed */
 .hero-cta {
     display: none; 
 }
@@ -692,13 +680,10 @@ body {
 
 /* 3. WHY TRUST SECTION (Modern Card Grid) */
 #why-trust {
-    /* More focus on the background gradient */
     background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-gradient-light) 100%);
     padding: 100px 0;
     position: relative;
 }
-
-/* ... (REST OF THE CSS CODE FOR SECTIONS 3, 4, 5 REMAINS UNCHANGED) ... */
 
 .grid-container {
     display: grid;
@@ -710,10 +695,10 @@ body {
 .section-card {
     background-color: var(--color-text-light);
     padding: 30px;
-    border-radius: 12px; /* Smoother corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for a floating effect */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease-in-out;
-    border-left: 5px solid var(--color-accent); /* Accent line for techish feel */
+    border-left: 5px solid var(--color-accent);
     position: relative;
     z-index: 2;
 }
@@ -737,7 +722,7 @@ body {
 }
 
 .full-span {
-    grid-column: 1 / -1; /* Make the last card span the full width */
+    grid-column: 1 / -1;
     text-align: center;
 }
 
@@ -763,7 +748,7 @@ body {
     background-color: var(--color-text-light);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
-    flex-basis: 250px; /* Fixed width for list items */
+    flex-basis: 250px;
     max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -773,12 +758,12 @@ body {
     counter-increment: step-counter;
     position: absolute;
     left: 50%;
-    top: -20px; /* Move number outside the card */
+    top: -20px;
     transform: translateX(-50%);
     width: 45px;
     height: 45px;
-    background-color: var(--color-primary); /* Dark Blue background */
-    color: var(--color-text-light); /* White number text */
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -799,7 +784,6 @@ body {
 .cta-final-section {
     background-color: var(--color-secondary);
     padding: 100px 0;
-    /* Removed previous Flexbox properties to rely on the simpler text-align fix */
 }
 
 .final-cta-button {
@@ -829,15 +813,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Below the text (z-index: 2) */
+    z-index: 1;
     overflow: hidden;
     pointer-events: none;
 }
 
 /* Original Bubbles Container for Why Trust Section */
 .floating-bubbles-container {
-    /* Kept original styles: position absolute, z-index 1, etc. */
-    /* Only ensure it does not conflict with the new header container */
     position: absolute;
     top: 0;
     left: 0;
@@ -849,7 +831,6 @@ body {
 }
 
 .bubble {
-    /* Styles remain the same for both containers */
     position: absolute;
     display: block;
     width: 30px; 
@@ -895,14 +876,14 @@ body {
 /* --- Responsive Adjustments for Homepage --- */
 @media (max-width: 900px) {
     .section-title { font-size: 2rem; }
-    .hero-main-title { font-size: 2.8rem; } /* Adjusted */
-    .hero-sub-title { font-size: 1.4rem; } /* Adjusted */
+    .hero-main-title { font-size: 2.8rem; }
+    .hero-sub-title { font-size: 1.4rem; }
     .grid-container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .full-span { grid-column: auto; }
 }
 @media (max-width: 600px) {
-    .main-welcome-heading { font-size: 2.5rem; padding-top: 40px; padding-bottom: 10px; } /* Adjusted */
-    .hero { height: 300px; } /* Adjusted */
+    .main-welcome-heading { font-size: 2.5rem; padding-top: 40px; padding-bottom: 10px; }
+    .hero { height: 300px; }
     .hero-main-title { font-size: 2.2rem; }
     .hero-sub-title { font-size: 1.1rem; }
     .section { padding: 50px 0; }
@@ -911,7 +892,7 @@ body {
 }
 /* --- FIX: Forcing alignment of the final button --- */
 .center-text-fix {
-    text-align: center; /* This centers the inline/inline-block children like the button */
+    text-align: center;
 }
 /* --- Styles for affiliate.html (Affiliate Program Page) --- */
 
@@ -919,7 +900,6 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 body {
-    /* Override body font and background only for the affiliate page */
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #F7F7F0, #ADD8E6);
 }
@@ -1089,7 +1069,7 @@ body {
 
 .floating-element {
     position: absolute;
-    background: rgba(227, 238, 247, 0.6); /* Using var(--color-secondary) */
+    background: rgba(227, 238, 247, 0.6);
     border-radius: 50%;
     animation: float 15s infinite linear;
 }
@@ -1111,8 +1091,8 @@ body {
 .content-section.hero-section, #faq-hero {
     text-align: center;
     padding: 60px 20px;
-    background-color: var(--color-accent); /* Light Blue Accent */
-    border-radius: 0; /* Remove previous border-radius */
+    background-color: var(--color-accent);
+    border-radius: 0;
     margin-bottom: 40px;
 }
 .section-header {
@@ -1154,10 +1134,10 @@ body {
     align-items: center;
     padding: 20px 30px;
     cursor: pointer;
-    background-color: var(--color-secondary); /* Light Blue/Off-White */
+    background-color: var(--color-secondary);
     font-weight: 600;
     transition: background-color 0.3s ease;
-    border: none; /* Ensure it looks like a clean panel */
+    border: none;
     width: 100%;
     text-align: left;
 }
@@ -1167,7 +1147,7 @@ body {
 }
 
 .faq-item.active .faq-question {
-    background-color: var(--color-accent); /* Highlight when active */
+    background-color: var(--color-accent);
 }
 
 .faq-question h3 {
@@ -1186,14 +1166,14 @@ body {
 }
 
 .faq-item.active .toggle-icon {
-    transform: rotate(45deg); /* Plus sign turns into an X */
+    transform: rotate(45deg);
 }
 
 .faq-answer {
     padding: 0 30px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-in-out; /* Smooth transition */
+    transition: max-height 0.4s ease-in-out;
 }
 
 .faq-answer p {
@@ -1460,7 +1440,6 @@ a.text-link:hover {
     padding: 4rem 2rem;
     justify-content: space-evenly; 
     flex-grow: 1;
-    /* Ensure main tag is a column container for the cards */
     display: flex; 
     flex-direction: column;
 }
@@ -1543,30 +1522,28 @@ a.text-link:hover {
 
 /* --- Custom Policy Page Variables --- */
 :root {
-    --policy-accent: #ADD8E6; /* Light Blue Accent for details */
+    --policy-accent: #ADD8E6;
     --policy-text: #1C2E46;
 }
 
 /* --- Styles for policies.html (Optimized for Performance) --- */
 
 #page-content {
-    /* Set a specific font for the content wrapper */
     font-family: 'Poppins', sans-serif;
 }
 
 .policy-header {
     text-align: center;
-    padding: 4rem 10px 2rem; /* Adjusted padding */
+    padding: 4rem 10px 2rem;
 }
 
 .policies-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem; /* Reduced for better mobile scaling */
+    font-size: 3rem;
     margin-bottom: 0.5rem;
     color: var(--color-primary);
     position: relative;
     display: inline-block;
-    /* Cleaned up animation for performance */
 }
 
 .policies-title::after {
@@ -1591,18 +1568,17 @@ a.text-link:hover {
 
 /* Policy Sections */
 .policy-section {
-    background: var(--color-secondary); /* Use the Light Blue/Off-White variable */
+    background: var(--color-secondary);
     border-radius: 16px;
     padding: 2.5rem;
     margin-bottom: 3rem;
     box-shadow: 0 5px 20px rgba(28, 46, 70, 0.1);
     transition: transform 0.3s ease;
-    /* Use 'will-change' to hint at hardware acceleration */
     will-change: transform, box-shadow; 
 }
 
 .policy-section:hover {
-    transform: translateY(-3px); /* Lighter transform */
+    transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(28, 46, 70, 0.15);
 }
 
@@ -1617,8 +1593,8 @@ a.text-link:hover {
 .section-icon {
     font-size: 2rem;
     margin-right: 1rem;
-    color: var(--color-accent); /* Use your existing accent color */
-    animation: pulse 2s infinite; /* Keep pulse, it's light */
+    color: var(--color-accent);
+    animation: pulse 2s infinite;
 }
 
 .section-title {
@@ -1635,13 +1611,13 @@ a.text-link:hover {
 }
 
 .policy-content {
-    padding-left: 0; /* Remove padding for better mobile flow */
+    padding-left: 0;
 }
 
 .policy-point {
     margin-bottom: 1.5rem;
     position: relative;
-    padding-left: 1.5rem; /* Reduced padding */
+    padding-left: 1.5rem;
 }
 
 .policy-point::before {
