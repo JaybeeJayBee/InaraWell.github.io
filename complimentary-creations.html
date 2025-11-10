@@ -32,6 +32,7 @@
         }
         
         .container {
+            /* Standard container max-width and centering for inner content */
             max-width: 1200px;
             margin: 0 auto; 
             padding: 0 20px;
@@ -46,6 +47,8 @@
             position: relative;
             overflow: hidden;
             border-radius: 0 0 25px 25px;
+            /* Ensure the banner takes full width */
+            width: 100%;
         }
         
         .section-banner::before {
@@ -80,7 +83,7 @@
             border-radius: 4px;
         }
         
-        /* NEW WRAPPER TO ISOLATE CENTERING */
+        /* NEW WRAPPER TO ISOLATE CENTERING (THIS FIXED THE CARDS) */
         .product-grid-wrapper {
             width: max-content; 
             margin: 0 auto; 
