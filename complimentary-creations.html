@@ -24,17 +24,25 @@
             box-sizing: border-box;
         }
         
+        /* ULTIMATE FIX: Applying Flexbox directly to the body for centering */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f9f9f9;
             color: var(--primary);
             line-height: 1.6;
+            
+            /* Core Flexbox properties for centering the entire page content */
+            display: flex;
+            flex-direction: column; /* Stacks the header/main/footer vertically */
+            align-items: center; /* **KEY FIX**: Centers ALL immediate children (nav, main, footer) horizontally */
+            min-height: 100vh;
         }
         
+        /* Removing margin auto from the container, as the body now handles centering */
         .container {
-            /* Standard container max-width and centering for inner content */
             max-width: 1200px;
-            margin: 0 auto; 
+            width: 100%; /* Ensure it spans full width inside the body's centering context */
+            margin: 0; /* Remove margin auto */
             padding: 0 20px;
         }
         
@@ -82,10 +90,11 @@
             border-radius: 4px;
         }
         
-        /* AGGRESSIVE FIX: Isolating the centering with !important and max-content */
+        /* PRODUCT GRID WRAPPER: Now only needs to manage its max width, centering is handled by the body */
         .product-grid-wrapper {
             width: max-content; 
-            margin: 0 auto !important; /* FORCING CENTER */
+            /* margin: 0 auto !important; is no longer needed here */
+            margin: 0;
         }
         
         /* Products Grid */
@@ -169,7 +178,7 @@
             
             .product-grid-wrapper {
                 width: 100%;
-                margin: 0 auto !important; /* Ensure centering is enforced on mobile too */
+                margin: 0; 
             }
             
             .products-grid {
