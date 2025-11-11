@@ -1,192 +1,1675 @@
-/* 🎨 Brand Colors & Variables */
+/* --- Global Variables and Reset --- */
 :root {
-    --color-primary-dark: #6b4226; /* Dark Brown */
-    --color-secondary-light: #d4a373; /* Mid-Tone Tan */
-    --color-accent-cream: #f8edeb; /* Light Cream/Off-White */
-    --color-text-dark: #333;
-    --color-text-light: #fff;
-    --nav-icon-size: 50px;
-    --spacing-lg: 3rem;
+    --color-primary: #1C2E46; /* Dark Blue */
+    --color-secondary: #E3EEF7; /* Light Blue/Off-White */
+    --color-gradient-light: #F7F7F0; /* Lightest Background */
+    --color-accent: #ADD8E6; /* Light Blue Accent */
+    --color-text-light: #ffffff;
+    --color-text-dark: #1C2E46;
 }
 
-/* 🔄 Global Reset & Typography */
+/* --- CRITICAL GLOBAL RESET --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 * {
     box-sizing: border-box;
-    margin: 0;
+    margin: 0; 
     padding: 0;
 }
 
+
 body {
-    font-family: 'Arial', sans-serif;
-    color: var(--color-text-dark);
+    font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: var(--color-accent-cream);
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-primary-dark);
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--color-secondary-light);
-}
-
-/* 🖼️ MAIN Content Styling (High-Value Look) */
-#page-content {
-    min-height: 80vh; /* Ensures footer is below the fold initially */
-    padding: var(--spacing-lg) 5vw;
-    text-align: center;
-}
-
-.hero-section {
-    padding: 6rem 0;
-}
-
-.agency-title {
-    font-size: 3.5rem;
-    color: var(--color-primary-dark);
-    margin-bottom: 0.5rem;
-}
-
-.agency-tagline {
-    font-size: 1.3rem;
-    color: var(--color-secondary-light);
-    margin-bottom: 2rem;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    background-color: var(--color-primary-dark);
-    color: var(--color-text-light);
-    border-radius: 5px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: var(--color-secondary-light);
-    color: var(--color-primary-dark);
-}
-
-.content-section {
-    padding: 4rem 0;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: left;
-}
-.content-section h2 {
-    color: var(--color-primary-dark);
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    text-align: center;
-}
-
-
-/* 🧭 2A. FLOATING NAV ICON (Trigger) */
-#floating-nav-icon {
-    position: fixed;
-    top: 25px; /* Offset from the edge */
-    right: 25px; /* Offset from the edge */
-    width: var(--nav-icon-size);
-    height: var(--nav-icon-size);
-    background-color: var(--color-secondary-light);
-    color: var(--color-text-light);
-    border: none;
-    border-radius: 50%; /* Circular button */
+    background-color: var(--color-gradient-light); 
+    color: var(--color-text-dark);
+    
+    /* --- STICKY FOOTER SOLUTION: PART 1 (Confirmed) --- */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* -------------------------------------- */
+/* --- 1. Floating Overlay Icon (Trigger) --- */
+/* -------------------------------------- */
+#nav-trigger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    z-index: 1001; /* Above everything */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: opacity 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    z-index: 1001;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.chef-heart-icon {
-    font-size: 1.5rem; /* Sizing the chef hat icon */
+#nav-trigger .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text-light);
+    transition: all 0.3s;
 }
 
-/* Visibility Control: Hide/Show on Scroll Up/Down */
-#floating-nav-icon.hidden {
+/* Visibility Control (Scroll) */
+#nav-trigger.is-hidden {
+    transform: translateY(-100px);
     opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none; /* Make sure it's not clickable when hidden */
 }
 
-/* 🍔 2B. NAVIGATION MENU (Overlay) */
-.nav-overlay {
+
+/* -------------------------------------- */
+/* --- 2. Navigation Menu (Overlay) --- */
+/* -------------------------------------- */
+#nav-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(107, 66, 38, 0.98); /* Primary dark with slight transparency */
+    background-color: rgba(28, 46, 70, 0.98); /* Dark Blue with slight transparency */
+    color: var(--color-text-light);
     z-index: 1000;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /* Initial Hidden State (Slide Animation) */
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in-out;
+    overflow: hidden; /* Hide bubble overflow */
 }
 
-.nav-overlay.open {
-    transform: translateX(0); /* Final Visible State */
+#nav-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
-/* Close Button (X) */
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    font-size: 3rem;
-    background: none;
-    border: none;
-    color: var(--color-accent-cream);
-    cursor: pointer;
+#nav-overlay.visible {
     opacity: 1;
-    transition: opacity 0.3s;
+    visibility: visible;
 }
 
-.close-btn:hover {
-    opacity: 0.7;
-}
-
-/* Menu Links */
 .overlay-menu ul {
     list-style: none;
-    padding: 0;
     text-align: center;
 }
 
-.overlay-menu li {
-    margin: 1.5rem 0;
-}
-
-.overlay-menu a {
+/* --- UPDATED: Glitch Removed, Text Shadow Fixed, Clipping Fixed --- */
+.overlay-menu a, .overlay-menu .submenu-toggle {
     color: var(--color-text-light);
-    font-size: 2.5rem;
-    font-weight: 300;
+    text-decoration: none;
+    font-size: 1.8rem; /* Target size and alignment confirmed */
+    font-weight: 600; 
+    padding: 15px 0; /* INCREASED PADDING to prevent clipping */
+    display: block;
+    transition: color 0.3s, text-shadow 0.3s, background-color 0.3s;
+    position: relative;
+    
+    /* SCI-FI GLOW (PERMANENT) for high visibility and style */
+    text-shadow: 0 0 5px var(--color-accent); 
+    
+    /* Glitch Animation REMOVED to fix visibility and clipping */
+    animation: none; 
+}
+
+/* Sci-Fi Hover Effect (Light Blue Glow) */
+.overlay-menu a:hover, .overlay-menu .submenu-toggle:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 15px var(--color-accent), 0 0 25px var(--color-text-light); /* STRONGER SCI-FI GLOW on hover */
+    background-color: rgba(173, 216, 230, 0.15);
+    text-decoration: none;
+}
+
+/* Submenu Links: Keep smaller and remove extra glow */
+.overlay-menu .submenu a {
+    font-size: 1.4rem;
+    font-weight: 400; 
+    padding: 10px 0; /* Increased padding */
+    opacity: 0.9;
+    animation: none;
+    text-shadow: none; /* No base glow on sub-links */
+}
+
+.overlay-menu .submenu a:hover {
+    opacity: 1;
+    text-shadow: 0 0 5px var(--color-accent); /* Small glow on hover */
+    background-color: rgba(173, 216, 230, 0.05);
+    text-decoration: none;
+}
+/* END UPDATED NAVIGATION STYLING */
+
+/* Close Button (X) */
+#nav-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: 100;
+}
+
+/* AI Decision: Spin/Fade-Out Animation for closing */
+#nav-close.animate-close {
+    transform: rotate(180deg);
+    opacity: 0;
+}
+
+
+/* --- FLOATING BUBBLES ANIMATION (NAVIGATION OVERLAY SPECIFIC) --- */
+
+.menu-bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.menu-bubbles-container .bubble {
+    position: absolute;
+    display: block;
+    width: 30px; 
+    height: 30px;
+    background-color: rgba(173, 216, 230, 0.2);
+    bottom: -100px;
+    border-radius: 50%;
+    animation: bubble-float 40s linear infinite; 
+    opacity: 0; 
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.4); 
+}
+
+/* Individual bubble settings and @keyframes remain unchanged */
+.menu-bubbles-container .bubble:nth-child(1) { left: 15%; width: 100px; height: 100px; animation-delay: 0s; animation-duration: 25s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(2) { left: 5%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 35s; opacity: 0.8; }
+.menu-bubbles-container .bubble:nth-child(3) { left: 80%; width: 50px; height: 50px; animation-delay: 4s; animation-duration: 20s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(4) { left: 45%; width: 70px; height: 70px; animation-delay: 0s; animation-duration: 40s; opacity: 0.9; }
+.menu-bubbles-container .bubble:nth-child(5) { left: 65%; width: 30px; height: 30px; animation-delay: 0s; animation-duration: 30s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(6) { left: 75%; width: 120px; height: 120px; animation-delay: 3s; animation-duration: 22s; opacity: 0.7; }
+.menu-bubbles-container .bubble:nth-child(7) { left: 30%; width: 40px; height: 40px; animation-delay: 7s; animation-duration: 38s; opacity: 0.9; }
+.menu-bubbles-container .bubble:nth-child(8) { left: 55%; width: 90px; height: 90px; animation-delay: 15s; animation-duration: 27s; opacity: 0.8; }
+.menu-bubbles-container .bubble:nth-child(9) { left: 20%; width: 60px; height: 60px; animation-delay: 2s; animation-duration: 29s; opacity: 1; }
+.menu-bubbles-container .bubble:nth-child(10) { left: 90%; width: 80px; height: 80px; animation-delay: 11s; animation-duration: 32s; opacity: 0.8; }
+
+@keyframes bubble-float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; 
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+    }
+}
+/* END BUBBLE STYLING */
+
+/* --- Professional Navigation Info Styling --- */
+.overlay-info {
+    position: absolute;
+    bottom: 20px; /* SHIFTED DOWN FOR MORE MENU SPACE */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    z-index: 100;
+}
+
+.overlay-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: 20px;
+}
+
+/* --- New Styles for Submenu Dropdown --- */
+
+.has-submenu {
+    position: relative;
+}
+
+.overlay-menu .submenu-toggle {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding: 15px 0; /* Clipping fix */
+    display: block; 
+    text-align: center;
+    cursor: pointer; 
+    transition: color 0.3s;
+    text-shadow: 0 0 5px var(--color-accent);
+    animation: none; 
+}
+
+/* Ensure the non-clickable SPAN doesn't get text decoration on hover, only color change */
+.overlay-menu .submenu-toggle:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 15px var(--color-accent), 0 0 25px var(--color-text-light);
+    background-color: rgba(173, 216, 230, 0.15);
+    text-decoration: none;
+}
+
+
+/* Submenu Links: Keep these smaller than the primary links */
+.overlay-menu .submenu {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    max-height: 500px;
+    text-align: center; 
+}
+
+.overlay-menu .submenu.hidden {
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.overlay-menu .submenu li {
+    padding: 0;
+}
+
+.overlay-menu .submenu a {
+    font-size: 1.4rem;
+    font-weight: 400; 
+    padding: 10px 0; /* Clipping fix */
+    opacity: 0.9;
+    text-decoration: none;
+    display: block; 
+    animation: none;
+    text-shadow: none; 
+}
+
+.overlay-menu .submenu a:hover {
+    opacity: 1;
+    text-shadow: 0 0 5px var(--color-accent);
+    background-color: rgba(173, 216, 230, 0.05);
+    text-decoration: none;
+}
+
+/* Arrow Styling (Only visible for Creations Showcase) */
+.submenu-arrow {
     display: inline-block;
-    padding: 0.5rem 0;
-    letter-spacing: 2px;
-    transition: color 0.3s, border-bottom 0.3s;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease-in-out;
+    color: var(--color-text-light);
 }
 
-.overlay-menu a:hover {
-    color: var(--color-secondary-light);
-    border-bottom: 2px solid var(--color-secondary-light);
+.submenu-arrow.rotate {
+    transform: rotate(180deg);
 }
 
-.overlay-tagline {
-    margin-top: 3rem;
-    color: var(--color-secondary-light);
-    font-style: italic;
+/* Mobile Adjustment: Ensure sub-links look good on tiny screens */
+@media (max-width: 480px) {
+    .overlay-menu a, .overlay-menu .submenu-toggle {
+        font-size: 1.5rem;
+        padding: 10px 0;
+    }
+    .overlay-menu .submenu a {
+        font-size: 1.2rem;
+    }
+}
+/* -------------------------------------- */
+/* --- 3. Standardized Footer Component --- */
+/* -------------------------------------- */
+.site-footer {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 40px 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-footer h3, .site-footer h4 {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+}
+
+.site-footer p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.site-footer ul {
+    list-style: none;
+}
+
+.site-footer a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer a:hover {
+    color: var(--color-accent);
+}
+
+/* --- New Styles for Updated Footer Structure --- */
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent);
+    margin-bottom: 15px;
+}
+
+.footer-links-group, .contact-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    font-size: 1.5rem;
+    align-items: center; 
+}
+
+.social-links a {
+    color: var(--color-text-light) !important;
+    opacity: 1; 
+    text-decoration: none;
+    transition: color 0.3s;
+    display: block;
+}
+
+.social-links a:hover {
+    color: var(--color-accent) !important;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    font-size: 0.85rem;
+}
+
+.footer-grid h4 {
     font-size: 1.1rem;
 }
+.footer-grid p, .footer-grid a {
+    font-size: 0.95rem;
+}
+
+.footer-links-group a, .contact-btn-group a {
+    width: fit-content;
+}
+
+/* Responsiveness for Footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-links-group, .contact-btn-group {
+        align-items: center;
+    }
+    .footer-links ul, .footer-legal ul {
+        padding-left: 0;
+    }
+}
+
+
+/* -------------------------------------- */
+/* --- 4. Main Content Styling (Example) --- */
+/* -------------------------------------- */
+
+/* --- NEW FONT DEFINITIONS (MUST BE AT THE TOP) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* --- UPDATE GLOBAL BODY FONT (REQUIRED FOR CONTACT/THANK YOU STYLING) --- */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#page-content {
+    /* --- STICKY FOOTER SOLUTION: PART 2 (Confirmed) --- */
+    flex-grow: 1;
+    
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+/* --- Styles for services.html (Services Page) --- */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.service-card {
+    background-color: var(--color-secondary);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(28, 46, 70, 0.2);
+}
+
+.card-title {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.card-description {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.card-cta {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+/* -------------------------------------- */
+/* --- 5. INDEX.HTML (HOMEPAGE) STYLING --- */
+/* -------------------------------------- */
+
+/* General Layout Containers */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden; 
+}
+
+.section-title {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.section-subtitle, .intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 50px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--color-primary);
+}
+
+/* -------------------------------------- */
+/* --- COMBINED HEADER / WELCOME ANIMATION --- */
+/* -------------------------------------- */
+
+.combined-hero-section {
+    background-color: var(--color-gradient-light);
+    padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 5px solid var(--color-secondary); 
+}
+
+.main-welcome-heading {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    padding: 60px 20px 20px;
+    letter-spacing: -0.5px;
+}
+
+/* Welcome Heading Animation */
+.main-welcome-heading.animated-scale {
+    animation: scaleZoom 4s ease-in-out infinite;
+}
+
+@keyframes scaleZoom {
+    0% { transform: scale(1.0); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1.0); }
+}
+
+/* 1. HERO SECTION (Contained within the combined header) */
+.hero {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.hero-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1541819662772-50d40e163b4b') no-repeat center center/cover;
+    background-color: var(--color-secondary);
+    mix-blend-mode: soft-light;
+    opacity: 0.8; 
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.hero-main-title {
+    font-size: 3.2rem;
+    margin-bottom: 10px;
+    text-shadow: none;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--color-primary);
+}
+
+.hero-sub-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-shadow: none;
+    margin-bottom: 0;
+    color: var(--color-primary);
+}
+
+.hero-cta {
+    display: none; 
+}
+
+
+/* 3. WHY TRUST SECTION (Modern Card Grid) */
+#why-trust {
+    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-gradient-light) 100%);
+    padding: 100px 0;
+    position: relative;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.section-card {
+    background-color: var(--color-text-light);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease-in-out;
+    border-left: 5px solid var(--color-accent);
+    position: relative;
+    z-index: 2;
+}
+
+.section-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(28, 46, 70, 0.25);
+    border-left-color: var(--color-primary);
+}
+
+.section-card h3 {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.section-card p {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.full-span {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+/* 4. PROCESS SECTION (Visual Numbered List) */
+#process {
+    padding: 80px 0;
+}
+
+#process-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+#process-list li {
+    position: relative;
+    padding: 20px;
+    padding-top: 60px;
+    background-color: var(--color-text-light);
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    flex-basis: 250px;
+    max-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#process-list li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 45px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#process-list h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* 5. COMING SOON SECTION */
+.cta-final-section {
+    background-color: var(--color-secondary);
+    padding: 100px 0;
+}
+
+.final-cta-button {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: 700;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.final-cta-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* -------------------------------------- */
+/* --- FLOATING BUBBLES ANIMATION (HEADER SPECIFIC) --- */
+/* -------------------------------------- */
+
+/* New Container for Header Bubbles */
+.header-bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Original Bubbles Container for Why Trust Section */
+.floating-bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    display: block;
+    width: 30px; 
+    height: 30px;
+    background-color: rgba(173, 216, 230, 0.6); 
+    bottom: -100px;
+    border-radius: 50%;
+    animation: animate 40s linear infinite; 
+    opacity: 0; 
+    box-shadow: 0 0 10px var(--color-accent); 
+}
+
+/* Individual bubble settings and @keyframes remain unchanged */
+.bubble:nth-child(1) { left: 15%; width: 100px; height: 100px; animation-delay: 0s; animation-duration: 25s; opacity: 1; }
+.bubble:nth-child(2) { left: 5%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 35s; opacity: 0.8; }
+.bubble:nth-child(3) { left: 80%; width: 50px; height: 50px; animation-delay: 4s; animation-duration: 20s; opacity: 1; }
+.bubble:nth-child(4) { left: 45%; width: 70px; height: 70px; animation-delay: 0s; animation-duration: 40s; opacity: 0.9; }
+.bubble:nth-child(5) { left: 65%; width: 30px; height: 30px; animation-delay: 0s; animation-duration: 30s; opacity: 1; }
+.bubble:nth-child(6) { left: 75%; width: 120px; height: 120px; animation-delay: 3s; animation-duration: 22s; opacity: 0.7; }
+.bubble:nth-child(7) { left: 30%; width: 40px; height: 40px; animation-delay: 7s; animation-duration: 38s; opacity: 0.9; }
+.bubble:nth-child(8) { left: 55%; width: 90px; height: 90px; animation-delay: 15s; animation-duration: 27s; opacity: 0.8; }
+.bubble:nth-child(9) { left: 20%; width: 60px; height: 60px; animation-delay: 2s; animation-duration: 29s; opacity: 1; }
+.bubble:nth-child(10) { left: 90%; width: 80px; height: 80px; animation-delay: 11s; animation-duration: 32s; opacity: 0.8; }
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; 
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+
+/* --- Responsive Adjustments for Homepage --- */
+@media (max-width: 900px) {
+    .section-title { font-size: 2rem; }
+    .hero-main-title { font-size: 2.8rem; }
+    .hero-sub-title { font-size: 1.4rem; }
+    .grid-container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .full-span { grid-column: auto; }
+}
+@media (max-width: 600px) {
+    .main-welcome-heading { font-size: 2.5rem; padding-top: 40px; padding-bottom: 10px; }
+    .hero { height: 300px; }
+    .hero-main-title { font-size: 2.2rem; }
+    .hero-sub-title { font-size: 1.1rem; }
+    .section { padding: 50px 0; }
+    .section-card { border-left: none; border-bottom: 5px solid var(--color-accent); }
+    #process-list { flex-direction: column; align-items: center; }
+}
+/* --- FIX: Forcing alignment of the final button --- */
+.center-text-fix {
+    text-align: center;
+}
+/* --- Styles for affiliate.html (Affiliate Program Page) --- */
+
+/* Font Import for Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #F7F7F0, #ADD8E6);
+}
+
+.affiliate-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+/* Header Animation */
+.affiliate-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* Affiliate Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.6s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+}
+
+.benefit-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    color: var(--color-primary);
+}
+
+.benefit-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--color-primary);
+}
+
+.benefit-desc {
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* CTA Section Styles */
+.affiliate-cta-section {
+    text-align: center; 
+    margin-top: 4rem;
+}
+
+.cta-heading {
+    font-size: 1.8rem; 
+    margin-bottom: 1.5rem;
+}
+
+.cta-text {
+    max-width: 600px; 
+    margin: 0 auto 2rem; 
+    line-height: 1.6;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 2rem auto 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.2);
+    animation: pulse 2s infinite;
+}
+
+.cta-button:hover {
+    background: #14253a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(28, 46, 70, 0.3);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Floating Background Elements */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.floating-element {
+    position: absolute;
+    background: rgba(227, 238, 247, 0.6);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-1000px) rotate(720deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title { font-size: 2rem; }
+    .benefits-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Styles for faq.html (FAQ Page) --- */
+
+/* FAQ Hero Section Styling (to match your custom look) */
+.content-section.hero-section, #faq-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--color-accent);
+    border-radius: 0;
+    margin-bottom: 40px;
+}
+.section-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 0;
+}
+.section-tagline {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 10px auto 0;
+}
+
+/* FAQ Container and Items */
+.faq-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.faq-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(28, 46, 70, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-secondary);
+}
+
+.faq-item.active {
+    box-shadow: 0 4px 20px rgba(28, 46, 70, 0.1);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    cursor: pointer;
+    background-color: var(--color-secondary);
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.faq-question:hover {
+    background-color: #d8e5f2;
+}
+
+.faq-item.active .faq-question {
+    background-color: var(--color-accent);
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    flex-grow: 1;
+    color: var(--color-primary);
+}
+
+.toggle-icon {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .toggle-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.faq-answer p {
+    padding: 20px 0;
+    margin: 0;
+    color: var(--color-text-dark);
+    font-size: 0.95rem;
+}
+
+.faq-answer ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 20px;
+}
+
+.faq-answer li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+}
+
+.faq-answer li .checkmark {
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+a.text-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.3s ease;
+}
+
+a.text-link:hover {
+    color: #4a5d77;
+}
+
+/* Image Filler and Contact Section */
+.image-filler-section {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.image-filler-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(28, 46, 70, 0.08);
+}
+
+.contact-section {
+    text-align: center;
+    margin: 50px auto;
+    padding: 50px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(28, 46, 70, 0.08);
+}
+
+.contact-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--color-primary);
+}
+
+.contact-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 14px 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+/* --- NEW STYLES for contact.html (Contact Us Page) --- */
+
+.contact-hero {
+    position: relative;
+    background: linear-gradient(45deg, var(--color-gradient-light) 0%, var(--color-accent) 100%);
+    color: var(--color-primary);
+    padding: 6rem 2rem;
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 40px; 
+}
+
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+    transform: rotate(3deg);
+    animation: wave 15s infinite ease-in-out;
+    z-index: 0;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(3deg) scale(1.0); }
+    50% { transform: rotate(-3deg) scale(1.05); }
+}
+
+.contact-hero .content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.contact-hero p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-section {
+    padding: 2rem 0; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.contact-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(28, 46, 70, 0.1);
+    padding: 3rem;
+    flex: 1;
+    min-width: 300px;
+    max-width: 550px; 
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(28, 46, 70, 0.15);
+}
+
+.contact-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--color-secondary);
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(173, 216, 230, 0.5);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Reusing cta-button from global styles but adjusting context */
+.contact-card .cta-button {
+    width: auto;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    border: none;
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.2);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.contact-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--color-accent);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    color: var(--color-primary);
+    font-size: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+    color: var(--color-accent);
+}
+
+/* --- NEW STYLES for thank-you.html (Thank You Page) --- */
+
+.thank-you-main {
+    align-items: center;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    justify-content: space-evenly; 
+    flex-grow: 1;
+    display: flex; 
+    flex-direction: column;
+}
+
+.thank-you-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(28, 46, 70, 0.1);
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Animation delays for the cards */
+.thank-you-card:nth-of-type(1) { animation-delay: 0.2s; }
+.thank-you-card:nth-of-type(2) { animation-delay: 1.2s; }
+.thank-you-card:nth-of-type(3) { animation-delay: 2.2s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.thank-you-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.thank-you-card p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.thank-you-card .cta-button {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+.thank-you-card .cta-button:hover {
+    background-color: #364d6e;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-hero h1 {
+        font-size: 2.5rem;
+    }
+    .contact-hero p {
+        font-size: 1rem;
+    }
+    .contact-card {
+        padding: 2rem;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .thank-you-main {
+        padding: 2rem 1rem;
+        justify-content: flex-start;
+    }
+    .thank-you-card {
+        padding: 2rem;
+        margin-bottom: 20px;
+    }
+    .thank-you-card h1 {
+        font-size: 2.5rem;
+    }
+    .thank-you-card p {
+        font-size: 1rem;
+    }
+}
+/* --- New Global Font Imports for Policies Page --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* --- Custom Policy Page Variables --- */
+:root {
+    --policy-accent: #ADD8E6;
+    --policy-text: #1C2E46;
+}
+
+/* --- Styles for policies.html (Optimized for Performance) --- */
+
+#page-content {
+    font-family: 'Poppins', sans-serif;
+}
+
+.policy-header {
+    text-align: center;
+    padding: 4rem 10px 2rem;
+}
+
+.policies-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.policies-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+.policies-subtitle {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--color-primary);
+    opacity: 0.9;
+}
+
+/* Policy Sections */
+.policy-section {
+    background: var(--color-secondary);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 5px 20px rgba(28, 46, 70, 0.1);
+    transition: transform 0.3s ease;
+    will-change: transform, box-shadow; 
+}
+
+.policy-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(28, 46, 70, 0.15);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(28, 46, 70, 0.1);
+}
+
+.section-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: var(--color-accent);
+    animation: pulse 2s infinite;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--color-primary);
+    opacity: 0.8;
+    margin-top: 0.3rem;
+}
+
+.policy-content {
+    padding-left: 0;
+}
+
+.policy-point {
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.policy-point::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 7px;
+    height: 7px;
+    background: var(--color-accent);
+    border-radius: 50%;
+}
+
+.policy-point h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.policy-list {
+    list-style-type: none;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.policy-list li {
+    margin-bottom: 0.6rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.policy-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+/* Responsive Design for Policies */
+@media (max-width: 768px) {
+    .policies-title {
+        font-size: 2.2rem;
+    }
+    
+    .policy-section {
+        padding: 1.5rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .section-icon {
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+    }
+    }
