@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    /* Explicit Mapping for All Existing Links */
     { "source": "/complimentary-creations", "destination": "/complimentary-creations.html" },
     { "source": "/premium-creations", "destination": "/premium-creations.html" },
     { "source": "/our-creations-showcase", "destination": "/our-creations-showcase.html" },
@@ -9,9 +8,6 @@
     { "source": "/policies", "destination": "/policies.html" },
     { "source": "/our-reviews-and-testimonials", "destination": "/our-reviews-and-testimonials.html" },
     { "source": "/contact", "destination": "/contact.html" },
-    
-    /* CATCH-ALL: This tells Vercel: If a clean URL is requested (e.g., /services), 
-       try to serve a file with the same name + .html (e.g., /services.html). */
     { "source": "/:path", "destination": "/:path.html" }
   ]
 }
