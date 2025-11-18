@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/complimentary-creations", "destination": "/complimentary-creations.html" },
+    { "source": "/premium-creations", "destination": "/premium-creations.html" },
+    { "source": "/our-creations-showcase", "destination": "/our-creations-showcase.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/affiliate", "destination": "/affiliate.html" },
+    { "source": "/policies", "destination": "/policies.html" },
+    { "source": "/our-reviews-and-testimonials", "destination": "/our-reviews-and-testimonials.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    
+    /* Catch-all for any other top-level page we might have missed */
+    { "source": "/:path", "destination": "/:path.html" }
+  ]
+}
