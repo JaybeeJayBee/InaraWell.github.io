@@ -1674,23 +1674,93 @@ a.text-link:hover {
     }
     }
 
-/* --- NEW STYLES FOR CREATIONS SHOWCASE (Self-Help Agency) --- */
+/* --- NEW STYLES FOR CREATIONS SHOWCASE (FINAL, ALIGNED LAYOUT) --- */
 
-/* ENSURE BRAND COLORS ARE SET (If not already at the top of main.css) */
-:root {
-    /* If these lines are already at the top of your main.css, you can skip them. */
-    --color-primary-dark: #1C2E46; /* Dark Blue */
-    --color-secondary-light: #E3EEF7; /* Light Blue/Off-White */
-    --color-accent-cream: #ffffff; /* General Highlight/Text on Dark */
-    --color-text-dark: #333333;
-}
-
-/* Ensure Header background uses dark primary color (Defined in HTML, but here for reference) */
+/* --- Header Styles (Applying colors via variables) --- */
 .header-container.creations-showcase-hero {
+    position: relative;
+    /* Background set to Primary Dark Blue */
     background-color: var(--color-primary-dark);
+    color: var(--color-secondary-light);
+    padding: 60px 20px 40px; /* Increased padding for better spacing */
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 5px solid var(--color-secondary-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Base Carousel Styles (Reusing optimized recipe styles but ensuring colors match) */
+/* REMOVED .header-image STYLES */
+
+.header-container h1 {
+    margin: 0;
+    font-size: 3em;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Playfair Display', serif;
+}
+.header-tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+    color: var(--color-secondary-light);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Bubble Animation (Kept for visual flair) */
+.header-container.creations-showcase-hero .bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+.header-container.creations-showcase-hero .bubbles div {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(227, 238, 247, 0.25); /* Light blue bubbles */
+    animation: hubBubbleUp 25s linear infinite; 
+    bottom: -150px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(227, 238, 247, 0.3);
+}
+
+/* Bubble specific timing definitions (retained structure) */
+.header-container.creations-showcase-hero .bubbles div:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 10s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(2) { left: 20%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 12s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(3) { left: 25%; width: 60px; height: 60px; animation-delay: 4s; animation-duration: 15s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(4) { left: 40%; width: 50px; height: 50px; animation-delay: 0s; animation-duration: 18s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(5) { left: 70%; width: 70px; height: 70px; animation-delay: 3s; animation-duration: 13s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(6) { left: 80%; width: 40px; height: 40px; animation-delay: 6s; animation-duration: 10s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(7) { left: 5%; width: 90px; height: 90px; animation-delay: 7s; animation-duration: 20s; }
+.header-container.creations-showcase-hero .bubbles div:nth-child(8) { left: 90%; width: 25px; height: 25px; animation-delay: 5s; animation-duration: 11s; }
+
+/* Keyframes */
+@keyframes hubBubbleUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 0.7; }
+    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+/* --- END Header Styles --- */
+
+/* REMOVED INTRO SECTION STYLES (.intro-section, .food-image, .bio-text) */
+
+/* --- HORIZONTAL CAROUSEL --- */
+
 .recipe-categories-wrapper {
     width: 100%;
     max-width: 1200px;
@@ -1708,38 +1778,44 @@ a.text-link:hover {
 .recipe-carousel-section:not(:last-child)::after {
     content: '';
     display: block;
-    width: 80%;
+    width: 90%; /* Increased width for better mobile appearance */
+    max-width: 1100px;
     height: 1px;
-    background: var(--color-secondary-light);
+    background: var(--color-primary-dark); /* Darker divider line */
     margin: 4rem auto 0;
-    opacity: 0.5;
+    opacity: 0.1;
 }
 
 /* Heading Size and Alignment Fixes */
 .section-title-hub {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
-    color: var(--color-primary-dark); /* Dark Blue Heading */
-    margin: 0 0 1.5rem 20px;
+    color: var(--color-primary-dark);
+    /* ALIGNMENT FIX: Use auto margin and padding for clean centering/edge alignment */
+    margin: 0 0 1.5rem 0;
     text-align: left;
-    padding-left: 20px; 
+    padding-left: 40px; /* Padding for desktop alignment */
+    max-width: 1200px;
+    width: 100%;
 }
 
 /* CRITICAL: Horizontal Scroll Container */
 .horizontal-scroll-container {
     display: flex;
     overflow-x: scroll;
-    padding: 10px 20px;
+    /* IMPORTANT FIX: Padding ensures first/last card isn't stuck to the edge */
+    padding: 10px 40px; 
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 30px;
 }
+
 /* Hide scrollbar */
 .horizontal-scroll-container::-webkit-scrollbar { display: none; }
 .horizontal-scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
 
 
-/* --- PRODUCT CARD STYLING --- */
+/* --- PRODUCT CARD STYLING (HEIGHT AND APPEARANCE) --- */
 
 .product-card {
     flex-shrink: 0;
@@ -1748,11 +1824,11 @@ a.text-link:hover {
     
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(28, 46, 70, 0.1); /* Subtle dark blue shadow */
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.1); /* Subtle dark blue shadow */
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid var(--color-secondary-light); /* Light Blue Border */
+    border: 1px solid var(--color-secondary-light); /* Light Blue Border */
     display: flex;
     flex-direction: column;
 }
@@ -1771,23 +1847,55 @@ a.text-link:hover {
     transition: transform 0.5s ease;
 }
 
+.product-card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .product-card h3 {
-    color: var(--color-primary-dark); /* Dark Blue Title */
+    font-size: 1.6em; 
+    margin-bottom: 10px;
+    color: var(--color-primary-dark);
+    font-family: 'Playfair Display', serif;
 }
 
+.product-card p {
+    font-size: 1em; 
+    margin-bottom: 20px;
+    flex-grow: 1;
+    color: var(--color-text-dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Button Fix: Professional, Non-clickable Style */
 .coming-soon-button {
-    background-color: var(--color-secondary-light); /* Light Blue Button */
-    color: var(--color-primary-dark); /* Dark Blue Text on Button */
-    border: 2px solid var(--color-secondary-light);
+    display: inline-block;
+    background-color: var(--color-secondary-light);
+    color: var(--color-primary-dark);
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    /* Important: Remove interaction visual cues */
+    pointer-events: none; /* Make it completely non-clickable */
+    opacity: 0.85; /* Slightly muted color for a professional 'coming soon' look */
+    border: 1px solid var(--color-primary-dark);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
-
+/* Ensure hover effect is NOT active (for professionalism) */
 .coming-soon-button:hover {
-    background-color: var(--color-primary-dark);
-    color: var(--color-accent-cream);
-    border-color: var(--color-primary-dark);
+    transform: none; 
+    background-color: var(--color-secondary-light); 
+    color: var(--color-primary-dark);
 }
 
-/* Carousel Indicator (Dots) Styling */
+
+/* 2. Carousel Indicator (Dots) Styling */
 .carousel-indicator {
     display: flex;
     justify-content: center;
@@ -1798,7 +1906,7 @@ a.text-link:hover {
 .indicator-dot {
     height: 10px;
     width: 10px;
-    background-color: rgba(28, 46, 70, 0.2); /* Transparent Dark Blue */
+    background-color: rgba(28, 46, 70, 0.2); 
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.3s, transform 0.2s;
@@ -1810,28 +1918,30 @@ a.text-link:hover {
 }
 
 /* --- FINAL RESPONSIVE ADJUSTMENTS --- */
-/* This section is retained from the previous version for excellent mobile alignment */
 @media (max-width: 768px) {
     .header-container h1 {
-        font-size: 2em;
+        font-size: 2.2em;
     }
     .header-tagline {
-        font-size: 1rem;
+        font-size: 1.1em;
     }
     .section-title-hub {
         font-size: 1.8rem; 
-        padding-left: 0;
-        margin-left: 15px;
+        padding-left: 20px; /* Reduced padding on mobile */
+        margin-left: 0;
+    }
+    .horizontal-scroll-container {
+        padding: 10px 20px; /* Reduced side padding on mobile */
     }
     .product-card {
         width: 250px;
     }
 }
 @media (max-width: 480px) {
+    .header-container h1 {
+        font-size: 1.8em;
+    }
     .product-card {
         width: 220px;
-    }
-    .header-container h1 {
-        font-size: 1.6em;
     }
 }
