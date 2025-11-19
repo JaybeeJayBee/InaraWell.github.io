@@ -1673,16 +1673,16 @@ a.text-link:hover {
         margin-right: 0;
     }
     }
+/* --- NEW STYLES FOR CREATIONS SHOWCASE (FINAL, ALIGNED & RESPONSIVE) --- */
 
-/* --- NEW STYLES FOR CREATIONS SHOWCASE (FINAL, ALIGNED LAYOUT) --- */
-
-/* --- Header Styles (Applying colors via variables) --- */
+/* --- Header Styles: FIX for Cut-off Text and Alignment --- */
 .header-container.creations-showcase-hero {
     position: relative;
     /* Background set to Primary Dark Blue */
     background-color: var(--color-primary-dark);
     color: var(--color-secondary-light);
-    padding: 60px 20px 40px; /* Increased padding for better spacing */
+    /* FIX: Increased TOP padding dramatically to push content down past mobile browser chrome */
+    padding: 100px 20px 60px; 
     text-align: center;
     overflow: hidden;
     border-bottom: 5px solid var(--color-secondary-light);
@@ -1757,8 +1757,6 @@ a.text-link:hover {
 }
 /* --- END Header Styles --- */
 
-/* REMOVED INTRO SECTION STYLES (.intro-section, .food-image, .bio-text) */
-
 /* --- HORIZONTAL CAROUSEL --- */
 
 .recipe-categories-wrapper {
@@ -1778,10 +1776,10 @@ a.text-link:hover {
 .recipe-carousel-section:not(:last-child)::after {
     content: '';
     display: block;
-    width: 90%; /* Increased width for better mobile appearance */
+    width: 90%; 
     max-width: 1100px;
     height: 1px;
-    background: var(--color-primary-dark); /* Darker divider line */
+    background: var(--color-primary-dark); 
     margin: 4rem auto 0;
     opacity: 0.1;
 }
@@ -1791,10 +1789,9 @@ a.text-link:hover {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     color: var(--color-primary-dark);
-    /* ALIGNMENT FIX: Use auto margin and padding for clean centering/edge alignment */
     margin: 0 0 1.5rem 0;
     text-align: left;
-    padding-left: 40px; /* Padding for desktop alignment */
+    padding-left: 40px; 
     max-width: 1200px;
     width: 100%;
 }
@@ -1803,9 +1800,10 @@ a.text-link:hover {
 .horizontal-scroll-container {
     display: flex;
     overflow-x: scroll;
-    /* IMPORTANT FIX: Padding ensures first/last card isn't stuck to the edge */
-    padding: 10px 40px; 
-    scroll-snap-type: x mandatory;
+    /* FIX: Remove horizontal padding here; padding is handled by .carousel-nav for full button width */
+    padding: 10px 0; 
+    /* FIX: Remove scroll-snap-type to enable smooth manual swiping on mobile */
+    /* scroll-snap-type: none; */ 
     -webkit-overflow-scrolling: touch;
     gap: 30px;
 }
@@ -1815,20 +1813,21 @@ a.text-link:hover {
 .horizontal-scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
 
 
-/* --- PRODUCT CARD STYLING (HEIGHT AND APPEARANCE) --- */
+/* --- PRODUCT CARD STYLING (HEIGHT AND ALIGNMENT FIX) --- */
 
 .product-card {
     flex-shrink: 0;
     width: 300px; 
-    scroll-snap-align: start; 
+    /* FIX: Ensure consistent minimum height across all cards */
+    min-height: 480px; 
     
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.1); /* Subtle dark blue shadow */
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.15); 
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--color-secondary-light); /* Light Blue Border */
+    border: 1px solid var(--color-secondary-light); 
     display: flex;
     flex-direction: column;
 }
@@ -1865,27 +1864,28 @@ a.text-link:hover {
 .product-card p {
     font-size: 1em; 
     margin-bottom: 20px;
-    flex-grow: 1;
+    flex-grow: 1; /* Ensures text area grows to push button down */
     color: var(--color-text-dark);
     font-family: 'Poppins', sans-serif;
 }
 
 /* Button Fix: Professional, Non-clickable Style */
 .coming-soon-button {
-    display: inline-block;
+    display: block; /* Ensures button is full width */
+    width: 100%;
     background-color: var(--color-secondary-light);
     color: var(--color-primary-dark);
-    padding: 12px 25px;
+    padding: 12px 0;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     font-size: 1em;
-    /* Important: Remove interaction visual cues */
-    pointer-events: none; /* Make it completely non-clickable */
-    opacity: 0.85; /* Slightly muted color for a professional 'coming soon' look */
+    pointer-events: none; 
+    opacity: 0.85; 
     border: 1px solid var(--color-primary-dark);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
+    margin-top: auto; /* Ensures button sticks to the bottom */
 }
 /* Ensure hover effect is NOT active (for professionalism) */
 .coming-soon-button:hover {
@@ -1917,42 +1917,13 @@ a.text-link:hover {
     transform: scale(1.2);
 }
 
-/* --- FINAL RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-    .header-container h1 {
-        font-size: 2.2em;
-    }
-    .header-tagline {
-        font-size: 1.1em;
-    }
-    .section-title-hub {
-        font-size: 1.8rem; 
-        padding-left: 20px; /* Reduced padding on mobile */
-        margin-left: 0;
-    }
-    .horizontal-scroll-container {
-        padding: 10px 20px; /* Reduced side padding on mobile */
-    }
-    .product-card {
-        width: 250px;
-    }
-}
-@media (max-width: 480px) {
-    .header-container h1 {
-        font-size: 1.8em;
-    }
-    .product-card {
-        width: 220px;
-    }
-}
 /* --- NEW STYLES FOR INTERACTIVE CAROUSEL NAVIGATION --- */
 
 .carousel-nav {
     position: relative;
-    /* Use flex to align the arrows and the scroll container */
     display: flex; 
     align-items: center;
-    /* FIX: Set the same side padding as the scroll container used to have */
+    /* FIX: Set the same side padding as the scroll container used to have on desktop */
     padding: 0 40px; 
 }
 
@@ -1982,7 +1953,6 @@ a.text-link:hover {
     transition: background-color 0.2s, transform 0.2s;
     line-height: 1;
     opacity: 0.9;
-    /* Ensures the button text (<< or >>) is centered */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2002,8 +1972,24 @@ a.text-link:hover {
     right: 5px; 
 }
 
-/* Hide navigation buttons on mobile devices */
+/* --- FINAL RESPONSIVE ADJUSTMENTS: FIX Header Spacing on Mobile --- */
 @media (max-width: 768px) {
+    /* FIX: Ensure mobile padding is large enough to clear the top bar/fix cut-off */
+    .header-container.creations-showcase-hero {
+        padding: 60px 15px 30px; 
+    }
+    .header-container h1 {
+        font-size: 2.2em;
+    }
+    .header-tagline {
+        font-size: 1.0em; /* Adjusted to 1.0em */
+    }
+    .section-title-hub {
+        font-size: 1.8rem; 
+        padding-left: 20px;
+        margin-left: 0;
+    }
+    /* Hide navigation buttons on mobile devices */
     .nav-button {
         display: none;
     }
@@ -2014,4 +2000,18 @@ a.text-link:hover {
     .carousel-nav .horizontal-scroll-container {
         padding: 10px 0;
     }
+    .product-card {
+        width: 250px;
+        min-height: 440px; /* Ensures vertical content doesn't get cut off */
+    }
 }
+@media (max-width: 480px) {
+    .header-container h1 {
+        font-size: 1.8em;
+    }
+    .product-card {
+        width: 220px;
+        min-height: 400px;
+    }
+}
+
