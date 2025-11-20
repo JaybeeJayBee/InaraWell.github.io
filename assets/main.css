@@ -1673,3 +1673,213 @@ a.text-link:hover {
         margin-right: 0;
     }
     }
+/* -------------------------------------- */
+/* --- 5. Creations Showcase Styles --- */
+/* -------------------------------------- */
+
+.showcase-header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.header-title {
+    color: var(--color-primary);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header-tagline {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.creation-category {
+    padding: 30px 0;
+    margin-bottom: 40px;
+}
+
+.category-title {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* --- Slider Container (Hides Overflow & Holds Controls) --- */
+.creation-slider-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Slider Wrapper (The Viewport) --- */
+.slider-wrapper {
+    overflow: hidden; /* CRUCIAL: Blocks user scrolling */
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* --- Slider Content (The Track) --- */
+.slider-content {
+    display: flex;
+    gap: 30px;
+    /* Disable all scrolling by browser to force button control */
+    overflow-x: hidden; 
+    /* Smooth transition for JavaScript movement */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* --- Product Card Design (Responsive Sizing) --- */
+.product-card {
+    /* Base minimum size */
+    min-width: 300px; 
+    max-width: 300px; 
+    
+    flex-shrink: 0; /* Prevents cards from shrinking */
+    background-color: var(--color-text-light);
+    border: 1px solid var(--color-secondary);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-name {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 20px;
+    min-height: 40px; /* Ensures consistent card height */
+}
+
+.coming-soon-btn {
+    /* Designed to look like a button but not clickable */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: default; /* CRUCIAL: Prevents click action */
+    opacity: 0.8;
+}
+.coming-soon-btn:hover {
+    background-color: var(--color-accent); /* No change on hover */
+}
+
+
+/* --- Controls and Indicator Dots --- */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.nav-btn {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+.nav-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.indicator-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator-dot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.indicator-dot.active {
+    background-color: var(--color-primary); /* Glow/Active State */
+    color: var(--color-text-light);
+    transform: scale(1.1);
+}
+
+.indicator-dot:hover:not(.active) {
+    background-color: var(--color-accent);
+}
+
+/* --- Responsiveness: Displaying multiple cards on wider screens --- */
+
+@media (min-width: 900px) {
+    /* Show 3 cards on desktop/large tablet */
+    .slider-content {
+        /* Set scroll-snap for smoother, more native feeling movement */
+        scroll-snap-type: x mandatory; 
+    }
+    .product-card {
+        min-width: calc(33.333% - 20px); /* 3 cards + 30px gap */
+        max-width: calc(33.333% - 20px);
+        scroll-snap-align: start; /* Snap to the start of the card */
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Show 4 cards on very wide screens */
+    .product-card {
+        min-width: calc(25% - 22.5px); /* 4 cards + 30px gap */
+        max-width: calc(25% - 22.5px);
+    }
+}
+
+@media (max-width: 650px) {
+    /* Show 1 card fully visible on mobile */
+    .product-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    .slider-content {
+        gap: 0; /* Remove gap when showing only one card for perfect alignment */
+    }
+}
