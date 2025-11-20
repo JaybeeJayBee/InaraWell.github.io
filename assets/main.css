@@ -1714,7 +1714,7 @@ a.text-link:hover {
 .creation-slider-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0; /* Let the content wrapper handle the spacing */
 }
 
 /* --- Slider Wrapper (The Viewport) --- */
@@ -1733,6 +1733,9 @@ a.text-link:hover {
     /* Smooth transition for JavaScript movement */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    
+    /* CRITICAL MOBILE FIX: Add padding to the ends of the carousel track */
+    padding: 0 20px; 
 }
 
 /* --- Product Card Design (Responsive Sizing) --- */
@@ -1855,13 +1858,13 @@ a.text-link:hover {
 @media (min-width: 900px) {
     /* Show 3 cards on desktop/large tablet */
     .slider-content {
-        /* Set scroll-snap for smoother, more native feeling movement */
         scroll-snap-type: x mandatory; 
+        padding: 0; /* Reset padding on desktop */
     }
     .product-card {
         min-width: calc(33.333% - 20px); /* 3 cards + 30px gap */
         max-width: calc(33.333% - 20px);
-        scroll-snap-align: start; /* Snap to the start of the card */
+        scroll-snap-align: start; 
     }
 }
 
@@ -1876,10 +1879,13 @@ a.text-link:hover {
 @media (max-width: 650px) {
     /* Show 1 card fully visible on mobile */
     .product-card {
-        min-width: 100%;
-        max-width: 100%;
+        /* CRITICAL FIX: Make card size slightly smaller than 100% to ensure visible side padding */
+        min-width: calc(100% - 40px); 
+        max-width: calc(100% - 40px);
     }
     .slider-content {
-        gap: 0; /* Remove gap when showing only one card for perfect alignment */
+        /* CRITICAL FIX: Add margin to the content track to visually center the single card */
+        gap: 40px; 
+        padding: 0 20px; 
     }
 }
