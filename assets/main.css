@@ -1,4 +1,4 @@
-/* --- Global Variables and Reset --- */
+y/* --- Global Variables and Reset --- */
 :root {
     --color-primary: #1C2E46; /* Dark Blue */
     --color-secondary: #E3EEF7; /* Light Blue/Off-White */
@@ -1799,11 +1799,10 @@ a.text-link:hover {
 /* CRITICAL: Horizontal Scroll Container */
 .horizontal-scroll-container {
     display: flex;
+    /* FIX: Explicitly prevent wrapping to allow full horizontal scrolling on mobile */
+    flex-wrap: nowrap; 
     overflow-x: scroll;
-    /* FIX: Remove horizontal padding here; padding is handled by .carousel-nav for full button width */
     padding: 10px 0; 
-    /* FIX: Remove scroll-snap-type to enable smooth manual swiping on mobile */
-    /* scroll-snap-type: none; */ 
     -webkit-overflow-scrolling: touch;
     gap: 30px;
 }
@@ -1864,14 +1863,14 @@ a.text-link:hover {
 .product-card p {
     font-size: 1em; 
     margin-bottom: 20px;
-    flex-grow: 1; /* Ensures text area grows to push button down */
+    flex-grow: 1;
     color: var(--color-text-dark);
     font-family: 'Poppins', sans-serif;
 }
 
 /* Button Fix: Professional, Non-clickable Style */
 .coming-soon-button {
-    display: block; /* Ensures button is full width */
+    display: block; 
     width: 100%;
     background-color: var(--color-secondary-light);
     color: var(--color-primary-dark);
@@ -1885,7 +1884,7 @@ a.text-link:hover {
     border: 1px solid var(--color-primary-dark);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
-    margin-top: auto; /* Ensures button sticks to the bottom */
+    margin-top: auto;
 }
 /* Ensure hover effect is NOT active (for professionalism) */
 .coming-soon-button:hover {
@@ -1923,7 +1922,6 @@ a.text-link:hover {
     position: relative;
     display: flex; 
     align-items: center;
-    /* FIX: Set the same side padding as the scroll container used to have on desktop */
     padding: 0 40px; 
 }
 
@@ -1972,7 +1970,7 @@ a.text-link:hover {
     right: 5px; 
 }
 
-/* --- FINAL RESPONSIVE ADJUSTMENTS: FIX Header Spacing on Mobile --- */
+/* --- FINAL RESPONSIVE ADJUSTMENTS: FIX Header Spacing and Nav on Mobile --- */
 @media (max-width: 768px) {
     /* FIX: Ensure mobile padding is large enough to clear the top bar/fix cut-off */
     .header-container.creations-showcase-hero {
@@ -1982,7 +1980,7 @@ a.text-link:hover {
         font-size: 2.2em;
     }
     .header-tagline {
-        font-size: 1.0em; /* Adjusted to 1.0em */
+        font-size: 1.0em; 
     }
     .section-title-hub {
         font-size: 1.8rem; 
@@ -2002,7 +2000,7 @@ a.text-link:hover {
     }
     .product-card {
         width: 250px;
-        min-height: 440px; /* Ensures vertical content doesn't get cut off */
+        min-height: 440px; 
     }
 }
 @media (max-width: 480px) {
@@ -2014,4 +2012,3 @@ a.text-link:hover {
         min-height: 400px;
     }
 }
-
