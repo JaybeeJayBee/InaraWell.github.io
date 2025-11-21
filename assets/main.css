@@ -1427,6 +1427,14 @@ a.text-link:hover {
     color: var(--color-accent);
 }
 
+/* --- CRITICAL FIX FOR INVISIBLE SOCIAL ICONS --- */
+/* Forces Font Awesome icons to display correctly and inherit the primary color */
+.social-links a i {
+    display: inline-block !important; /* Ensures the element is not hidden */
+    opacity: 1 !important; /* Ensures it is fully opaque */
+    color: var(--color-primary) !important; /* Guarantees the dark blue color */
+}
+
 /* --- NEW STYLES for thank-you.html (Thank You Page) --- */
 
 .thank-you-main {
