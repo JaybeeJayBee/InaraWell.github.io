@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Run Navigation setup after the nav.html content has been injected
         setupNavigation();
         setupSubmenuLogic();
-        highlightCurrentPage(); // NEW: Active Page Glow
+        highlightCurrentPage(); 
     });
     loadComponent('footer-container', 'components/footer.html').then(() => {
         // Run Footer script after injection
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Navigation and Floating Icon Logic ---
     function setupNavigation() {
-        // UPDATED ID to match blueprint
-        const trigger = document.getElementById('floating-nav-icon'); 
+        // *** CRITICAL FIX: Reverting to the original, correct ID: #nav-trigger ***
+        const trigger = document.getElementById('nav-trigger'); 
         const closeBtn = document.getElementById('nav-close');
         const overlay = document.getElementById('nav-overlay');
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, false);
     }
     
-    // --- NEW: Active Page Glow Logic (Highlight Current Page) ---
+    // --- Active Page Glow Logic (Highlight Current Page) ---
     function highlightCurrentPage() {
         const currentPath = window.location.pathname.replace(/\/$/, ''); // Get clean path (/faq)
         
@@ -98,9 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // --- UPDATED: Submenu Dropdown Logic for Multiple Menus ---
+    // --- Submenu Dropdown Logic for Multiple Menus ---
     function setupSubmenuLogic() {
-        // Select all elements that can trigger a dropdown (both <a> and <span> with class .submenu-toggle)
         document.querySelectorAll('.submenu-toggle').forEach(toggle => {
             
             const parentLi = toggle.closest('.has-submenu');
@@ -109,18 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!submenu) return;
 
-            // This single click handler now manages both the 'click-to-toggle' (span) and 'click-to-navigate' (a)
             toggle.addEventListener('click', (e) => {
                 
-                // If it's a non-link span OR the submenu is closed, or it's an arrow click, we TOGGLE
                 if (toggle.tagName === 'SPAN' || submenu.classList.contains('hidden') || e.target.classList.contains('submenu-arrow') || e.target.closest('.submenu-arrow')) {
                     
                     e.preventDefault(); 
                     
-                    // Toggle visibility of the submenu
                     submenu.classList.toggle('hidden');
                     
-                    // Toggle arrow rotation ONLY if the arrow exists
                     if (arrow) {
                         arrow.classList.toggle('rotate');
                     }
@@ -139,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
-                // If it's an <a> and the submenu is already visible, the default action (navigation) will proceed.
             });
             
             // Handle non-clickable sub-links (spans) inside the submenu
@@ -167,12 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const faqItem = item.parentElement;
                 const answer = faqItem.querySelector('.faq-answer');
 
-                // Toggle active class on the clicked item
                 faqItem.classList.toggle('active');
 
-                // Show or hide the answer with a smooth animation
                 if (faqItem.classList.contains('active')) {
-                    // Close other active items when a new one is opened (optional but clean)
                     document.querySelectorAll('.faq-item.active').forEach(otherItem => {
                         if (otherItem !== faqItem) {
                             otherItem.classList.remove('active');
@@ -180,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                     
-                    answer.style.maxHeight = answer.scrollHeight + 'px'; // Set height to scroll height
+                    answer.style.maxHeight = answer.scrollHeight + 'px'; 
                 } else {
-                    answer.style.maxHeight = '0'; // Collapse
+                    answer.style.maxHeight = '0';
                 }
             });
         });
