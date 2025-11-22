@@ -196,6 +196,30 @@ body {
     text-shadow: none;
 }
 
+/* Submenu Links: Base Style */
+.overlay-menu .submenu {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    text-align: center; 
+    /* Base height must be large for smooth transition when opening */
+    max-height: 500px; 
+}
+
+/* *** CRITICAL FIX: The initial hidden state for submenus *** */
+.overlay-menu .submenu.hidden {
+    max-height: 0; /* Collapses the menu and creates the hidden state */
+    overflow: hidden; /* Hides the submenu content */
+    margin-bottom: 0;
+}
+
+.overlay-menu .submenu li {
+    padding: 0;
+}
+
+
 /* Submenu Item Text Compression Rule */
 .submenu-item-text {
     /* CRITICAL COMPRESSION RULE */
