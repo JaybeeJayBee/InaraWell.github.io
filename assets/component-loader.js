@@ -80,23 +80,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }, false);
     }
     
-    // --- Active Page Glow Logic (Highlight Current Page) ---
+       // --- Active Page Glow Logic (Highlight Current Page) ---
     function highlightCurrentPage() {
         const currentPath = window.location.pathname.replace(/\/$/, ''); // Get clean path (/faq)
         
         document.querySelectorAll('.overlay-menu a').forEach(link => {
             const linkPath = link.getAttribute('href').replace(/\/$/, '');
             
-            // Handle index.html (root) separately
-            if (linkPath === '/' && (currentPath === '' || currentPath === '/index.html' || currentPath === '/index')) {
+            // 1. Check for the definitive home path (domain root)
+            // Fix: Added currentPath === '/' check for Vercel root URL handling
+            if (linkPath === '/' && (currentPath === '' || currentPath === '/index.html' || currentPath === '/index' || currentPath === '/')) {
                  link.classList.add('active-page');
             }
-            // Match based on clean URL path
-            else if (currentPath.includes(linkPath) && linkPath !== '/') {
+            // 2. Check for other pages
+            // Fix: Changed includes() to startsWith() for more precise matching
+            // We use startsWith() to match /faq/subpage to /faq
+            else if (linkPath !== '/' && currentPath.startsWith(linkPath) && currentPath.length === linkPath.length) {
+                // To prevent partial matches (e.g., matching /affiliates if the page is /affiliate-partners)
                 link.classList.add('active-page');
+            } else if (linkPath !== '/' && currentPath.startsWith(linkPath) && linkPath !== '/') {
+                 // Fallback for pages where path segments might be needed, but added length check above is better
+                 // For now, let's keep it simple to fix the root issue and avoid accidental highlighting
+                 if (currentPath === linkPath) { // Simple exact match for most pages
+                    link.classList.add('active-page');
+                 }
             }
         });
     }
+
     
     // --- Submenu Dropdown Logic for Multiple Menus ---
     function setupSubmenuLogic() {
