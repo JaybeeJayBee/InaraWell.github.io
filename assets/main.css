@@ -1629,177 +1629,6 @@ a.text-link:hover {
         margin-right: 0;
     }
     }
-/* -------------------------------------- */
-/* --- 5. Styles for our-creations-showcase.html --- */
-/* -------------------------------------- */
-
-/* --- Store Hero (Scaling/Floating Animation) --- */
-@keyframes zoomInOut {
-    0% { transform: scale(0.98); opacity: 0.9; }
-    50% { transform: scale(1.02); opacity: 1; }
-    100% { transform: scale(0.98); opacity: 0.9; }
-}
-
-.store-hero {
-    text-align: center;
-    padding: 60px 20px;
-    /* --- UPDATED: Background Image and Dark Overlay for Contrast --- */
-    background: linear-gradient(rgba(28, 46, 70, 0.7), rgba(28, 46, 70, 0.7)), 
-                url('https://res.cloudinary.com/dqpvrgi9f/image/upload/v1763860358/Picsart_25-11-23_02-05-35-683_lxcrbq.jpg') no-repeat center center;
-    background-size: cover;
-    background-position: top center;
-    /* End of New Background Styling */
-    border-radius: 8px;
-    margin-bottom: 50px;
-    animation: zoomInOut 6s ease-in-out infinite; /* Apply the smooth animation */
-    transition: all 0.5s ease;
-    
-    /* Set base text color to light to contrast the dark overlay */
-    color: var(--color-text-light); 
-}
-
-.store-hero .hero-title {
-    font-size: 2.8rem;
-    /* FIX: Use light color against dark background */
-    color: var(--color-text-light);
-    margin-bottom: 10px;
-    font-weight: 800;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Added shadow for better edge definition */
-}
-
-.store-hero .hero-tagline {
-    font-size: 1.3rem;
-    /* FIX: Use light color against dark background */
-    color: var(--color-text-light);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* --- Category Headings (Wowing) --- */
-.category-section {
-    margin-bottom: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--color-secondary);
-}
-
-.category-title {
-    font-size: 2rem;
-    color: var(--color-primary);
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 10px 0;
-    position: relative;
-}
-
-.category-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    margin: 10px auto 0;
-    border-radius: 2px;
-}
-
-/* --- Product List (Vertical Alignment and Responsiveness) --- */
-.product-list {
-    display: flex;
-    flex-direction: column; /* Vertical stacking */
-    gap: 25px; /* Spacing between cards */
-    max-width: 800px; /* Constrain the overall width for readability */
-    margin: 0 auto; /* Center the list */
-}
-
-.product-card {
-    display: flex; /* Flex container for content inside the card */
-    align-items: center; /* Vertically center image and details */
-    background-color: var(--color-text-light); /* White background */
-    border: 1px solid var(--color-secondary);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.08);
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(28, 46, 70, 0.15);
-}
-
-.product-image {
-    width: 120px; /* Fixed size for vertical alignment */
-    height: 120px;
-    object-fit: cover;
-    flex-shrink: 0; /* Prevents image from shrinking */
-}
-
-.card-details {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.product-name {
-    color: var(--color-primary);
-    font-size: 1.4rem;
-    margin-bottom: 5px;
-}
-
-.product-desc {
-    color: var(--color-text-dark);
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-    opacity: 0.8;
-}
-
-/* --- Coming Soon Button --- */
-.coming-soon-btn {
-    align-self: flex-start; /* Aligns button to the left */
-    padding: 10px 18px;
-    background-color: var(--color-accent); /* Light Blue Accent */
-    color: var(--color-primary);
-    border: none;
-    border-radius: 50px; /* Pill shape */
-    font-weight: bold;
-    font-size: 0.9rem;
-    cursor: default;
-    transition: background-color 0.3s;
-}
-
-/* --- Responsiveness for Product Cards --- */
-
-@media (max-width: 650px) {
-    .product-card {
-        flex-direction: column; /* Stack image and text vertically on small screens */
-        text-align: center;
-    }
-    .product-image {
-        width: 100%; /* Image takes full width at the top */
-        height: 200px;
-        border-radius: 12px 12px 0 0;
-    }
-    .card-details {
-        padding: 20px 15px;
-        align-items: center; /* Center text and button */
-    }
-    .product-name {
-        font-size: 1.3rem;
-    }
-    .coming-soon-btn {
-        align-self: center; /* Center button when stacked */
-    }
-    .store-hero .hero-title {
-        font-size: 2rem;
-    }
-    .store-hero .hero-tagline {
-        font-size: 1rem;
-    }
-    .category-title {
-        font-size: 1.5rem;
-    }
-}
 
 /* ========================================= */
 /* --- VIDEO HEADER UPGRADE (Vibe Coder) --- */
@@ -1873,13 +1702,112 @@ a.text-link:hover {
     }
 }
 
-/* --- Product Card Icon Upgrade (The Vibe Coder Look) --- */
+/* ========================================= */
+/* --- MASTER SHOP STYLES (Creations Showcase) --- */
+/* ========================================= */
 
-/* 1. The Container for the Icon (The "Card Cover") */
+/* 1. Store Hero Animation */
+@keyframes zoomInOut {
+    0% { transform: scale(0.98); opacity: 0.9; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(0.98); opacity: 0.9; }
+}
+
+.store-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(rgba(28, 46, 70, 0.7), rgba(28, 46, 70, 0.7)), 
+                url('https://res.cloudinary.com/dqpvrgi9f/image/upload/v1763860358/Picsart_25-11-23_02-05-35-683_lxcrbq.jpg') no-repeat center center;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 8px;
+    margin-bottom: 50px;
+    animation: zoomInOut 6s ease-in-out infinite;
+    transition: all 0.5s ease;
+    color: var(--color-text-light); 
+}
+
+.store-hero .hero-title {
+    font-size: 2.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+    font-weight: 800;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.store-hero .hero-tagline {
+    font-size: 1.3rem;
+    color: var(--color-text-light);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 2. Category Headings */
+.category-section {
+    margin-bottom: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-secondary);
+}
+
+.category-title {
+    font-size: 2rem;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 3. Product List Container (Fixes Edge Touching) */
+.product-list {
+    display: flex;
+    flex-direction: column; 
+    gap: 30px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    /* CRITICAL: Keeps cards away from screen edges on mobile */
+    padding: 0 20px; 
+    width: 100%; 
+}
+
+/* 4. Product Card (Frame & Border Upgrade) */
+.product-card {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    background-color: #ffffff; 
+    
+    /* THE FRAME */
+    border: 2px solid var(--color-secondary); /* Light Blue Border */
+    border-radius: 16px; 
+    
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.08); 
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent); 
+    box-shadow: 0 10px 25px rgba(28, 46, 70, 0.15);
+}
+
+/* 5. Icon Wrapper (The "Cover Image") */
 .product-card .product-icon-wrapper {
     width: 100%;
-    height: 180px; /* Gives it the height of a product image */
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #ffffff 100%); /* Light blue gradient */
+    height: 180px; 
+    background: linear-gradient(135deg, var(--color-secondary) 0%, #ffffff 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1887,27 +1815,61 @@ a.text-link:hover {
     transition: background 0.3s ease;
 }
 
-/* 2. The Icon Itself */
 .product-card .product-icon-wrapper i {
-    font-size: 4rem; /* Makes the icon BIG */
-    color: var(--color-primary); /* Dark Blue */
+    font-size: 4rem; 
+    color: var(--color-primary); 
     opacity: 0.9;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s ease;
 }
 
-/* 3. Hover Effect */
 .product-card:hover .product-icon-wrapper {
     background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
 }
 
 .product-card:hover .product-icon-wrapper i {
-    transform: scale(1.2); /* Icon pops up when you hover */
+    transform: scale(1.2); 
     color: var(--color-primary);
 }
 
-/* Mobile Adjustment */
+/* 6. Text & Button Styling */
+.card-details {
+    padding: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.product-name {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.product-desc {
+    color: var(--color-text-dark);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+.coming-soon-btn {
+    padding: 10px 20px;
+    background-color: var(--color-accent); 
+    color: var(--color-primary);
+    border: none;
+    border-radius: 50px; 
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: default;
+}
+
+/* Mobile Tweak */
 @media (max-width: 650px) {
     .product-card .product-icon-wrapper {
         height: 150px;
+    }
+    .store-hero .hero-title {
+        font-size: 2rem;
     }
 }
