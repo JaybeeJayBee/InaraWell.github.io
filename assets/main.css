@@ -89,9 +89,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    
+    /* --- SCROLLING RULES --- */
+    justify-content: flex-start; /* Starts items at the top */
     padding-top: 50px; 
-    overflow: auto; 
+    padding-bottom: 50px; /* NEW: Prevents last item from being cut off */
+    overflow-y: auto; /* Enables vertical scrolling */
     
     /* *** CRITICAL FIX: Ensures overlay is hidden on page load *** */
     opacity: 0;
