@@ -1805,38 +1805,41 @@ a.text-link:hover {
     }
 }
 /* =========================================
-   INARAWELL PREMIUM HERO (THE ASCENSION GRID)
+   INARAWELL PREMIUM HERO (BRAND COLORS CORRECTED)
    ========================================= */
 
 :root {
-    --bg-light: #F8FAFC;      /* Premium Off-White */
-    --grid-line: rgba(30, 58, 138, 0.08); /* Faint Navy Blue */
-    --primary-blue: #0F172A;  /* Deep Navy for Text */
-    --accent-blue: #3B82F6;   /* Bright Blue for Buttons */
-    --gradient-text: linear-gradient(135deg, #0F172A 0%, #3B82F6 100%);
+    /* YOUR BRAND PALETTE */
+    --brand-dark: #1C2E46;    /* Dark Blue (Text/Primary) */
+    --brand-light: #F7F7F0;   /* Lightest Background */
+    --brand-soft: #E3EEF7;    /* Secondary Soft Blue */
+    --brand-accent: #ADD8E6;  /* Light Blue Accent */
+    
+    /* Grid Line Color (Dark Blue at 10% opacity) */
+    --grid-line: rgba(28, 46, 70, 0.08); 
 }
 
 /* 1. HERO CONTAINER */
 .hero-section {
     position: relative;
-    height: 95vh; /* Full screen impact */
+    height: 90vh; 
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: var(--bg-light);
-    perspective: 1000px; /* Needed for 3D effect */
-    margin-bottom: 0; /* Reset */
-    padding: 0; /* Reset */
-    border-radius: 0; /* Reset */
+    /* Gradient Background based on your palette */
+    background: linear-gradient(180deg, var(--brand-light) 0%, var(--brand-soft) 100%);
+    perspective: 1000px;
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
 }
 
-/* 2. THE 3D FLOOR (CSS GRID) */
+/* 2. THE 3D FLOOR (ASCENSION GRID) */
 .ascension-grid-wrap {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: 1;
-    /* The Tilt */
     transform: rotateX(60deg) scale(2);
     transform-origin: center top;
 }
@@ -1845,22 +1848,22 @@ a.text-link:hover {
     position: absolute;
     top: -50%; left: -50%; width: 200%; height: 200%;
     
-    /* The Grid Drawing */
+    /* Grid lines using your Dark Blue */
     background-image: 
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 80px 80px; /* Large, spacious squares */
+    background-size: 80px 80px;
     
-    /* The Movement */
-    animation: gridFloat 20s linear infinite;
+    animation: gridFloat 25s linear infinite;
 }
 
-/* 3. THE LIGHT BEAM (Center Glow) */
+/* 3. LIGHT BEAM (Center Glow) */
 .light-beam {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0) 0%, var(--bg-light) 60%);
-    z-index: 2; /* Fades the grid into the distance */
+    /* Soft center glow using your Off-White */
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0) 0%, var(--brand-light) 70%);
+    z-index: 2;
 }
 
 @keyframes gridFloat {
@@ -1868,52 +1871,38 @@ a.text-link:hover {
     100% { transform: translateY(80px); }
 }
 
-/* 4. HERO CONTENT (Typography) */
+/* 4. HERO CONTENT */
 .hero-content {
     position: relative;
     z-index: 10;
     text-align: center;
     max-width: 800px;
-    padding-top: 50px;
+    padding-top: 0; /* Removed top padding since badge is gone */
     background: transparent; /* Override */
 }
 
-/* The "System Online" Badge */
-.pill-badge {
-    display: inline-block;
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--accent-blue);
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* The Big Headline */
+/* Headline */
 .headline-hero {
-    font-family: 'Inter', sans-serif; /* Clean Sans Serif */
+    font-family: 'Playfair Display', serif; /* Matching your logo font */
     font-size: 4rem;
     line-height: 1.1;
-    font-weight: 800;
-    color: var(--primary-blue);
+    font-weight: 700;
+    color: var(--brand-dark);
     margin-bottom: 25px;
-    letter-spacing: -2px; /* Tight, expensive kerning */
 }
 
 .text-gradient {
-    background: var(--gradient-text);
+    /* Optional: Subtle gradient on the name, or keep solid dark blue */
+    background: linear-gradient(135deg, var(--brand-dark) 0%, #4A6Fa5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .sub-hero {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
-    color: #64748B; /* Slate Grey */
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif; /* Matching your body font */
+    font-size: 1.1rem;
+    color: #5A6A80; /* Slightly lighter version of dark blue */
+    line-height: 1.7;
     margin-bottom: 40px;
     max-width: 600px;
     margin-left: auto;
@@ -1924,42 +1913,43 @@ a.text-link:hover {
 .cta-group {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     align-items: center;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
+    background: var(--brand-dark);
     color: #FFF;
-    padding: 16px 32px;
-    border-radius: 8px;
+    padding: 16px 36px;
+    border-radius: 50px; /* Softer, pill-shape buttons for wellness */
     font-weight: 600;
     text-decoration: none;
     transition: 0.3s ease;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 10px 25px rgba(28, 46, 70, 0.15);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.25);
-    background: var(--accent-blue);
+    background: #2C425E; /* Slightly lighter dark blue */
+    box-shadow: 0 15px 35px rgba(28, 46, 70, 0.25);
 }
 
 .btn-text {
-    color: var(--primary-blue);
+    color: var(--brand-dark);
     font-weight: 600;
     text-decoration: none;
     transition: 0.2s;
+    border-bottom: 1px solid transparent;
 }
 
 .btn-text:hover {
-    color: var(--accent-blue);
-    padding-left: 5px; /* Subtle movement */
+    color: #4A6Fa5;
+    border-bottom-color: #4A6Fa5;
 }
 
 /* MOBILE FIX */
 @media (max-width: 768px) {
-    .headline-hero { font-size: 2.5rem; }
+    .headline-hero { font-size: 2.8rem; }
     .hero-section { height: 85vh; }
-    .sub-hero { font-size: 1rem; padding: 0 20px; }
-        }
+    .cta-group { flex-direction: column; gap: 15px; }
+}
