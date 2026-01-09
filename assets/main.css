@@ -1953,3 +1953,25 @@ a.text-link:hover {
     .hero-section { height: 85vh; }
     .cta-group { flex-direction: column; gap: 15px; }
 }
+
+/* =========================================
+   INTERNAL PAGES (SHORTER HEADER)
+   ========================================= */
+
+.hero-section.internal-hero {
+    height: 50vh; /* Shorter than homepage for inner pages */
+    min-height: 450px;
+    background: linear-gradient(180deg, var(--brand-light) 0%, var(--brand-soft) 100%);
+    border-bottom: 1px solid var(--grid-line);
+}
+
+.hero-section.internal-hero .headline-hero {
+    font-size: 3.5rem; /* Slightly smaller font */
+    margin-bottom: 20px;
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .hero-section.internal-hero { height: 60vh; }
+    .hero-section.internal-hero .headline-hero { font-size: 2.5rem; }
+    }
