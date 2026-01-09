@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Optional: Close all submenus when main menu closes
                 closeAllSubmenus();
-            }, 300);
+            }, 150);
         });
 
         // C. SCROLL LOGIC (Hide Trigger on Scroll)
