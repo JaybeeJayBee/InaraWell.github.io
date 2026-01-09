@@ -1956,3 +1956,58 @@ a.text-link:hover {
     .hero-section.internal-hero { height: 60vh; }
     .hero-section.internal-hero .headline-hero { font-size: 2.5rem; }
     }
+
+/* =========================================
+   NAVIGATION ANIMATIONS & INTERACTIONS
+   ========================================= */
+
+/* 1. HAMBURGER PULSE (Breathing Effect) */
+@keyframes softGlowPulse {
+    0% { box-shadow: 0 0 0 0 rgba(28, 46, 70, 0.7); }
+    50% { box-shadow: 0 0 15px 5px rgba(173, 216, 230, 0.5); }
+    100% { box-shadow: 0 0 0 0 rgba(28, 46, 70, 0); }
+}
+
+#nav-trigger {
+    /* Apply the breathing animation */
+    animation: softGlowPulse 3s infinite ease-in-out;
+}
+
+/* 2. CLOSE BUTTON GLOW (When Clicked) */
+#nav-close.glow-active {
+    color: #FFFFFF !important;
+    text-shadow: 0 0 20px #FFFFFF, 0 0 40px #ADD8E6;
+    transform: scale(1.2) rotate(90deg); /* Grow and spin slightly */
+    transition: all 0.3s ease;
+}
+
+/* 3. CHEVRON ROTATION (Point Up when Open) */
+/* This works when JavaScript adds the 'active' class */
+.submenu-toggle.active .submenu-arrow {
+    transform: rotate(180deg);
+    color: #FFFFFF; /* Arrow turns white when open */
+}
+
+/* 4. ACTIVE PAGE GLOW (You Are Here) */
+/* Standard Links */
+.overlay-menu a.main-link.active-page {
+    color: #ADD8E6;
+    text-shadow: 0 0 10px rgba(173, 216, 230, 0.6);
+    border-left: 2px solid #ADD8E6; /* Optional: Small indicator line */
+    padding-left: 15px; /* Adjust spacing for the line */
+}
+
+/* Parent Toggles (If a sub-page is active) */
+.overlay-menu .submenu-toggle.child-active {
+    color: #ADD8E6;
+    text-shadow: 0 0 10px rgba(173, 216, 230, 0.6);
+}
+
+/* Submenu Items */
+.submenu-item-text.active-page {
+    color: #FFFFFF;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding-left: 10px;
+    }
