@@ -73,32 +73,35 @@ body {
 
 
 /* -------------------------------------- */
-/* --- 2. Navigation Menu (Overlay) --- */
+/* --- 2. NAVIGATION MENU (STABILIZED) --- */
 /* -------------------------------------- */
 
 #nav-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(28, 46, 70, 0.98); 
+    /* Inset 0 locks it to all 4 corners */
+    inset: 0; 
+    width: 100vw;
+    height: 100vh;
+    
+    background-color: var(--color-primary); 
     color: var(--color-text-light);
     z-index: 1000;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    
+    /* SCROLL STABILIZATION */
+    overflow-y: auto;   /* Scroll vertically if list is long */
+    overflow-x: hidden; /* NO side scrolling */
+    overscroll-behavior: none; /* Prevents "rubber banding" bounce */
+    
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0 80px; /* Padding bottom ensures last item isn't cut off */
     
-    /* --- SCROLLING RULES --- */
-    justify-content: flex-start; /* Starts items at the top */
-    padding-top: 50px; 
-    padding-bottom: 50px; /* NEW: Prevents last item from being cut off */
-    overflow-y: auto; /* Enables vertical scrolling */
-    
-    /* *** CRITICAL FIX: Ensures overlay is hidden on page load *** */
+    /* Animation States */
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #nav-overlay.visible {
@@ -106,168 +109,146 @@ body {
     visibility: visible;
 }
 
-/* Close Button (X) */
+/* Close Button Positioned Absolute to the Overlay, not the screen */
 #nav-close.close-btn { 
     position: absolute;
-    top: 25px; /* Adjusted to match icon offset */
+    top: 25px; 
     right: 25px;
     font-size: 2.5rem; 
     background: none;
     border: none;
-    color: var(--color-text-light);
+    color: var(--color-accent);
     cursor: pointer;
-    padding: 10px;
-    transition: transform 0.5s, opacity 0.5s;
     z-index: 1002;
+    padding: 10px;
 }
 
-/* AI Decision: Spin/Fade-Out Animation for closing */
-#nav-close.animate-close {
-    transform: rotate(180deg);
-    opacity: 0;
-}
-
-/* --- Chevron Rotation Logic --- */
-.submenu-arrow {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease-in-out;
-    color: var(--color-text-light);
-}
-
-.submenu-arrow.rotate {
-    transform: rotate(180deg); /* Flips the arrow upwards when the submenu is open */
-}
-
-
-/* --- NEW: Brand Header Styling --- */
+/* Brand Header */
 .nav-brand-header {
-    width: 100%;
+    margin-top: 40px; /* Space for the close button */
+    margin-bottom: 20px;
     text-align: center;
-    padding: 10px 0 25px;
+    width: 100%;
 }
 
 .nav-brand-header h1 {
-    /* Blueprint Requirement: Large, high-contrast. Using var(--color-accent) as light cream placeholder */
-    color: var(--color-accent); 
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    /* Simulate Playfair Display font style */
-    font-family: serif, 'Playfair Display', Georgia;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(173, 216, 230, 0.5); 
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--color-text-light);
+    letter-spacing: 1px;
 }
 
-/* --- Navigation Links & Compression --- */
-
+/* --- THE MENU LIST --- */
 .overlay-menu ul {
     list-style: none;
-    text-align: center;
     padding: 0;
     margin: 0;
-    width: 90%; /* Constrain width for the separator */
-    max-width: 400px;
+    width: 100%;
+    max-width: 400px; /* Prevents it from getting too wide */
+    text-align: center;
 }
 
-/* Blueprint Compression Rules (A) & Active/Hover Glow (B) */
-.overlay-menu a, .overlay-menu .submenu-toggle {
+/* --- LINKS & TOGGLES (The Fix for Alignment) --- */
+.overlay-menu a.main-link, 
+.overlay-menu .submenu-toggle {
+    display: flex;             /* Flexbox is key */
+    flex-direction: row;       /* Forces side-by-side */
+    align-items: center;       /* Vertically centered */
+    justify-content: center;   /* Horizontally centered */
+    gap: 12px;                 /* Space between text and arrow */
+    
+    width: 100%;
+    padding: 15px 10px;
+    
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
     color: var(--color-text-light);
     text-decoration: none;
-    /* CRITICAL COMPRESSION RULE */
-    font-size: 1.3rem !important; 
-    line-height: 1.2 !important; 
-    
-    font-weight: 600; 
-    padding: 10px 0;
-    margin: 0.1rem 0 !important; /* CRITICAL COMPRESSION RULE */
-    display: block;
-    transition: color 0.3s, text-shadow 0.3s;
-    position: relative;
-    text-shadow: none; /* Removed base glow for cleaner look */
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-/* Active/Hover Glow Blueprint Rule (B) */
-.overlay-menu a:hover, .overlay-menu a.active-page, .overlay-menu .submenu-toggle:hover { 
-    color: var(--color-accent); /* Using accent for light secondary color */
-    text-shadow: 0 0 10px var(--color-accent); /* Subtle text shadow for glow */
+/* Hover State */
+.overlay-menu a.main-link:hover, 
+.overlay-menu .submenu-toggle:hover {
+    color: var(--color-accent);
 }
 
-/* Separator Styling */
+/* THE ARROW (Strictly Controlled) */
+.submenu-arrow {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    transition: transform 0.3s ease;
+    margin-top: 4px; /* Optical alignment adjustment */
+}
+
+/* Rotate when active */
+.submenu-toggle.active .submenu-arrow {
+    transform: rotate(180deg);
+}
+
+/* Separator Line */
 .menu-divider {
     border: 0;
     height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* CRITICAL COMPRESSION RULE */
-    margin: 0.8rem auto; 
-    width: 80%;
+    background: rgba(255,255,255,0.1);
+    width: 60%;
+    margin: 0 auto;
 }
 
-/* Submenu Link Styling */
-.overlay-menu .submenu a, .overlay-menu .submenu span.submenu-item-text {
-    text-align: center;
-    color: var(--color-text-light);
-    opacity: 0.8;
-    padding: 5px 0;
-    text-shadow: none;
-}
-
-/* Submenu Links: Base Style */
+/* --- SUBMENUS --- */
 .overlay-menu .submenu {
     list-style: none;
     padding: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease-in-out;
-    text-align: center; 
-    /* Base height must be large for smooth transition when opening */
-    max-height: 500px; 
+    margin: 0;
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+    opacity: 1;
+    background: rgba(0,0,0,0.15); /* Darker background for nested items */
+    width: 100%;
 }
 
-/* *** CRITICAL FIX: The initial hidden state for submenus *** */
 .overlay-menu .submenu.hidden {
-    max-height: 0; /* Collapses the menu and creates the hidden state */
-    overflow: hidden; /* Hides the submenu content */
-    margin-bottom: 0;
+    max-height: 0;
+    opacity: 0;
 }
 
-.overlay-menu .submenu li {
-    padding: 0;
-}
-
-
-/* Submenu Item Text Compression Rule */
+/* Submenu Links (Store One) */
 .submenu-item-text {
-    /* CRITICAL COMPRESSION RULE */
-    font-size: 0.9rem !important; 
-    line-height: 1.2 !important; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #E3EEF7;
     display: block;
-    padding: 5px 0;
+    padding: 15px 0;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-
-/* --- Mobile Adjustments (<480px) --- */
-@media (max-width: 480px) {
-    /* Blueprint Compression Rules (A) */
-    .overlay-menu a, .overlay-menu .submenu-toggle {
-        font-size: 1.1rem !important;
-        line-height: 1.2 !important;
-        margin: 0 !important; /* CRITICAL MOBILE COMPRESSION */
-    }
-    
-    .menu-divider {
-        margin: 0.5rem auto; /* CRITICAL MOBILE COMPRESSION */
-    }
-    
-    .submenu-item-text {
-        font-size: 0.7rem !important; /* CRITICAL MOBILE COMPRESSION */
-    }
-    
-    .nav-brand-header h1 {
-        font-size: 1.8rem;
-    }
+.submenu-item-text:hover {
+    color: #FFF;
+    background: rgba(255,255,255,0.05);
 }
 
+/* Non-Clickable Notes (View All Stores) */
+.submenu-note {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #8fa3bf; /* Muted Blue/Grey */
+    font-style: italic;
+    display: block;
+    padding: 10px 0 20px;
+    cursor: default;
+}
+
+/* Background Bubbles (Pushed to back) */
+.menu-bubbles-container {
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* Behind the menu items */
+    overflow: hidden;
+    pointer-events: none;
+    }
 
 /* -------------------------------------- */
 /* --- 3. Standardized Footer Component --- */
