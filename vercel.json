@@ -9,5 +9,25 @@
     { "source": "/our-reviews-and-testimonials", "destination": "/our-reviews-and-testimonials.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/:path", "destination": "/:path.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "all"
+        }
+      ]
+    },
+    {
+      "source": "/favicon.(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
   ]
 }
