@@ -19,16 +19,37 @@
             font-family: 'Playfair Display', serif !important; 
             font-weight: 700;
             color: #1C2E46; /* InaraWell Dark Blue */
+            
+            /* Layout Settings */
             display: flex;
             align-items: center;
-            justify-content: center; /* Centers the text and icon */
-            gap: 12px; /* Space between icon and text */
+            justify-content: center; 
+            flex-wrap: wrap; /* Allows text to wrap naturally */
+            gap: 12px; 
+            text-align: center;
+            
+            /* Anchor for the underline */
+            position: relative; 
+            padding-bottom: 20px; /* Space for the underline */
         }
         
-        /* Ensures the new icons are the correct brand color, not emoji yellow */
+        /* Ensures the new icons are the correct brand color */
         .category-title i {
             color: #1C2E46;
             font-size: 0.9em;
+        }
+
+        /* THE FIX: Force the underline to stay at the bottom center */
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Perfectly centered */
+            width: 60px;
+            height: 4px; /* Slightly thicker for visibility */
+            background-color: #ADD8E6; /* Light Blue Accent */
+            margin: 0 !important; /* Overrides any floating margins */
         }
     </style>
 </head>
@@ -325,4 +346,4 @@
     <script src="/assets/component-loader.js"></script>
     
 </body>
-    </html>
+                    </html>
