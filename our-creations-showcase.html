@@ -12,6 +12,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* This forces the section headers to match the elegant Hero Font */
+        .category-title {
+            font-family: 'Playfair Display', serif !important; 
+            font-weight: 700;
+            color: #1C2E46; /* InaraWell Dark Blue */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers the text and icon */
+            gap: 12px; /* Space between icon and text */
+        }
+        
+        /* Ensures the new icons are the correct brand color, not emoji yellow */
+        .category-title i {
+            color: #1C2E46;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
 
@@ -39,7 +58,11 @@
         </header>
 
         <section class="category-section" id="featured-creations">
-            <h2 class="category-title">✨ Featured Creations: Start Your Transformation Today</h2>
+            <h2 class="category-title">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> 
+                Featured Creations: Start Your Transformation Today
+            </h2>
+            
             <div class="product-list vertical-align">
                 
                 <div class="product-card">
@@ -101,7 +124,11 @@
         </section>
 
         <section class="category-section" id="premium-creations">
-            <h2 class="category-title">💎 Premium Creations: Deep Dive Into Personal Mastery</h2>
+            <h2 class="category-title">
+                <i class="fa-solid fa-gem"></i> 
+                Premium Creations: Deep Dive Into Personal Mastery
+            </h2>
+
             <div class="product-list vertical-align">
                 
                 <div class="product-card">
@@ -162,7 +189,11 @@
         </section>
         
         <section class="category-section" id="complimentary-creations">
-            <h2 class="category-title">🎁 Complimentary Creations: Your Free Boost to Well-being</h2>
+            <h2 class="category-title">
+                <i class="fa-solid fa-gift"></i> 
+                Complimentary Creations: Your Free Boost to Well-being
+            </h2>
+
             <div class="product-list vertical-align">
                 
                 <div class="product-card">
@@ -219,10 +250,15 @@
                         <button class="coming-soon-btn">Coming Soon</button>
                     </div>
                 </div>
-            </div> </section>
+            </div> 
+        </section>
 
         <section class="category-section" id="extra-value-creations">
-            <h2 class="category-title">⭐ Extra Value Creations: Bundles & Specialized Guides</h2>
+            <h2 class="category-title">
+                <i class="fa-solid fa-star"></i> 
+                Extra Value Creations: Bundles & Specialized Guides
+            </h2>
+
             <div class="product-list vertical-align">
                 
                 <div class="product-card">
@@ -289,4 +325,4 @@
     <script src="/assets/component-loader.js"></script>
     
 </body>
-                            </html>
+    </html>
