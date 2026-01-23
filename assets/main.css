@@ -2012,12 +2012,13 @@ a.text-link:hover {
     padding-left: 10px;
     }
 /* =========================================
-   AFFILIATE PAGE HERO SECTION
+   AFFILIATE PAGE HERO SECTION (InaraWell Theme)
    ========================================= */
 .affiliate-hero {
     position: relative;
     padding: 120px 20px 100px;
-    background: linear-gradient(135deg, #f8fbfb 0%, #eef6f6 100%);
+    /* Updated Gradient: Ivory to Light Blue */
+    background: linear-gradient(135deg, #F7F7F0 0%, #ADD8E6 100%);
     text-align: center;
     border-radius: 0 0 50px 50px;
     margin-bottom: 60px;
@@ -2026,35 +2027,44 @@ a.text-link:hover {
 
 .hero-badge {
     display: inline-block;
-    background-color: #dbece5;
-    color: #2c5c4b;
+    /* Secondary Accent Background */
+    background-color: #1C2E46; 
+    /* Light Text for High Contrast */
+    color: #E3EEF7;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 50px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(28, 46, 70, 0.15); /* Soft shadow */
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif; /* Falls back to serif if Playfair isn't loaded */
+    font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
-    color: #1a1a1a;
+    /* Primary Text: Dark Blue */
+    color: #1C2E46;
     line-height: 1.1;
     margin-bottom: 24px;
     font-weight: 700;
 }
 
 .hero-title .highlight {
-    color: #2c5c4b;
+    /* Keeping same color but adding an underline effect if desired, 
+       or we can rely on the font weight. Let's keep it clean. */
+    color: #1C2E46;
     position: relative;
     display: inline-block;
+    border-bottom: 3px solid #1C2E46; /* Adds emphasis */
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #555;
+    /* Primary Text with slight opacity for subtitle */
+    color: #1C2E46;
+    opacity: 0.8;
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
