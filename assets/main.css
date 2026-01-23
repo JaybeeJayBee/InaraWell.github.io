@@ -2011,3 +2011,61 @@ a.text-link:hover {
     border-radius: 4px;
     padding-left: 10px;
     }
+/* =========================================
+   AFFILIATE PAGE HERO SECTION
+   ========================================= */
+.affiliate-hero {
+    position: relative;
+    padding: 120px 20px 100px;
+    background: linear-gradient(135deg, #f8fbfb 0%, #eef6f6 100%);
+    text-align: center;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: 60px;
+    overflow: hidden;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: #dbece5;
+    color: #2c5c4b;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif; /* Falls back to serif if Playfair isn't loaded */
+    font-size: 3.5rem;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.hero-title .highlight {
+    color: #2c5c4b;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .affiliate-hero {
+        padding: 80px 20px 60px;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    }
